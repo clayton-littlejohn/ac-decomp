@@ -81,6 +81,25 @@ static u8 mIV_fish_collect_list[] = {
 #undef F
 // clang-format on
 
+/* Unassigned slot on an extended fish collection page */
+#define mIV_FISH_SLOT_EMPTY 0xFF
+
+// clang-format off
+#define E mIV_FISH_SLOT_EMPTY
+
+/* Fish collection layout - page 2 (new fish)
+ * Register new fish here by replacing mIV_FISH_SLOT_EMPTY with the fish's
+ * aGYO_TYPE_* value. See fish/ADDING_FISH.md for the full workflow. */
+static u8 mIV_fish_collect_list2[mIV_COLLECT_NUM] = {
+    E, E, E, E, E, E, E, E,
+    E, E, E, E, E, E, E, E,
+    E, E, E, E, E, E, E, E,
+    E, E, E, E, E, E, E, E,
+    E, E, E, E, E, E, E, E,
+};
+#undef E
+// clang-format on
+
 // clang-format off
 #define I(n) aINS_INSECT_TYPE_##n
 
@@ -121,8 +140,21 @@ static mActor_name_t mIV_set_collect_itemNo(int type, int page) {
             return EMPTY_NO;
         }
     } else {
-        int fish_no = mIV_fish_collect_list[type];
-        int bit = FTR_IDX_2_NO(FTR_NO_2_IDX(FTR_SUM_FUNA) + (u32)FTR_NO_2_IDX(fish_no));
+        int fish_no;
+        int bit;
+
+        if (inv_ovl_data.fish_page_no != 0) {
+            fish_no = mIV_fish_collect_list2[type];
+        } else {
+            fish_no = mIV_fish_collect_list[type];
+        }
+
+        /* unassigned slot on an extended page */
+        if (fish_no == mIV_FISH_SLOT_EMPTY || fish_no >= aGYO_TYPE_NUM) {
+            return EMPTY_NO;
+        }
+
+        bit = FTR_IDX_2_NO(FTR_NO_2_IDX(FTR_SUM_FUNA) + (u32)FTR_NO_2_IDX(fish_no));
 
         if (Now_Private->furniture_collected_bitfield[bit >> 5] & (1 << (bit & 31))) {
             return mNT_FishIdx2FishItemNo(fish_no);
@@ -1291,12 +1323,17 @@ static void mIV_move_Play(Submenu* submenu, mSM_MenuInfo_c* menu_info) {
         menu_info->position[1] = (f32)y;
 
         if (inv_ovl->page_move_timer == 20) {
-            if (inv_ovl->page_order[2] == inv_ovl->next_page_id) {
-                inv_ovl->page_order[2] = inv_ovl->page_order[1];
-            }
+            if (inv_ovl->next_page_id == inv_ovl->page_order[0]) {
+                /* same-tab transition: advance to the next fish sub-page instead of reordering */
+                inv_ovl->fish_page_no = (inv_ovl->fish_page_no + 1) % mIV_FISH_PAGE_NUM;
+            } else {
+                if (inv_ovl->page_order[2] == inv_ovl->next_page_id) {
+                    inv_ovl->page_order[2] = inv_ovl->page_order[1];
+                }
 
-            inv_ovl->page_order[1] = inv_ovl->page_order[0];
-            inv_ovl->page_order[0] = inv_ovl->next_page_id;
+                inv_ovl->page_order[1] = inv_ovl->page_order[0];
+                inv_ovl->page_order[0] = inv_ovl->next_page_id;
+            }
         } else if (inv_ovl->page_move_timer == 0) {
             menu_info->position[1] = 0.0f;
             submenu->overlay->hand_ovl->set_hand_func(submenu);
@@ -1465,11 +1502,24 @@ extern Gfx inv_mushi_part_model[];
 extern Gfx inv_sakana_scroll_mode[];
 extern Gfx inv_mushi_scroll_mode[];
 
+/* fish encyclopedia page 2 recolor (mod) */
+extern Gfx inv_sakana2_model[];
+extern Gfx inv_sakana2_scroll_mode[];
+
 static void mIV_set_base_frame_dl(Submenu* submenu, GAME_PLAY* play, GRAPH* graph, int page, int scroll_flag, f32 pos_x,
                                   f32 pos_y) {
     static Gfx* base_frame[] = { inv_sakana_model, inv_mwin_model, inv_mushi_model };
     static Gfx* part_frame[] = { inv_sakana_part_model, inv_mwin_model, inv_mushi_part_model };
     static Gfx* scroll_set[] = { inv_sakana_scroll_mode, NULL, inv_mushi_scroll_mode };
+
+    Gfx* base_dl = base_frame[page];
+    Gfx* scroll_dl = scroll_set[page];
+
+    /* the second fish sub-page uses an azure recolor so it is distinguishable */
+    if (page == mIV_PAGE_FISH_COLLECTION && submenu->overlay->inventory_ovl->fish_page_no != 0) {
+        base_dl = inv_sakana2_model;
+        scroll_dl = inv_sakana2_scroll_mode;
+    }
 
     Matrix_scale(16.0f, 16.0f, 1.0f, MTX_LOAD);
     Matrix_translate(pos_x, pos_y, 140.0f, MTX_MULT);
@@ -1489,14 +1539,14 @@ static void mIV_set_base_frame_dl(Submenu* submenu, GAME_PLAY* play, GRAPH* grap
             gDPSetTile_Dolphin(POLY_OPA_DISP++, G_DOLPHIN_TLUT_DEFAULT_MODE, G_TX_RENDERTILE, 14, GX_REPEAT, GX_REPEAT,
                                GX_CLAMP, GX_CLAMP);
         } else {
-            gSPDisplayList(POLY_OPA_DISP++, scroll_set[page]);
+            gSPDisplayList(POLY_OPA_DISP++, scroll_dl);
         }
 
         gDPTileSync(POLY_OPA_DISP++);
         tex_x = (int)-submenu->overlay->menu_control.texture_pos[0] & 0x7F;
         tex_y = (int)-submenu->overlay->menu_control.texture_pos[1] & 0x7F;
         gDPSetTileSize(POLY_OPA_DISP++, G_TX_RENDERTILE, tex_x, tex_y, tex_x + (31 << 2), tex_y + (31 << 2));
-        gSPDisplayList(POLY_OPA_DISP++, base_frame[page]);
+        gSPDisplayList(POLY_OPA_DISP++, base_dl);
     } else {
         gSPDisplayList(POLY_OPA_DISP++, part_frame[page]);
     }
@@ -1845,6 +1895,15 @@ static f32 mIV_get_win_posY(Submenu* submenu, mSM_MenuInfo_c* menu_info, int pag
 static int mIV_up_page_draw_check(Submenu* submenu, int page) {
     mIV_Ovl_c* inv_ovl = submenu->overlay->inventory_ovl;
 
+    if (inv_ovl->page_move_timer != 0 && inv_ovl->next_page_id == inv_ovl->page_order[0]) {
+        /* same-tab (fish sub-page) transition: only the front page moves */
+        if (inv_ovl->page_order[0] == page) {
+            return TRUE;
+        }
+
+        return FALSE;
+    }
+
     if (inv_ovl->page_move_timer > 20) {
         if (inv_ovl->next_page_id == page || inv_ovl->page_order[0] == page) {
             return TRUE;
@@ -2077,6 +2136,8 @@ static void mIV_inventory_ovl_init(Submenu* submenu, mSM_MenuInfo_c* menu_info, 
     inv_ovl->page_order[0] = mIV_PAGE_INVENTORY;
     inv_ovl->page_order[1] = mIV_PAGE_FISH_COLLECTION;
     inv_ovl->page_order[2] = mIV_PAGE_INSECT_COLLECTION;
+    inv_ovl->next_page_id = mIV_PAGE_INVENTORY;
+    inv_ovl->fish_page_no = 0;
     inv_ovl->page_move_timer = 0;
     inv_ovl->mail_mark_flag = FALSE;
     inv_ovl->item_mark_bitfield = 0;

@@ -6972,6 +6972,15 @@ static int mTG_select_tag_decide_wchange(Submenu* submenu, mSM_MenuInfo_c* menu_
         inv_ovl->page_move_timer = 40;
         submenu->overlay->hand_ovl->nop_hand_func(submenu);
         sAdo_SysTrgStart(NA_SE_41C);
+    } else if (tag->tag_row == mIV_PAGE_FISH_COLLECTION && mIV_FISH_PAGE_NUM > 1) {
+        /* fish tab clicked while the fish page is already open:
+         * play the normal page-change transition and flip to the next fish sub-page
+         * (applied at the transition midpoint, see mIV_move_Play) */
+        mTG_mark_main_CLR(submenu, menu_info);
+        inv_ovl->next_page_id = tag->tag_row;
+        inv_ovl->page_move_timer = 40;
+        submenu->overlay->hand_ovl->nop_hand_func(submenu);
+        sAdo_SysTrgStart(NA_SE_41C);
     }
 
     return mTG_TYPE_NONE;

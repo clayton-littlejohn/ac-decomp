@@ -196,6 +196,14 @@ class Gcm:
                     "mode": mode,
                 })
 
+            # Pad the image to a 32 KiB boundary. The GC DVD interface (and
+            # Dolphin) reads in aligned blocks; an image that ends mid-block
+            # fails with "The disc could not be read (at ...)" near EOF.
+            end = f.seek(0, 2)
+            pad = (-end) % 0x8000
+            if pad:
+                f.write(b"\x00" * pad)
+
         self.disc_size = max(self.disc_size, out_path.stat().st_size)
         for r in results:
             r["out_disc_size"] = self.disc_size

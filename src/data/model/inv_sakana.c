@@ -384,3 +384,66 @@ Gfx inv_sakana_part_model[] = {
     gsSPDisplayList(inv_sakana_shirushiT_model),
     gsSPEndDisplayList(),
 };
+
+/* --- Fish encyclopedia page 2 variant (mod) ---------------------------------
+ * Same geometry/textures as page 1, but the cloth palette and title banner are
+ * hue-shifted toward azure so the second page is visually distinct.
+ * Palette derived from inv_sakana_nuno_tex_rgb_ci4_pal (hue -22deg, +sat). */
+
+static u16 inv_sakana2_nuno_tex_rgb_ci4_pal[] ATTRIBUTE_ALIGN(32) = {
+    0x8DDF, 0xCB38, 0xB6F5, 0xA6B4, 0xCB57, 0xCF9B, 0x9E6B, 0x95E8,
+    0xDB7F, 0x8000, 0x0822, 0x1999, 0x0000, 0x0000, 0x0000, 0x0000,
+};
+
+Gfx inv_sakana2_scroll_mode[] = {
+    gsDPPipeSync(),
+    gsDPLoadTLUT_Dolphin(14, 16, 1, inv_sakana2_nuno_tex_rgb_ci4_pal),
+    gsDPSetTextureImage_Dolphin(G_IM_FMT_CI, G_IM_SIZ_4b, 32, 32, inv_sakana_nuno_tex_rgb_ci4),
+    gsDPSetTile_Dolphin(G_DOLPHIN_TLUT_DEFAULT_MODE, 0, 14, GX_REPEAT, GX_REPEAT, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+/* Title banner recolored to match the page-2 cloth */
+static Gfx inv_sakana2_daimeiT_model[] = {
+    gsDPSetPrimColor(0, 255, 25, 95, 170, 255),
+    gsDPSetEnvColor(90, 175, 235, 255),
+    gsDPSetTextureImage_Dolphin(G_IM_FMT_IA, G_IM_SIZ_8b, 64, 32, inv_sakana_waku2_tex),
+    gsDPSetTile_Dolphin(G_DOLPHIN_TLUT_DEFAULT_MODE, 0, 0, GX_MIRROR, GX_MIRROR, 0, 0),
+    gsSPVertex(&inv_sakana_v[136], 8, 0),
+    gsSPNTrianglesInit_5b(2, 0, 1, 2, 1, 3, 2, 0, 0, 0),
+    gsDPSetTextureImage_Dolphin(G_IM_FMT_IA, G_IM_SIZ_8b, 64, 32, inv_sakana_waku1_tex),
+    gsDPSetTile_Dolphin(G_DOLPHIN_TLUT_DEFAULT_MODE, 0, 0, GX_MIRROR, GX_MIRROR, 0, 0),
+    gsSPNTrianglesInit_5b(2, 4, 5, 6, 5, 7, 6, 0, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+Gfx inv_sakana2_model[] = {
+    gsDPPipeSync(),
+    gsSPDisplayList(inv_sakana_w1T_model),
+    gsSPDisplayList(inv_sakana_w2T_model),
+    gsSPDisplayList(inv_sakana_w3T_model),
+    gsSPDisplayList(inv_sakana_w4T_model),
+    gsSPDisplayList(inv_sakana_w5T_model),
+    gsSPDisplayList(inv_sakana_w6T_model),
+    gsSPDisplayList(inv_sakana_w7T_model),
+    gsSPDisplayList(inv_sakana_w8T_model),
+    gsSPDisplayList(inv_sakana_w9T_model),
+    gsSPDisplayList(inv_sakana_w10T_model),
+    gsSPDisplayList(inv_sakana_w11T_model),
+    gsSPDisplayList(inv_sakana_w12T_model),
+    gsSPDisplayList(inv_sakana_w13T_model),
+    gsSPDisplayList(inv_sakana_w14_model),
+    gsSPDisplayList(inv_sakana_waku2T_model),
+    gsSPDisplayList(inv_sakana_ueT_model),
+    gsDPPipeSync(),
+    gsDPSetCombineLERP(PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, TEXEL0, PRIMITIVE, ENVIRONMENT, TEXEL0,
+                       ENVIRONMENT, 0, 0, 0, TEXEL0),
+    gsDPSetRenderMode(G_RM_CLD_SURF, G_RM_CLD_SURF2),
+    gsSPDisplayList(inv_sakana_ue2T_model),
+    gsDPPipeSync(),
+    gsDPSetRenderMode(G_RM_XLU_SURF, G_RM_XLU_SURF2),
+    gsSPDisplayList(inv_sakana2_daimeiT_model),
+    gsSPDisplayList(inv_sakana_shirushiT_model),
+    gsSPDisplayList(inv_sakana_moji_model),
+    gsSPEndDisplayList(),
+};

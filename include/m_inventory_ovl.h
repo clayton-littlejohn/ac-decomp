@@ -15,6 +15,7 @@ extern "C" {
 #define mIV_ITEM_JOINT_NUM 8
 #define mIV_PLAYER_EFFECT_NUM 20
 #define mIV_COLLECT_NUM 40
+#define mIV_FISH_PAGE_NUM 2 /* number of fish encyclopedia sub-pages */
 #define mIV_ITEM_COLUMNS 5
 #define mIV_ITEM_ROWS 3
 #define mIV_MAIL_COLUMNS 2
@@ -102,7 +103,8 @@ struct inventory_ovl_s {
     u16 item_mark_bitfield;
     u16 mail_mark_bitfield2;
     s16 mail_mark_flag;
-    u8 _5E6[2];
+    u8 fish_page_no; /* current fish encyclopedia sub-page (0..mIV_FISH_PAGE_NUM-1) */
+    u8 _5E7[1];
     u16 mail_mark_bitfield;
     u8 original_flag;
     u8 wc_flag;
