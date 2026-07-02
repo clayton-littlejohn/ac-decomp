@@ -1910,6 +1910,14 @@ extern int mRmTp_GetWallIdx() {
 }
 
 extern mActor_name_t mRmTp_Item1ItemNo2FtrItemNo_AtPlayerRoom(mActor_name_t item1_no, int no_convert_tools) {
+    if (item1_no >= ITM_FISH_START + FISH_NUM_VANILLA && item1_no < ITM_FISH_START + FISH_NUM) {
+        /* modded fish are not placeable as furniture (house tank disabled for
+         * now, see fish/ADDING_FISH.md) - returning the item unchanged makes
+         * the room code treat it as non-furniture. Without this guard the
+         * vanilla branch below would collide with the umbrella range. */
+        return item1_no;
+    }
+
     if (item1_no >= ITM_CLOTH_START && item1_no < ITM_CLOTH_END) {
         int is_valid = item1_no >= ITM_CLOTH_START && item1_no < ITM_CLOTH_END; // this is some kind of macro for sure
 

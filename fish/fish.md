@@ -54,3 +54,48 @@ Notes: `island` = also spawns at the island, `tourney` = boosted during the fish
 | 38 | Red snapper | 3,000 Bells | Large (L) | Sea | All day | JFMAMJJASOND | island |
 | 39 | Barred knifejaw | 5,000 Bells | Large (L) | Sea | All day | ––MAMJJASON– | island |
 | 40 | Arapaima | 10,000 Bells | Huge (XXL) | River | 4 PM – 9 AM | ––––––JAS––– |  |
+
+## Page 2 (new fish)
+
+| # | Name | Sell price | Shadow size | Location | Time | Months | Notes |
+|---|------|-----------|-------------|----------|------|--------|-------|
+| 41 | Neon tetra | 2,000 Bells | Tiny (XXS) | River | 9 PM – 4 AM | –––––JJAS––– | modded |
+| 42 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 43 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 44 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 45 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 46 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 47 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 48 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 49 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 50 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 51 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 52 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 53 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 54 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 55 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 56 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 57 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 58 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 59 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 60 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 61 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 62 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 63 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 64 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 65 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 66 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 67 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 68 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 69 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 70 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 71 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 72 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 73 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 74 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 75 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 76 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 77 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 78 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 79 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 80 | *(empty slot)* | — | — | — | — | –––––––––––– | |

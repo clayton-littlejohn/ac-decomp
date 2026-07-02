@@ -47,10 +47,28 @@ extern int mMmd_InsectInfo(int insect_no) {
   return 0;
 }
 
+/* Modded fish donation ledger (Save_t.mod_fish_donation): 4-bit donor values,
+ * same encoding as the vanilla fish_bit nibbles. Capacity 256 fish. */
+static int mMmd_ModFishInfo(int mod_idx) {
+  u8* bits = Save_GetPointer(mod_fish_donation[0]);
+  return (bits[mod_idx >> 1] >> ((mod_idx & 1) << 2)) & 0xF;
+}
+
+static void mMmd_ModFishSet(int mod_idx, int value) {
+  u8* bits = Save_GetPointer(mod_fish_donation[0]);
+  bits[mod_idx >> 1] &= ~(0xF << ((mod_idx & 1) << 2));
+  bits[mod_idx >> 1] |= (value & 0xF) << ((mod_idx & 1) << 2);
+}
+
 extern int mMmd_FishInfo(int fish_no) {
   int valid = FALSE;
 
-  if (fish_no >= 0 && fish_no < mMmd_FISH_NUM) {
+  if (fish_no >= mMmd_FISH_DISPLAY_NUM && fish_no < mMmd_FISH_NUM) {
+    /* modded fish: donatable but not displayed */
+    return mMmd_ModFishInfo(fish_no - mMmd_FISH_DISPLAY_NUM);
+  }
+
+  if (fish_no >= 0 && fish_no < mMmd_FISH_DISPLAY_NUM) {
     valid = TRUE;
   }
 
@@ -83,7 +101,13 @@ extern void mMmd_SetInsect(int insect_no) {
 }
 
 extern void mMmd_SetFish(int fish_no) {
-  if (fish_no >= 0 && fish_no < mMmd_FISH_NUM && mLd_PlayerManKindCheck() == FALSE) {
+  if (fish_no >= mMmd_FISH_DISPLAY_NUM && fish_no < mMmd_FISH_NUM && mLd_PlayerManKindCheck() == FALSE) {
+    /* modded fish: donatable but not displayed */
+    mMmd_ModFishSet(fish_no - mMmd_FISH_DISPLAY_NUM, Common_Get(player_no) + 1);
+    return;
+  }
+
+  if (fish_no >= 0 && fish_no < mMmd_FISH_DISPLAY_NUM && mLd_PlayerManKindCheck() == FALSE) {
     mMmd_FISH_CLR(Save_Get(museum_display), fish_no);
     mMmd_FISH_SET(Save_Get(museum_display), fish_no, Common_Get(player_no) + 1);
   }
@@ -372,8 +396,12 @@ extern void mMmd_DeletePresentedByPlayer(u8 player_no) {
     for (i = 0; i < mMmd_FISH_NUM; i++) {
       int donator = mMmd_FishInfo(i);
       if (donator == search_no) {
-        mMmd_FISH_CLR(Save_Get(museum_display), i);
-        mMmd_FISH_SET(Save_Get(museum_display), i, mMmd_DONATOR_DELETED_PLAYER);
+        if (i >= mMmd_FISH_DISPLAY_NUM) {
+          mMmd_ModFishSet(i - mMmd_FISH_DISPLAY_NUM, mMmd_DONATOR_DELETED_PLAYER);
+        } else {
+          mMmd_FISH_CLR(Save_Get(museum_display), i);
+          mMmd_FISH_SET(Save_Get(museum_display), i, mMmd_DONATOR_DELETED_PLAYER);
+        }
       }
     }
   }

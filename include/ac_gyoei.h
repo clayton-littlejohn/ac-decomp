@@ -85,10 +85,23 @@ enum fish_type {
     aGYO_TYPE_OLD_TIRE,
     aGYO_TYPE_SALMON2,
 
-    aGYO_TYPE_EXTENDED_NUM
+    aGYO_TYPE_EXTENDED_NUM,
+
+    /* modded fish (see fish/ADDING_FISH.md) - appended after the vanilla
+     * whale/trash/salmon2 block so vanilla type indices are untouched */
+    aGYO_TYPE_NEON_TETRA = aGYO_TYPE_EXTENDED_NUM,
+
+    aGYO_TYPE_MODDED_NUM
 };
 
 #define aGYO_TYPE_INVALID -1
+
+/* Modded fish mappings: fish/item index 40+ <-> gyo type aGYO_TYPE_EXTENDED_NUM+.
+ * Only valid for real fish (vanilla 0-39) and modded fish; NOT for whale/trash. */
+#define aGYO_FISH_IDX_2_TYPE(idx) \
+    ((idx) < aGYO_TYPE_NUM ? (idx) : (aGYO_TYPE_EXTENDED_NUM + ((idx) - aGYO_TYPE_NUM)))
+#define aGYO_TYPE_2_FISH_IDX(type) \
+    ((type) < aGYO_TYPE_NUM ? (type) : (aGYO_TYPE_NUM + ((type) - aGYO_TYPE_EXTENDED_NUM)))
 
 #define aGYO_IS_FISH_TRASH(type) ((type) >= aGYO_TYPE_EMPTY_CAN && (type) <= aGYO_TYPE_OLD_TIRE)
 

@@ -49,7 +49,7 @@ static void aGYR_actor_ct(ACTOR* actorx, GAME* game) {
     s16 angle_y;
     xyz_t pos;
 
-    gyo_release->gyo_type = actorx->actor_specific - ITM_FISH_START;
+    gyo_release->gyo_type = aGYO_FISH_IDX_2_TYPE(actorx->actor_specific - ITM_FISH_START);
     gyo_release->gyoei_actor_p = Actor_info_name_search(&play->actor_info, mAc_PROFILE_GYOEI, ACTOR_PART_CONTROL);
     gyo_release->segment = aGYR_empty_area(gyo_release->gyoei_actor_p);
     ((GYOEI_ACTOR*)gyo_release->gyoei_actor_p)->segment_type[gyo_release->segment] = gyo_release->gyo_type;
@@ -107,6 +107,7 @@ static int aGYR_anime_frame(GYO_RELEASE_ACTOR* gyo_release) {
     static int aGYR_anime_ptn[] = {
         1, 2, 2, 2, 2, 1, 2, 2, 1, 2, 2, 2, 2, 1, 1, 2, 1, 1, 1, 2, 2, 2, 2,
         1, 1, 2, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0,
+        1, /* aGYO_TYPE_NEON_TETRA (modded) */
     };
 
     int cur_frame = gyo_release->anime_frame;

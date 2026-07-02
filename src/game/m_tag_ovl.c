@@ -2864,6 +2864,13 @@ static int mTG_common_throw_put_room(GAME_PLAY* play, mActor_name_t item, xyz_t*
     int uz;
     int res = FALSE;
 
+    /* modded fish cannot be dropped in rooms (no tank furniture / ground model
+     * yet, they would be invisible) - FALSE makes the caller show the standard
+     * "can't put that here" warning. See fish/ADDING_FISH.md. */
+    if (item >= ITM_FISH_START + FISH_NUM_VANILLA && item < ITM_FISH_START + FISH_NUM) {
+        return FALSE;
+    }
+
     if (mFI_Wpos2UtNum(&ux, &uz, *pos_p) && Common_Get(clip).shop_goods_clip != NULL &&
         Common_Get(clip).shop_goods_clip->player_drop_entry_proc != NULL) {
         res = Common_Get(clip).shop_goods_clip->player_drop_entry_proc(&play->game, item, ux, uz, layer, delay_timer);
@@ -6738,6 +6745,14 @@ static int mTG_select_tag_decide_item_normal(Submenu* submenu, mActor_name_t ite
         if (ret_tag_type == mTG_TYPE_FIELD_PLANT) {
             ret_tag_type = mTG_TYPE_FIELD_PLANT_JOB;
         }
+    }
+
+    /* modded fish have no room-drop support (they would be invisible):
+     * use the option set without "Drop", same as items in other rooms.
+     * See fish/ADDING_FISH.md. */
+    if (ret_tag_type == mTG_TYPE_ROOM_DEFAULT && item >= ITM_FISH_START + FISH_NUM_VANILLA &&
+        item < ITM_FISH_START + FISH_NUM) {
+        ret_tag_type = mTG_TYPE_CATCH_ITEM;
     }
 
     return ret_tag_type;

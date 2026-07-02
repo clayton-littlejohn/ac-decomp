@@ -156,7 +156,8 @@ typedef struct offset_table_s {
 #define PAPER_NUM 256
 #define MONEY_NUM 4
 #define TOOL_NUM 92
-#define FISH_NUM 40
+#define FISH_NUM 41 /* 40 vanilla + modded fish (see fish/ADDING_FISH.md) */
+#define FISH_NUM_VANILLA 40
 #define CLOTH_NUM 255
 #define ETC_NUM 49
 #define CARPET_NUM 67
@@ -2152,6 +2153,7 @@ enum {
 #define ITM_FISH37 (ITM_FISH_START + 37)
 #define ITM_FISH38 (ITM_FISH_START + 38)
 #define ITM_FISH39 (ITM_FISH_START + 39)
+#define ITM_FISH40 (ITM_FISH_START + 40) /* neon tetra (modded) */
 #define ITM_FISH_END (ITM_FISH_START + 40)
 
 #define ITM_CLOTH_START 0x2400

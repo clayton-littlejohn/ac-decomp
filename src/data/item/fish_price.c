@@ -39,5 +39,6 @@ unsigned short fish_price_table[] = {
     12000,
     20000,
     40000,
+    8000, /* neon tetra (modded): sells for 2,000 Bells */
     -1,
 };

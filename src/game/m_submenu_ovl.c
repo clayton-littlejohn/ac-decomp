@@ -616,6 +616,7 @@ extern u16 inv_mwin_29angel_pal[];
 extern u8 inv_mwin_29angel_tex[];
 extern u16 inv_mwin_28gupi_pal[];
 extern u8 inv_mwin_28gupi_tex[];
+extern u16 inv_mwin_41tetra_pal[]; /* neon tetra (modded) */
 extern u16 inv_mwin_27demekin_pal[];
 extern u8 inv_mwin_27demekin_tex[];
 extern u16 inv_mwin_32kaseki_pal[];
@@ -1069,6 +1070,7 @@ static void mSM_draw_item(GRAPH* graph, f32 pos_x, f32 pos_y, f32 scale, mActor_
         { inv_mwin_38tai_pal, inv_mwin_38tai_tex },
         { inv_mwin_39ishidai_pal, inv_mwin_39ishidai_tex },
         { inv_mwin_40piraruku_pal, inv_mwin_40piraruku_tex },
+        { inv_mwin_41tetra_pal, inv_mwin_28gupi_tex }, /* neon tetra (modded) */
     };
     // clang-format on
 

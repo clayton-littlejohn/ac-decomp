@@ -47,6 +47,8 @@ DISPLAY_NAMES = {
     "CRAWFISH": "Crawfish", "FROG": "Frog", "KILLIFISH": "Killifish",
     "JELLYFISH": "Jellyfish", "SEA_BASS": "Sea bass", "RED_SNAPPER": "Red snapper",
     "BARRED_KNIFEJAW": "Barred knifejaw", "ARAPAIMA": "Arapaima",
+    # modded fish
+    "NEON_TETRA": "Neon tetra",
 }
 
 SIZE_NAMES = {
@@ -72,14 +74,30 @@ def die(msg: str):
 
 
 def parse_enum_order() -> list[str]:
-    """aGYO_TYPE_* names in enum order (first 40 = real fish)."""
+    """aGYO_TYPE_* names indexed by enum value (first 40 = real fish)."""
     text = GYOEI_H.read_text(encoding="utf-8", errors="replace")
     m = re.search(r"enum\s+fish_type\s*\{(.*?)\};", text, re.S)
     if not m:
         die(f"fish_type enum not found in {GYOEI_H}")
-    names = re.findall(r"aGYO_TYPE_([A-Z0-9_]+?)(?:\s*=\s*\d+)?\s*,", m.group(1))
-    names = [n for n in names if not n.endswith("_NUM")]
-    return names
+    body = re.sub(r"/\*.*?\*/", "", m.group(1), flags=re.S)
+    body = re.sub(r"//[^\n]*", "", body)
+    values: dict[str, int] = {}
+    order: dict[int, str] = {}
+    next_val = 0
+    for entry in body.split(","):
+        entry = entry.strip()
+        if not entry:
+            continue
+        if "=" in entry:
+            name, rhs = (s.strip() for s in entry.split("=", 1))
+            next_val = int(rhs) if rhs.isdigit() else values[rhs]
+        else:
+            name = entry
+        values[name] = next_val
+        if not name.endswith("_NUM"):
+            order.setdefault(next_val, name.replace("aGYO_TYPE_", ""))
+        next_val += 1
+    return [order.get(i, f"?{i}") for i in range(max(order) + 1)]
 
 
 def parse_sizes() -> list[str]:
@@ -176,12 +194,20 @@ def parse_collect_lists() -> tuple[list[str], list[str]]:
         m = re.search(rf"static\s+u8\s+{name}\[[^\]]*\]\s*=\s*\{{(.*?)\}};", text, re.S)
         if not m:
             return []
-        return re.findall(r"F\((\w+)\)|\b(mIV_FISH_SLOT_EMPTY)\b", m.group(1))
+        body = re.sub(r"/\*.*?\*/", "", m.group(1), flags=re.S)
+        out = []
+        for tok in re.split(r"[,\s]+", body):
+            if not tok:
+                continue
+            if tok in ("E", "mIV_FISH_SLOT_EMPTY"):
+                out.append("mIV_FISH_SLOT_EMPTY")
+            elif tok.startswith("F(") and tok.endswith(")"):
+                out.append(tok[2:-1])
+            elif tok.startswith("aGYO_TYPE_"):
+                out.append(tok[len("aGYO_TYPE_"):])
+        return out
 
-    def flatten(pairs):
-        return [a if a else b for a, b in pairs]
-
-    return flatten(grab("mIV_fish_collect_list")), flatten(grab("mIV_fish_collect_list2"))
+    return grab("mIV_fish_collect_list"), grab("mIV_fish_collect_list2")
 
 
 def slots_to_time_str(slots: set[int]) -> str:
@@ -226,23 +252,33 @@ def build_rows():
 
     n_fish = 40
     if len(prices) < n_fish:
-        die(f"expected {n_fish} prices, found {len(prices)}")
+        die(f"expected at least {n_fish} prices, found {len(prices)}")
     if len(sizes) < n_fish:
         die(f"expected at least {n_fish} size entries, found {len(sizes)}")
     if len(page1) != n_fish:
         die(f"expected 40 entries in mIV_fish_collect_list, found {len(page1)}")
 
     idx_of = {name: i for i, name in enumerate(enum_order)}
+    # vanilla enum: 0-39 fish, 40-44 whale/trash/salmon2, 45+ modded fish.
+    # fish/item index: 0-39 vanilla, 40+ modded (skips the whale/trash block).
+    VANILLA_FISH = 40
+    EXTENDED = 45
+
+    def fish_index(enum_idx: int) -> int:
+        return enum_idx if enum_idx < VANILLA_FISH else VANILLA_FISH + (enum_idx - EXTENDED)
 
     def make_row(pos: int, enum_name: str):
         i = idx_of[enum_name]
+        fi = fish_index(i)
         sp = spawns.get(enum_name, {"months": set(), "slots": set(), "areas": set()})
         areas = ", ".join(sorted(AREA_NAMES[a] for a in sp["areas"])) or "\u2014"
         if sp.get("rain_only"):
             areas += " (raining)"
         time_str = slots_to_time_str(sp["slots"]) if sp["slots"] else "\u2014"
         notes = ", ".join(sorted(sp.get("notes", set())))
-        sell = prices[i] // 4
+        if i >= EXTENDED:
+            notes = ("modded, " + notes) if notes else "modded"
+        sell = prices[fi] // 4
         return (f"| {pos} | {DISPLAY_NAMES[enum_name]} | {sell:,} Bells | "
                 f"{SIZE_NAMES[sizes[i]]} | {areas} | {time_str} | "
                 f"{months_to_str(sp['months'])} | {notes} |")

@@ -170,7 +170,10 @@ typedef struct Save_s {
     /* 0x02418B */ u8 _2418B[0x24198 - 0x2418B];
     /* 0x024198 */ OSTime travel_hard_time;
     /* 0x0241A0 */ lbRTC_time_c saved_auto_nwrite_time; /* save data notice time used for fishing tourney results? */
-    /* 0x0241A8 */ u8 _241A8[0x242A0 - 0x241A8];
+    /* 0x0241A8 */ u8 mod_fish_donation[128]; /* modded fish museum donor nibbles (4 bits each, capacity 256 fish);
+                                                 carved from unused save padding - zero = mMmd_DONATOR_NONE, so
+                                                 vanilla saves are compatible. See fish/ADDING_FISH.md */
+    /* 0x024228 */ u8 _241A8[0x242A0 - 0x24228];
 } Save_t;
 
 typedef union save_u {

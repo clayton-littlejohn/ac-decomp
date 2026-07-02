@@ -83,7 +83,7 @@ static void aHOI_actor_draw(ACTOR* actorx, GAME* game) {
 
     if (handOverItem->item_type == aHOI_ITEM_TYPE_FISH) {
       if (handOverItem->gyo_flag == FALSE) {
-        handOverItem->gyo_type = ITEM_NAME_GET_INDEX(handOverItem->item);
+        handOverItem->gyo_type = aGYO_FISH_IDX_2_TYPE(ITEM_NAME_GET_INDEX(handOverItem->item));
         handOverItem->gyo_flag = TRUE;
       }
 

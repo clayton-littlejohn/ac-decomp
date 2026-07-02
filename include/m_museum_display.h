@@ -3,6 +3,7 @@
 
 #include "types.h"
 #include "m_actor_type.h"
+#include "m_name_table.h" /* FISH_NUM (includes modded fish) */
 
 #ifdef __cplusplus
 extern "C" {
@@ -18,7 +19,12 @@ extern "C" {
 #define mMmd_FOSSIL_NUM 25
 #define mMmd_ART_NUM 15
 #define mMmd_INSECT_NUM 40
-#define mMmd_FISH_NUM 40
+
+/* Vanilla fish shown in the exhibit tanks (fish_bit nibble space). Modded
+ * fish (idx 40+) are donatable and count toward completion but are NOT
+ * displayed; their donor nibbles live in Save_t.mod_fish_donation. */
+#define mMmd_FISH_DISPLAY_NUM 40
+#define mMmd_FISH_NUM FISH_NUM /* total donatable fish - scales with modded fish */
 
 enum {
     mMmd_DISPLAY_CANNOT_DONATE,   /* Item cannot be donated */

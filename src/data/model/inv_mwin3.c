@@ -117,6 +117,16 @@ u16 inv_mwin_28gupi_pal[] = {
 #include "assets/inv_mwin_28gupi_pal.inc"
 };
 
+/* neon tetra (modded): guppy icon texture with a silver/cyan/red palette.
+ * Entries 1 and 17 are the icon's background disc and MUST stay identical to
+ * the vanilla fish icons (dark blue) so the item background matches. */
+u16 inv_mwin_41tetra_pal[] = {
+    0x0000, 0xB19F, 0x871F, 0xC843, 0xFFFF, 0xFDAE, 0xE444, 0xE422,
+    0xCF9F, 0xA33F, 0x8A57, 0x85B1, 0x9884, 0x829A, 0x82FE, 0x8B1F,
+    0x0000, 0xA66D, 0x871F, 0xC843, 0xFFFF, 0xFDAE, 0xE444, 0xE422,
+    0xCF9F, 0xA33F, 0x8A57, 0x85B1, 0x9884, 0x829A, 0x82FE, 0x8B1F,
+};
+
 u16 inv_mwin_29angel_pal[] = {
 #include "assets/inv_mwin_29angel_pal.inc"
 };

@@ -388,10 +388,12 @@ Gfx inv_sakana_part_model[] = {
 /* --- Fish encyclopedia page 2 variant (mod) ---------------------------------
  * Same geometry/textures as page 1, but the cloth palette and title banner are
  * hue-shifted toward azure so the second page is visually distinct.
- * Palette derived from inv_sakana_nuno_tex_rgb_ci4_pal (hue -22deg, +sat). */
+ * Palette derived from inv_sakana_nuno_tex_rgb_ci4_pal (hue -22deg, +sat).
+ * Entries 6/7 are the fish-entry circles (fill/ring): lighter azure so the
+ * slots blend with the page-2 cloth instead of the vanilla green. */
 
 static u16 inv_sakana2_nuno_tex_rgb_ci4_pal[] ATTRIBUTE_ALIGN(32) = {
-    0x8DDF, 0xCB38, 0xB6F5, 0xA6B4, 0xCB57, 0xCF9B, 0x9E6B, 0x95E8,
+    0x8DDF, 0xCB38, 0xB6F5, 0xA6B4, 0xCB57, 0xCF9B, 0xD75E, 0xB27A,
     0xDB7F, 0x8000, 0x0822, 0x1999, 0x0000, 0x0000, 0x0000, 0x0000,
 };
 

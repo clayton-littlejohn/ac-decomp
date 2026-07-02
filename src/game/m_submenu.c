@@ -57,14 +57,26 @@ extern int mSM_CHECK_LAST_INSECT_GET(int idx) {
 }
 
 extern int mSM_COLLECT_FISH_GET(int idx) {
-    u32 ftr_idx = (0x31A << 2) + (idx << 2);
-    return (Common_Get(now_private)->furniture_collected_bitfield[ftr_idx >> 2 >> 5] &
-            (1 << ((ftr_idx >> 2) & 0x1F))) != 0;
+    if (idx >= FISH_NUM_VANILLA) {
+        /* modded fish: caught bits live in unused save space (see fish/ADDING_FISH.md) */
+        int mod_idx = idx - FISH_NUM_VANILLA;
+        return (Common_Get(now_private)->unused_2412[mod_idx >> 3] & (1 << (mod_idx & 7))) != 0;
+    } else {
+        u32 ftr_idx = (0x31A << 2) + (idx << 2);
+        return (Common_Get(now_private)->furniture_collected_bitfield[ftr_idx >> 2 >> 5] &
+                (1 << ((ftr_idx >> 2) & 0x1F))) != 0;
+    }
 }
 
 extern void mSM_COLLECT_FISH_SET(int idx) {
-    u32 ftr_idx = (0x31A << 2) + (idx << 2);
-    Common_Get(now_private)->furniture_collected_bitfield[ftr_idx >> 2 >> 5] |= (1 << ((ftr_idx >> 2) & 0x1F));
+    if (idx >= FISH_NUM_VANILLA) {
+        /* modded fish: caught bits live in unused save space (see fish/ADDING_FISH.md) */
+        int mod_idx = idx - FISH_NUM_VANILLA;
+        Common_Get(now_private)->unused_2412[mod_idx >> 3] |= 1 << (mod_idx & 7);
+    } else {
+        u32 ftr_idx = (0x31A << 2) + (idx << 2);
+        Common_Get(now_private)->furniture_collected_bitfield[ftr_idx >> 2 >> 5] |= (1 << ((ftr_idx >> 2) & 0x1F));
+    }
 }
 
 static int mSM_CHECK_ALL_FISH_GET_SUB() {

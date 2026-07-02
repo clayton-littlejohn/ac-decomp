@@ -51,5 +51,6 @@ static aGYO_type_c gyoei_type[] = {
     { aGYO_SIZE_M, 2, 4 }, // aGYO_TYPE_BOOT
     { aGYO_SIZE_L, 2, 4 }, // aGYO_TYPE_OLD_TIRE
     { aGYO_SIZE_L, 2, 1 }, // aGYO_TYPE_SALMON2
+    { aGYO_SIZE_XXS, 2, 2 }, // aGYO_TYPE_NEON_TETRA (modded)
 };
 // clang-format on

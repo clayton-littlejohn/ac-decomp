@@ -12,6 +12,8 @@ unsigned char itemName_tool[] = {
 
 unsigned char itemName_fish[] = {
 #include "assets/itemName_fish.inc"
+    /* modded fish names: 16 bytes each, space padded (see fish/ADDING_FISH.md) */
+    'n', 'e', 'o', 'n', ' ', 't', 'e', 't', 'r', 'a', ' ', ' ', ' ', ' ', ' ', ' ', /* neon tetra */
 };
 
 unsigned char itemName_cloth[] = {

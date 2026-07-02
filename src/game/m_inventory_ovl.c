@@ -14,6 +14,7 @@
 #include "padmgr.h"
 #include "m_play.h"
 #include "m_font.h"
+#include "m_submenu.h" /* mSM_COLLECT_FISH_GET for modded fish */
 
 enum {
     mIV_ITEM_KIND_AXE,
@@ -91,7 +92,7 @@ static u8 mIV_fish_collect_list[] = {
  * Register new fish here by replacing mIV_FISH_SLOT_EMPTY with the fish's
  * aGYO_TYPE_* value. See fish/ADDING_FISH.md for the full workflow. */
 static u8 mIV_fish_collect_list2[mIV_COLLECT_NUM] = {
-    E, E, E, E, E, E, E, E,
+    aGYO_TYPE_NEON_TETRA, E, E, E, E, E, E, E,
     E, E, E, E, E, E, E, E,
     E, E, E, E, E, E, E, E,
     E, E, E, E, E, E, E, E,
@@ -141,7 +142,6 @@ static mActor_name_t mIV_set_collect_itemNo(int type, int page) {
         }
     } else {
         int fish_no;
-        int bit;
 
         if (inv_ovl_data.fish_page_no != 0) {
             fish_no = mIV_fish_collect_list2[type];
@@ -149,15 +149,14 @@ static mActor_name_t mIV_set_collect_itemNo(int type, int page) {
             fish_no = mIV_fish_collect_list[type];
         }
 
-        /* unassigned slot on an extended page */
-        if (fish_no == mIV_FISH_SLOT_EMPTY || fish_no >= aGYO_TYPE_NUM) {
+        /* unassigned slot / whale / trash: nothing to show */
+        if (fish_no == mIV_FISH_SLOT_EMPTY || fish_no >= aGYO_TYPE_MODDED_NUM ||
+            (fish_no >= aGYO_TYPE_NUM && fish_no < aGYO_TYPE_EXTENDED_NUM)) {
             return EMPTY_NO;
         }
 
-        bit = FTR_IDX_2_NO(FTR_NO_2_IDX(FTR_SUM_FUNA) + (u32)FTR_NO_2_IDX(fish_no));
-
-        if (Now_Private->furniture_collected_bitfield[bit >> 5] & (1 << (bit & 31))) {
-            return mNT_FishIdx2FishItemNo(fish_no);
+        if (mSM_COLLECT_FISH_GET(aGYO_TYPE_2_FISH_IDX(fish_no))) {
+            return mNT_FishIdx2FishItemNo(aGYO_TYPE_2_FISH_IDX(fish_no));
         } else {
             return EMPTY_NO;
         }
@@ -2032,6 +2031,17 @@ static void mIV_inventory_ovl_init(Submenu* submenu, mSM_MenuInfo_c* menu_info, 
     mActor_name_t dig_item = EMPTY_NO;
     int i;
     Mail_c* mail = Now_Private->mail;
+
+/* TEMP TEST CHEAT (remove for release): every time the inventory opens,
+ * pocket slot 1 is overwritten with a neon tetra and the fish is unlocked
+ * in the encyclopedia. Set to 0 to disable. */
+#define mIV_MOD_FISH_TEST_CHEAT 1
+#if mIV_MOD_FISH_TEST_CHEAT
+    if (menu_info->data0 == mSM_IV_OPEN_NORMAL) {
+        mPr_SetPossessionItem(Now_Private, 0, ITM_FISH40, mPr_ITEM_COND_NORMAL);
+        mSM_COLLECT_FISH_SET(FISH_NUM_VANILLA); /* unlock in encyclopedia page 2 */
+    }
+#endif
 
     menu_info->proc_status = mSM_OVL_PROC_MOVE;
     menu_info->move_drt = mSM_MOVE_IN_RIGHT;

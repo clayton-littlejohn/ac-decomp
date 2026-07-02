@@ -1,34 +1,129 @@
 # Adding a New Fish — Complete Workflow
 
 This document is the checklist for adding a brand-new, fully functional fish to
-Animal Crossing (GameCube). Follow it top to bottom; every step maps to a real
-table in the decompiled source. After each addition, run
+Animal Crossing (GameCube). **Fish #41, the Neon tetra, has been added using
+exactly this process — search the codebase for `NEON_TETRA` / `modded` to see
+every touchpoint as a worked example.** Follow it top to bottom; every step
+maps to a real table in the decompiled source. After each addition, run
 `python fish/gen_fish_table.py --write` to regenerate [fish.md](fish.md) and confirm
-the game data matches your intent, then build with `ninja` (the
-`CHECK build.sha1` step will report FAILED — that is expected for a mod).
+the game data matches your intent, then build with `python fish/make_iso.py`.
 
-The engine identifies a fish by its **`aGYO_TYPE_*` index**. Every table below
-is indexed by (or maps to) that number, so all steps must stay in the same
-order.
+The engine identifies a fish two ways, and they diverge for modded fish:
+
+* **fish/item index** — 0-39 vanilla, 40+ modded (`ITM_FISH_START + idx`)
+* **gyo type** (`aGYO_TYPE_*`) — 0-39 vanilla fish, 40-44 whale/trash/salmon2,
+  45+ modded fish
+
+`aGYO_FISH_IDX_2_TYPE()` / `aGYO_TYPE_2_FISH_IDX()` in
+[include/ac_gyoei.h](../include/ac_gyoei.h) convert between them. New fish are
+appended **after** the whale/trash block so vanilla indices never move.
 
 ---
 
-## Step 0 — Pick the fish's identity
+## Checklist (every file the Neon tetra touched)
 
-Decide up front:
+| # | File | Change |
+|---|------|--------|
+| 1 | `include/ac_gyoei.h` | `aGYO_TYPE_<NAME>` after `aGYO_TYPE_EXTENDED_NUM`; bump `aGYO_TYPE_MODDED_NUM` |
+| 2 | `src/actor/ac_gyoei_type.c_inc` | append `{ size, search_area, bite_time }` |
+| 3 | `fish/gen_fish_model.py` | add a spec (colors/size) and run it → generates `src/data/model/act_f<NN>_<name>.c` (texture, palette, 3-frame swim mesh) |
+| 4 | `src/actor/ac_gyoei_model.c_inc` | extern the generated models, add `aGYO_<name>_dl`, append to `aGYO_displayList` |
+| 5 | `src/f_furniture.c` | `#include` the generated model file (compiles it into the build) |
+| 6 | `src/actor/ac_uki_move.c_inc` | append item to `fish_data[]` |
+| 7 | `src/actor/ac_gyo_release.c` | append to `aGYR_anime_ptn[]` (1 = small-fish wiggle, 2 = slow) |
+| 8 | `include/m_name_table.h` | `#define ITM_FISH<n>`; bump `FISH_NUM`; append `X(FTR_MOD_FISH<nn>)` to the **FTR1 enum** |
+| 9 | `include/m_ftr_def.h` | append `FTR_MOD_FISH<nn>` before `FTR_NUM` (kind enum; a compile-time check in `ac_mod_fish_tank.c` catches misalignment with #8) |
+| 10 | `src/actor/ac_furniture_profile_data.c_inc` | append `&iam_mod_fish00` (profile is shared by all modded fish tanks) |
+| 11 | `src/data/item/fish_price.c` | append catalog price before `-1` (sell = /4) |
+| 12 | `src/data/item/item_name.c` | append 16-byte space-padded ASCII name after the `.inc` include |
+| 13 | `src/game/m_item_name.c` | append `mIN_ARTICLE_A`/`AN` to `itemArt_Fish[]` |
+| 14 | `src/data/model/inv_mwin3.c` | icon palette (reuse a similar fish's CI4 texture with a recolored 32-entry palette) |
+| 15 | `src/game/m_submenu_ovl.c` | extern + append `{ pal, tex }` to `fish_tex_table[]` |
+| 16 | `src/actor/ac_set_ovl_gyoei.c` | `FISH_SPAWN(NAME, AREA, weight)` in each month/time array **and bump the array size + `aSOG_term_list_c` count** |
+| 17 | `src/game/m_inventory_ovl.c` | put `aGYO_TYPE_<NAME>` into a `mIV_fish_collect_list2[]` slot |
+| 18 | `src/actor/npc/ac_npc_curator_move.c_inc` | append a message id to the donation `msg_no[]` |
+| 19 | `fish/gen_fish_table.py` | add the display name to `DISPLAY_NAMES` |
 
-| Property | Where it lives | Example |
-|---|---|---|
-| Enum name | `include/ac_gyoei.h` | `aGYO_TYPE_TUNA` |
-| Shadow size | `src/actor/ac_gyoei_type.c_inc` | `aGYO_SIZE_XL` |
-| Sell price | `src/data/item/fish_price.c` | catalog `8000` → sells for 2,000 Bells |
-| Spawn area(s) | `src/actor/ac_set_ovl_gyoei.c` | `SEA`, `RIVER`, `POOL`, `POND`, `WATERFALL`, `RIVER_MOUTH`, `OFFING` |
-| Months + time slots | same file | e.g. Dec–Feb, slots 0/1/3 (4 PM–9 AM) |
-| Encyclopedia slot | `src/game/m_inventory_ovl.c` (`mIV_fish_collect_list2`) | page 2, slot 1 |
+Already handled generically (no per-fish change needed): catch flow & pocket
+item, sell price at Nook's, encyclopedia caught-bit
+(`mSM_COLLECT_FISH_GET/SET` stores modded bits in unused save space
+`Private_c.unused_2412`, so vanilla saves stay compatible), release-into-water
+remap, held-fish model remap, **house placement + tank rendering** (see below),
+catch message (falls back to the generic "I caught something!" line — see
+Limitations).
 
-Time slots (per day): `0` = 9 PM–4 AM, `1` = 4–9 AM, `2` = 9 AM–4 PM, `3` = 4–9 PM.
-Spawn tables are per **half-month** (`aSOG_TERM_0`/`aSOG_TERM_1`), so seasonal
-boundaries can land mid-month.
+## House tank (fish furniture) - status: PARKED
+
+Dropping a fish in your house converts it to furniture. Vanilla fish map to
+`FTR_FISH_START + idx*4`, but that range is full (umbrellas follow it), so a
+modded-fish tank needs new furniture kinds at the end of the FTR1 space.
+
+A complete implementation exists but is currently **disabled** (the generated
+fish model needs more art iteration):
+
+* [src/furniture/ac_mod_fish_tank.c](../src/furniture/ac_mod_fish_tank.c) -
+  shared tank profile + draw proc (kept in the tree, not compiled).
+* To re-enable: re-add `X(FTR_MOD_FISH00)` before `FTR1_END`
+  (include/m_name_table.h), `FTR_MOD_FISH00` before `FTR_NUM`
+  (include/m_ftr_def.h), `&iam_mod_fish00` at the end of `furniture_quality[]`,
+  the extern in include/f_furniture.h, the two `#include` lines in
+  src/f_furniture.c, and restore the item<->ftr remaps in
+  src/game/m_room_type.c (git history has all of these).
+* Until then, [m_room_type.c](../src/game/m_room_type.c) explicitly makes
+  modded fish **non-placeable** - do not remove that guard: without it the
+  vanilla conversion maps fish idx 40 into the umbrella furniture range.
+
+## Generating a fish model (`fish/gen_fish_model.py`)
+
+Each fish's 3D model (used when swimming after release, held overhead, and in
+the house tank) is generated — no art tools needed:
+
+```bash
+python fish/gen_fish_model.py --list     # available specs
+python fish/gen_fish_model.py tetra      # writes src/data/model/act_f41_tetra.c
+```
+
+A spec defines length/height and palette roles (back, belly, lateral stripe,
+rear/tail, outline, eye). The script paints a 32x32 CI4 texture (GameCube
+8x8-block swizzled), builds a matching low-poly double-sided side-profile mesh
+with UVs derived from the same outline function, and emits three vertex frames
+(tail bent up / neutral / down) with display lists identical in style to the
+vanilla `act_f##` models. It prints the registration snippet for
+`ac_gyoei_model.c_inc` and the `#include` line for `src/f_furniture.c`.
+
+**Status:** the generated tetra model is currently *not wired in* (needs art
+iteration); the tetra uses the vanilla guppy model. To swap the generated one
+back in: `#include "../src/data/model/act_f41_tetra.c"` in src/f_furniture.c
+and point the tetra's `aGYO_displayList` entry at an `aGYO_tetra_dl` built
+from the `act_f41_tetra_*T_model` display lists.
+
+**Icon palette rule:** entries 1 and 17 of the `inv_mwin_*` icon palettes are
+the shared dark-blue background disc behind every item icon - never recolor
+them (keep `0xB19F` / `0xA66D`), or the item's background won't match the rest
+of the inventory.
+
+## Known limitations (v1)
+
+* **Catch message**: modded fish use the generic fallback message (`0x10F2`),
+  since fish-specific catchphrases live in `forest_2nd.arc`. You can hijack an
+  existing message via `dialog/dialog.json` + `aTRC_clip_get_msgno()` if desired.
+
+## Completion requirements (implemented)
+
+* **Golden rod**: awarded via `mSM_CHECK_ALL_FISH_GET()` which compares against
+  `FISH_NUM` using `mSM_COLLECT_FISH_GET` — modded fish are REQUIRED and the
+  requirement scales automatically as `FISH_NUM` grows.
+* **Museum**: modded fish are **donatable and required for the fish wing to
+  count as complete, but are intentionally NOT displayed in the tanks**. The
+  exhibit room code is 100% vanilla (no per-fish museum work, scales to any
+  fish count). Donor records for modded fish live in a dedicated save ledger
+  `Save_t.mod_fish_donation[128]` (4-bit donor nibbles, capacity **256 modded
+  fish**, carved from unused save padding so vanilla saves stay compatible).
+  `mMmd_FishInfo/SetFish/CountDisplayedFish/DeletePresentedByPlayer` route
+  fish idx >= `mMmd_FISH_DISPLAY_NUM` (40) to the ledger; completion checks
+  compare against `mMmd_FISH_NUM` which is defined as `FISH_NUM` and scales
+  automatically. Per new fish, the ONLY museum-related step is the curator
+  `msg_no[]` entry (#18).
 
 ## Step 1 — Fish type enum (`include/ac_gyoei.h`)
 

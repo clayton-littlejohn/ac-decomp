@@ -64,11 +64,12 @@ static mActor_name_t aUKI_get_fish_type(ACTOR* actorx) {
         ITM_DUST1_BOOT,
         ITM_DUST2_OLD_TIRE,
         ITM_FISH22,
+        ITM_FISH40, /* aGYO_TYPE_NEON_TETRA (modded) */
     };
     // clang-format on
     mActor_name_t item = EMPTY_NO;
 
-    if (uki->gyo_type >= 0 && uki->gyo_type < aGYO_TYPE_EXTENDED_NUM) {
+    if (uki->gyo_type >= 0 && uki->gyo_type < aGYO_TYPE_MODDED_NUM) {
         item = fish_data[uki->gyo_type];
     }
 

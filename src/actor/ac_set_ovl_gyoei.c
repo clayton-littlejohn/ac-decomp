@@ -466,7 +466,7 @@ static aSOG_term_info_c r_m6_t1[16] = {
   FISH_SPAWN(KILLIFISH, RIVER, 1),
 };
 
-static aSOG_term_info_c r_m6_t2[17] = {
+static aSOG_term_info_c r_m6_t2[18] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 5),
   FISH_SPAWN(BROOK_TROUT, POOL, 5),
   FISH_SPAWN(CARP, RIVER, 5),
@@ -484,10 +484,11 @@ static aSOG_term_info_c r_m6_t2[17] = {
   FISH_SPAWN(FRESHWATER_GOBY, RIVER, 3),
   FISH_SPAWN(ANGELFISH, RIVER, 1),
   FISH_SPAWN(KILLIFISH, RIVER, 1),
+  FISH_SPAWN(NEON_TETRA, RIVER, 4), /* modded */
 };
 
 static aSOG_term_list_c r_begining_june[aSOG_TIME_NUM] = {
-  { 17, r_m6_t2 },
+  { 18, r_m6_t2 },
   { 20, r_m6_t0 },
   { 16, r_m6_t1 },
   { 20, r_m6_t0 }
@@ -561,7 +562,7 @@ static aSOG_term_info_c r_m7_t1[17] = {
   FISH_SPAWN(KILLIFISH, RIVER, 1),
 };
 
-static aSOG_term_info_c r_m7_t2[19] = {
+static aSOG_term_info_c r_m7_t2[20] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 7),
   FISH_SPAWN(BROOK_TROUT, POOL, 5),
   FISH_SPAWN(CARP, RIVER, 3),
@@ -581,10 +582,11 @@ static aSOG_term_info_c r_m7_t2[19] = {
   FISH_SPAWN(ANGELFISH, RIVER, 1),
   FISH_SPAWN(KILLIFISH, RIVER, 1),
   FISH_SPAWN(ARAPAIMA, RIVER, 1),
+  FISH_SPAWN(NEON_TETRA, RIVER, 4), /* modded */
 };
 
 static aSOG_term_list_c r_begining_july[aSOG_TIME_NUM] = {
-  { 19, r_m7_t2 },
+  { 20, r_m7_t2 },
   { 19, r_m7_t0 },
   { 17, r_m7_t1 },
   { 19, r_m7_t0 }
@@ -670,7 +672,7 @@ static aSOG_term_info_c s_m8_t1_2[3] = {
   FISH_SPAWN(BARRED_KNIFEJAW, SEA, 3),
 };
 
-static aSOG_term_info_c r_m8_t2[19] = {
+static aSOG_term_info_c r_m8_t2[20] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 7),
   FISH_SPAWN(BROOK_TROUT, POOL, 5),
   FISH_SPAWN(CARP, RIVER, 3),
@@ -690,10 +692,11 @@ static aSOG_term_info_c r_m8_t2[19] = {
   FISH_SPAWN(ANGELFISH, RIVER, 1),
   FISH_SPAWN(KILLIFISH, RIVER, 1),
   FISH_SPAWN(ARAPAIMA, RIVER, 1),
+  FISH_SPAWN(NEON_TETRA, RIVER, 4), /* modded */
 };
 
 static aSOG_term_list_c r_begining_august[aSOG_TIME_NUM] = {
-  { 19, r_m8_t2 },
+  { 20, r_m8_t2 },
   { 19, r_m8_t0 },
   { 17, r_m8_t1 },
   { 19, r_m8_t0 }
@@ -821,7 +824,7 @@ static aSOG_term_info_c s_m9_t1[3] = {
   FISH_SPAWN(BARRED_KNIFEJAW, SEA, 5),
 };
 
-static aSOG_term_info_c r_m9_t2[17] = {
+static aSOG_term_info_c r_m9_t2[18] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 16),
   FISH_SPAWN(BROOK_TROUT, POOL, 5),
   FISH_SPAWN(CARP, RIVER, 3),
@@ -839,6 +842,7 @@ static aSOG_term_info_c r_m9_t2[17] = {
   FISH_SPAWN(FRESHWATER_GOBY, RIVER, 3),
   FISH_SPAWN(ANGELFISH, RIVER, 1),
   FISH_SPAWN(ARAPAIMA, RIVER, 1),
+  FISH_SPAWN(NEON_TETRA, RIVER, 4), /* modded */
 };
 
 static aSOG_term_info_c r_m9_t2_2[15] = {
@@ -860,7 +864,7 @@ static aSOG_term_info_c r_m9_t2_2[15] = {
 };
 
 static aSOG_term_list_c r_begining_september[aSOG_TIME_NUM] = {
-  { 17, r_m9_t2 },
+  { 18, r_m9_t2 },
   { 20, r_m9_t0 },
   { 15, r_m9_t1 },
   { 20, r_m9_t0 }
