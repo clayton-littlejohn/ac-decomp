@@ -488,6 +488,7 @@ extern void mCoBG_InitBlockBgCheckMode(void);
 extern int mCoBG_ChangeBlockBgCheckMode(int mode);
 extern int mCoBG_GetBlockBgCheckMode(void);
 extern xyz_t mCoBG_UniqueWallCheck(ACTOR* actorx, f32 range, f32 y_ofs);
+extern xyz_t mCoBG_UniqueWallCheckScroll(ACTOR* actorx, f32 range, f32 y_ofs); /* @MOD seamless acres */
 extern xyz_t mCoBG_ScopeWallCheck(ACTOR* actorx, const xyz_t* base_pos, f32 x, f32 z, f32 range, f32 y_ofs);
 
 extern void mCoBG_Ut2SetPlussOffset(int ux, int uz, s16 change_ofs, s16 attr);

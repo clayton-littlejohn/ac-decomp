@@ -9,6 +9,7 @@
 #include "m_player_lib.h"
 #include "m_bg_type.h"
 #include "m_fg_type.h"
+#include "m_demo.h" /* @MOD seamless acres */
 
 static mCoBG_Collision_u l_edge_ut = { { 0, 31, 31, 31, 31, 31, mCoBG_ATTRIBUTE_GRASS0 } };
 
@@ -997,7 +998,7 @@ static int mFI_SearchNullDisp(int* idx) {
     return res;
 }
 
-static void mFI_BGDispMake(u8* disp_bitfield, int bx, int bz) {
+static void mFI_BGDispMake(u32* disp_bitfield, int bx, int bz) { /* @MOD seamless acres: u8 -> u32 bitfield (9 slots) */
     int num = mFI_GetBlockNum(bx, bz);
     int idx;
 
@@ -1071,7 +1072,7 @@ static void mFI_WhereisInBlock(u8* pos_bitfield, xyz_t wpos) {
 }
 
 extern void mFI_BGDisplayListRefresh(xyz_t wpos) {
-    u8 disp_bitfield;
+    u32 disp_bitfield; /* @MOD seamless acres: u8 -> u32 (9 slots) */
     u8 where_bitfield;
     int bx;
     int bz;
@@ -1084,6 +1085,37 @@ extern void mFI_BGDisplayListRefresh(xyz_t wpos) {
     disp_bitfield = 0;
     where_bitfield = 0;
     Common_Set(remove_cut_tree_info_bitfield, 0);
+
+    /* @MOD seamless acres: when the field provides enough display slots (the town
+     * field now has 9), keep the whole 3x3 acre neighborhood registered so trees and
+     * ground items are visible in every adjacent acre. Other fields keep the vanilla
+     * nearest-quadrant behavior. */
+    if (g_fdinfo->bg_num >= 9) {
+        if (mFI_Wpos2BlockNum(&bx, &bz, wpos)) {
+            int dx;
+            int dz;
+
+            for (dz = -1; dz <= 1; dz++) {
+                for (dx = -1; dx <= 1; dx++) {
+                    if (mFI_BlockCheck(bx + dx, bz + dz)) {
+                        mFI_BGDispMake(&disp_bitfield, bx + dx, bz + dz);
+                    }
+                }
+            }
+        }
+
+        for (i = 0; i < mFM_VISIBLE_BLOCK_NUM; i++) {
+            if (((disp_bitfield >> i) & 1) != 1) {
+                g_fdinfo->bg_draw_info[i].dma_loaded = FALSE;
+                g_fdinfo->bg_draw_info[i].block_x = 0xFF;
+                g_fdinfo->bg_draw_info[i].block_z = 0xFF;
+                mFI_ClearRegisterBgInfoIdx(i);
+            }
+        }
+
+        return;
+    }
+
     if (mFI_Wpos2BlockNum(&bx, &bz, wpos)) {
         num = mFI_GetBlockNum(bx, bz);
 
@@ -1483,9 +1515,9 @@ extern int mFI_GetItemTable_NoReset(mFI_item_table_c* item_table, xyz_t wpos) {
 
     mFM_field_draw_info_c* bg_disp = mFI_BGDisplayListTop();
     int t_no;
-    u8 _num = 0;
-    u8 _bitfield = 0;
-    u8 clear_tree_cut_bitfield = 0;
+    u32 _num = 0;
+    u32 _bitfield = 0; /* @MOD seamless acres: u8 -> u32 (9 slots) */
+    u32 clear_tree_cut_bitfield = 0;
     int bx;
     int bz;
     int block_x_tbl[mFM_VISIBLE_BLOCK_NUM];
@@ -2054,11 +2086,48 @@ extern void mFI_InitMoveActorBitData() {
 
 static int l_player_wade;
 
+/* @MOD seamless acres: with the wade demo disabled the player walks straight across
+ * acre borders. When that happens we sync the block table (which drives actor
+ * spawning) and synthesize the wade state machine (START -> INPROGRESS -> END) that
+ * the set managers, NPC manager, event manager, BGM, etc. listen to. */
+#define mFI_MOD_SYNTH_WADE_FRAMES 10
+static int l_mod_synth_wade_timer = 0;
+
+static int mFI_MOD_CheckSeamlessCrossing(GAME* game, PLAYER_ACTOR* player) {
+    GAME_PLAY* play = (GAME_PLAY*)game;
+    int bx;
+    int bz;
+
+    if (mPlib_check_player_actor_main_index_AllWade(game) == FALSE && mDemo_CheckDemo() == FALSE &&
+        play->fb_fade_type == FADE_TYPE_NONE &&
+        mFI_Wpos2BlockNum(&bx, &bz, player->actor_class.world.position) == TRUE &&
+        (bx != play->block_table.block_x || bz != play->block_table.block_z)) {
+        /* the player walked into a new acre: update the block table (spawns the new
+         * acre's actors via the born_actor flag) and start a synthetic wade */
+        mFI_SetBearActor(play, player->actor_class.world.position, TRUE);
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
 extern void mFI_SetPlayerWade(GAME* game) {
     PLAYER_ACTOR* player = GET_PLAYER_ACTOR_GAME(game);
 
     if (player != NULL) {
-        if (mPlib_check_player_actor_main_index_AllWade(game) == TRUE) {
+        int wading = mPlib_check_player_actor_main_index_AllWade(game);
+
+        /* @MOD seamless acres */
+        if (mFI_MOD_CheckSeamlessCrossing(game, player) == TRUE) {
+            l_mod_synth_wade_timer = mFI_MOD_SYNTH_WADE_FRAMES;
+        }
+
+        if (l_mod_synth_wade_timer > 0) {
+            l_mod_synth_wade_timer--;
+            wading = TRUE;
+        }
+
+        if (wading == TRUE) {
             if (l_player_wade == mFI_WADE_NONE || l_player_wade == mFI_WADE_END) {
                 l_player_wade = mFI_WADE_START;
             } else {
@@ -2095,6 +2164,10 @@ extern int mFI_GetNextBlockNum(int* bx, int* bz) {
 
     if (Common_Get(player_actor_exists)) {
         res = ((*GET_PLAYER_ACTOR_NOW()->Get_WadeEndPos_proc)(gamePT, &end_pos));
+        /* @MOD seamless acres: when the player crosses without a wade demo the "next"
+         * block is simply the block they already stand in (end_pos falls back to the
+         * player's position in that case) */
+        res = TRUE;
     }
 
     res2 = mFI_Wpos2BlockNum(bx, bz, end_pos);

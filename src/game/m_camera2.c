@@ -1325,20 +1325,25 @@ static void Camera2_main_Normal_SetEndCenterPos_fromPlayer(GAME_PLAY* play, xyz_
         end_center_pos->z = z_midpoint + (z_scale * z_left) * 0.25f;
     }
 
-    if (mFI_GetBlockWidth() < scale * 330.0f || border_x0 < border_x1) {
-        end_center_pos->x = (border_x0 + border_x1) * 0.5f;
-    } else if (end_center_pos->x > border_x0) {
-        end_center_pos->x = border_x0;
-    } else if (end_center_pos->x < border_x1) {
-        end_center_pos->x = border_x1;
-    }
+    /* @MOD seamless acres: only clamp the camera to the current acre's borders indoors
+     * (and during island boat travel). Outdoors the camera follows the player freely,
+     * so no pan is needed when crossing acre borders. */
+    if (Camera2_InDoorCheck() || (play->camera.flags & 1)) {
+        if (mFI_GetBlockWidth() < scale * 330.0f || border_x0 < border_x1) {
+            end_center_pos->x = (border_x0 + border_x1) * 0.5f;
+        } else if (end_center_pos->x > border_x0) {
+            end_center_pos->x = border_x0;
+        } else if (end_center_pos->x < border_x1) {
+            end_center_pos->x = border_x1;
+        }
 
-    if (mFI_GetBlockHeight() < scale * 250.0f || border_z1 < border_z0) {
-        end_center_pos->z = (border_z0 + border_z1) * 0.5f;
-    } else if (end_center_pos->z < border_z0) {
-        end_center_pos->z = border_z0;
-    } else if (end_center_pos->z > border_z1) {
-        end_center_pos->z = border_z1;
+        if (mFI_GetBlockHeight() < scale * 250.0f || border_z1 < border_z0) {
+            end_center_pos->z = (border_z0 + border_z1) * 0.5f;
+        } else if (end_center_pos->z < border_z0) {
+            end_center_pos->z = border_z0;
+        } else if (end_center_pos->z > border_z1) {
+            end_center_pos->z = border_z1;
+        }
     }
 
     if (Camera2_InDoorCheck()) {

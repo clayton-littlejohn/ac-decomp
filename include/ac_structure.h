@@ -11,7 +11,7 @@
 extern "C" {
 #endif
 
-#define aSTR_ACTOR_TBL_COUNT 9
+#define aSTR_ACTOR_TBL_COUNT 24 /* @MOD seamless acres: raised from 9 so a full 3x3 acre neighborhood of buildings can exist at once */
 #define aSTR_OVERLAY_SIZE 0x2400
 
 enum structure_type {

@@ -1729,7 +1729,15 @@ static int Player_actor_CheckAbleMoveDemoWadeBoatBlock(ACTOR* actorx, s16 angle_
 }
 
 static void Player_actor_CorrectWadeBlockBorder(ACTOR* actorx) {
-    mCoBG_UniqueWallCheck(actorx, 18.0f, 0.0f);
+    /* @MOD seamless acres: in normal play only wall off acre borders that cannot be
+     * crossed (map edges); passable borders are walked over freely. The full wall is
+     * kept during the intro/title demo, scripted demos and when events forbid it. */
+    if (mCoBG_GetBlockBgCheckMode() == mCoBG_BLOCK_BGCHECK_MODE_NORMAL && mPlib_Get_unable_wade() == FALSE &&
+        mDemo_CheckDemo() == FALSE) {
+        mCoBG_UniqueWallCheckScroll(actorx, 18.0f, 0.0f);
+    } else {
+        mCoBG_UniqueWallCheck(actorx, 18.0f, 0.0f);
+    }
 }
 
 /* Animation */
@@ -3659,8 +3667,17 @@ static void Player_actor_Init_ScrollDemo_forWade_snowball(ACTOR* actorx) {
 static int Player_actor_Set_ScrollDemo_forWade(ACTOR* actorx, GAME* game, int npc_check_flag) {
     xyz_t* player_pos_p = &actorx->world.position;
     s16 player_angle_y = actorx->shape_info.rotation.y;
-    int dir = Player_actor_CheckAbleMoveWadeBlock(game, player_pos_p, player_angle_y, 0.65f, DEG2SHORT_ANGLE2(40.0f),
-                                                  npc_check_flag);
+    int dir;
+
+    /* @MOD seamless acres: no wade demo in normal play - the player walks straight
+     * across the border and mFI_SetPlayerWade() synthesizes the acre bookkeeping.
+     * The intro/title demo still uses the vanilla wade. */
+    if (mCoBG_GetBlockBgCheckMode() == mCoBG_BLOCK_BGCHECK_MODE_NORMAL) {
+        return FALSE;
+    }
+
+    dir = Player_actor_CheckAbleMoveWadeBlock(game, player_pos_p, player_angle_y, 0.65f, DEG2SHORT_ANGLE2(40.0f),
+                                              npc_check_flag);
 
     if (dir != mFI_MOVEDIR_NONE) {
         PLAYER_ACTOR* player = (PLAYER_ACTOR*)actorx;

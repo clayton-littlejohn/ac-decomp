@@ -300,7 +300,12 @@ static void Actor_delete_check(ACTOR* actor, GAME* game) {
          (ACTOR_STATE_NO_MOVE_WHILE_CULLED | ACTOR_STATE_NO_DRAW_WHILE_CULLED | ACTOR_STATE_NO_CULL)) == 0) {
         if (actor->npc_id != EMPTY_NO) {
             if (actor->block_x >= 0 && actor->block_z >= 0) {
-                if (actor->block_x != play->block_table.block_x || actor->block_z != play->block_table.block_z) {
+                /* @MOD seamless acres: only delete NPC actors once they are outside
+                 * the 3x3 acre neighborhood (vanilla: outside the current acre) */
+                int dx = actor->block_x - play->block_table.block_x;
+                int dz = actor->block_z - play->block_table.block_z;
+
+                if (dx < -1 || dx > 1 || dz < -1 || dz > 1) {
                     Actor_delete(actor);
                 }
             }

@@ -86,3 +86,61 @@ extern xyz_t mCoBG_ScopeWallCheck(ACTOR* actorx, const xyz_t* base_pos, f32 x, f
 
     return rev;
 }
+
+/* @MOD seamless acres: like mCoBG_UniqueWallCheck, but each side of the acre only
+ * walls the actor in when scrolling into the neighboring acre is not possible
+ * (map edge / invalid block). Passable borders can be walked across freely. */
+extern xyz_t mCoBG_UniqueWallCheckScroll(ACTOR* actorx, f32 range, f32 y_ofs) {
+    int bx;
+    int bz;
+    xyz_t ret = { 0.0f, 0.0f, 0.0f };
+
+    mCoBG_InitRevpos(&l_ActorInf.rev_pos);
+    mCoBG_GetCurrentCenterPosition(&l_ActorInf.center_pos, actorx);
+    mCoBG_GetOldCenterPosition(&l_ActorInf.old_center_pos, actorx);
+    mCoBG_GetSpeedByWpos(l_ActorInf.speed_xz0, actorx);
+
+    if (mFI_Wpos2BlockNum(&bx, &bz, l_ActorInf.old_center_pos)) {
+        if (l_ActorInf.speed_xz0[0] != 0.0f || l_ActorInf.speed_xz0[1] != 0.0f) {
+            xyz_t block_base = { 0.0f, 0.0f, 0.0f };
+            f32 start[2];
+            f32 end[2];
+
+            mFI_BkNum2WposXZ(&block_base.x, &block_base.z, bx, bz);
+
+            start[0] = block_base.x + range;
+            start[1] = block_base.z + range;
+            end[0] = block_base.x + mFI_BK_WORLDSIZE_X - range;
+            end[1] = block_base.z + mFI_BK_WORLDSIZE_Z - range;
+
+            mCoBG_SetXyz_t(&l_ActorInf.rev_pos, 0.0f, 0.0f, 0.0f);
+
+            if (l_ActorInf.center_pos.x < start[0]) {
+                if (mFI_ScrollCheck(l_ActorInf.old_center_pos, mFI_MOVEDIR_LEFT) == FALSE) {
+                    l_ActorInf.rev_pos.x = start[0] - l_ActorInf.center_pos.x;
+                }
+            } else if (l_ActorInf.center_pos.x > end[0]) {
+                if (mFI_ScrollCheck(l_ActorInf.old_center_pos, mFI_MOVEDIR_RIGHT) == FALSE) {
+                    l_ActorInf.rev_pos.x = end[0] - l_ActorInf.center_pos.x;
+                }
+            }
+
+            if (l_ActorInf.center_pos.z < start[1]) {
+                if (mFI_ScrollCheck(l_ActorInf.old_center_pos, mFI_MOVEDIR_UP) == FALSE) {
+                    l_ActorInf.rev_pos.z = start[1] - l_ActorInf.center_pos.z;
+                }
+            } else if (l_ActorInf.center_pos.z > end[1]) {
+                if (mFI_ScrollCheck(l_ActorInf.old_center_pos, mFI_MOVEDIR_DOWN) == FALSE) {
+                    l_ActorInf.rev_pos.z = end[1] - l_ActorInf.center_pos.z;
+                }
+            }
+
+            mCoBG_GroundCheck(&l_ActorInf.rev_pos, &l_ActorInf, actorx, y_ofs, &actorx->bg_collision_check.result,
+                              NULL, FALSE);
+            mCoBG_CarryOutReverse(actorx, l_ActorInf.rev_pos, mCoBG_REVERSE_TYPE_REVERSE);
+            return l_ActorInf.rev_pos;
+        }
+    }
+
+    return ret;
+}

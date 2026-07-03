@@ -41,29 +41,24 @@ static f32 aBC_pos_table[UT_BASE_NUM] = {
 };
 
 static void aBC_deleteActor_part(GAME_PLAY* play, int part) {
-  mFI_block_tbl_c* last_block_table = &play->last_block_table;
-  s8 last_bx = last_block_table->block_x;
-  s8 last_bz = last_block_table->block_z;
   s8 now_bx = play->block_table.block_x;
   s8 now_bz = play->block_table.block_z;
-  s8 check_bx;
-  s8 check_bz;
   ACTOR* actor = play->actor_info.list[part].actor;
 
   while (TRUE) {
     if (actor == NULL) {
       break;
     }
-    
-    check_bx = actor->block_x;
-    check_bz = actor->block_z;
 
-    /* Delete any actors which aren't in the current block or the last block */
-    if (
-      (check_bx >= 0 && check_bx != last_bx && check_bx != now_bx) &&
-      (check_bz >= 0 && check_bz != last_bz && check_bz != now_bz)
-    ) {
-      Actor_delete(actor);
+    /* @MOD seamless acres: keep actors in the whole 3x3 neighborhood around the
+     * player's acre alive (vanilla only kept the current + last acre) */
+    if (actor->block_x >= 0 && actor->block_z >= 0) {
+      int dx = actor->block_x - now_bx;
+      int dz = actor->block_z - now_bz;
+
+      if (dx < -1 || dx > 1 || dz < -1 || dz > 1) {
+        Actor_delete(actor);
+      }
     }
 
     actor = actor->next_actor;
@@ -103,7 +98,7 @@ static int aBC_setupOtherActor(GAME_PLAY* play, mActor_name_t actor_id, s16 prof
   return res;
 }
 
-static void aBC_setupActor(BIRTH_CONTROL_ACTOR* birth_control, GAME_PLAY* play) {
+static int aBC_setupActorInBlock(GAME_PLAY* play) {
   mFI_block_tbl_c* block_table = &play->block_table;
   mActor_name_t* item_p = block_table->items;
   f32 base_x = block_table->pos_x;
@@ -112,6 +107,10 @@ static void aBC_setupActor(BIRTH_CONTROL_ACTOR* birth_control, GAME_PLAY* play) 
   mActor_name_t clear_item;
   int ut_z;
   int ut_x;
+
+  if (item_p == NULL) {
+    return FALSE;
+  }
 
   for (ut_z = 0; ut_z < UT_Z_NUM; ut_z++) {
     for (ut_x = 0; ut_x < UT_X_NUM; ut_x++) {
@@ -153,6 +152,48 @@ static void aBC_setupActor(BIRTH_CONTROL_ACTOR* birth_control, GAME_PLAY* play) 
     }
   }
 
+  return setup_actor_flag;
+}
+
+/* @MOD seamless acres: build a block table for any acre (mFI_SetBlockTable is
+ * private to m_field_info.c) */
+static int aBC_getBlockTable(mFI_block_tbl_c* block_table, int bx, int bz) {
+  if (mFI_BlockCheck(bx, bz) == FALSE) {
+    return FALSE;
+  }
+
+  block_table->items = g_fdinfo->block_info[mFI_GetBlockNum(bx, bz)].fg_info.items_p;
+  block_table->block_x = bx;
+  block_table->block_z = bz;
+  mFI_BkNum2WposXZ(&block_table->pos_x, &block_table->pos_z, bx, bz);
+
+  return TRUE;
+}
+
+static void aBC_setupActor(BIRTH_CONTROL_ACTOR* birth_control, GAME_PLAY* play) {
+  /* @MOD seamless acres: spawn item/prop/structure actors (houses, bridges, signs,
+   * etc.) for the full 3x3 acre neighborhood instead of just the current acre, so
+   * nothing pops in while walking around. Spawning is idempotent: successfully
+   * spawned entries are removed from the acre's FG item data until the actor dies.
+   * play->block_table is temporarily swapped so the spawn helpers tag each actor
+   * with its true acre. */
+  mFI_block_tbl_c center = play->block_table;
+  int setup_actor_flag = FALSE;
+  int dx;
+  int dz;
+
+  for (dz = -1; dz <= 1; dz++) {
+    for (dx = -1; dx <= 1; dx++) {
+      mFI_block_tbl_c neighbor;
+
+      if (aBC_getBlockTable(&neighbor, center.block_x + dx, center.block_z + dz) == TRUE) {
+        play->block_table = neighbor;
+        setup_actor_flag |= aBC_setupActorInBlock(play);
+      }
+    }
+  }
+
+  play->block_table = center;
   birth_control->setup_actor_flag = setup_actor_flag;
 }
 
