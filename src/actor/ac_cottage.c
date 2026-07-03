@@ -863,6 +863,16 @@ static void Cottage_actor_move(ACTOR* actor, GAME* game) {
     cottage_data = Cottage_data_get(cottage);
     (*cottage->action_proc)(cottage, play);
     (*cottage_data->light_control_proc)(cottage);
+
+    /* @MOD seamless acres: the island collision BG is reloaded (flattened) around
+     * island arrival, which wipes the raised collision the cottage set up in its ct.
+     * Because structures now persist (seamless 3x3 spawn) instead of respawning each
+     * time the acre is entered, that one-time offset is never re-applied and the
+     * player can walk through the house. Re-apply it here every frame:
+     * mCoBG_SetPluss5PointOffset only touches units that are currently flat, so this
+     * is idempotent (a no-op once the walls are raised) and cheap. Cottages only
+     * exist on the island, so town houses are unaffected. */
+    (*cottage_data->set_bg_offset_proc)(cottage, 1);
 }
 
 static void Cottage_actor_init(ACTOR* actor, GAME* game) {

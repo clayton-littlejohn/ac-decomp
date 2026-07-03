@@ -51,8 +51,13 @@ static void aBC_deleteActor_part(GAME_PLAY* play, int part) {
     }
 
     /* @MOD seamless acres: keep actors in the whole 3x3 neighborhood around the
-     * player's acre alive (vanilla only kept the current + last acre) */
-    if (actor->block_x >= 0 && actor->block_z >= 0) {
+     * player's acre alive (vanilla only kept the current + last acre). Kapp'n and
+     * his boat are exempt: during the island ride they sail several acres away from
+     * the dock acre they spawned in and manage their own lifetime, so culling them
+     * here by spawn-acre distance would delete the boat out from under the player
+     * mid-demo and leave them stranded. */
+    if (actor->id != mAc_PROFILE_BOAT && actor->id != mAc_PROFILE_NPC_SENDO &&
+        actor->block_x >= 0 && actor->block_z >= 0) {
       int dx = actor->block_x - now_bx;
       int dz = actor->block_z - now_bz;
 
@@ -301,25 +306,7 @@ static void aBC_set_boat(BIRTH_CONTROL_ACTOR* birth_control, GAME_PLAY* play) {
     mActor_name_t* boat_ut_p = mFI_UtNum2UtFG(5 * UT_X_NUM + 5, 6 * UT_Z_NUM + 10); // Set boat at F-5, unit 5-10 (x-z)
 
     if (boat_ut_p != NULL) {
-      mActor_name_t boat_item = *boat_ut_p;
-
-      switch (mGcgba_ConnectEnabled()) {
-        case GBA2_GBA_STATE_SUCCESS:
-          /* Successfully connected to the GBA */
-          mGcgba_InitVar();
-          boat_item = BOAT; // set boat
-          break;
-        default:
-          /* Failed to connect to the GBA */
-          mGcgba_InitVar();
-          boat_item = EMPTY_NO; // clear boat
-          break;
-        case GBA2_GBA_STATE_TRANSMITTING:
-          /* Still transmitting */
-          break;
-      }
-
-      *boat_ut_p = boat_item;
+      *boat_ut_p = BOAT; // always spawn Kapp'n's boat, no GBA connection required
     }
   }
   else {

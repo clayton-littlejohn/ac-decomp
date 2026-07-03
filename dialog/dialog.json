@@ -119554,7 +119554,7 @@
       "index": 12410,
       "label": "",
       "original": "<<DEMONPC0 [00 00 0E]>><<STR_FREE0>> Island, ho!!<<PAUSE [10]>>\n<<DEMONPC0 [00 00 17]>>Well now, <<PAUSE [03]>>that were some\nbumpy ride, wouldn't ye say?<<PAUSE [0A]>>\nAye, almost lost me vittles!\n<<BTN>>\n<<MSGCLEAR>><<DEMONPC0 [00 00 FF]>>Now ye can turn off<<PAUSE [06]>>\nyer <<COLORCHARS [19 8C DC 10]>>Game Boy Advance, <<PAUSE [03]>>\nif ye feel like doin' so.<<PAUSE [0A]>>\nMe, I don't give a squid.\n<<MSGEND>>",
-      "new": "<<DEMONPC0 [00 00 0E]>><<STR_FREE0>> Island, ho!!<<PAUSE [10]>>\n<<DEMONPC0 [00 00 17]>>Well now, <<PAUSE [03]>>that were some\nbumpy ride, wouldn't ye say?<<PAUSE [0A]>>\nAye, almost lost me vittles!\n<<BTN>>\n<<MSGCLEAR>><<DEMONPC0 [00 00 FF]>>Now ye can turn off<<PAUSE [06]>>\nyer <<COLORCHARS [19 8C DC 10]>>Game Boy Advance, <<PAUSE [03]>>\nif ye feel like doin' so.<<PAUSE [0A]>>\nMe, I don't give a squid.\n<<MSGEND>>",
+      "new": "<<DEMONPC0 [00 00 0E]>><<STR_FREE0>> Island, ho!!<<PAUSE [10]>>\n<<DEMONPC0 [00 00 17]>>Well now, <<PAUSE [03]>>that were some\nbumpy ride, wouldn't ye say?<<PAUSE [0A]>>\nAye, almost lost me vittles!\n<<BTN>>\n<<MSGCLEAR>><<DEMONPC0 [00 00 FF]>>Ye can head ashore now,<<PAUSE [06]>>\nif ye feel like doin' so.<<PAUSE [0A]>>\nMe, I don't give a squid.\n<<MSGEND>>",
       "flow": {
         "ends": true
       }
@@ -121763,7 +121763,7 @@
       "index": 12620,
       "label": "",
       "original": "<<DEMONPC0 [00 00 0E]>><<STR_FREE0>> Island, ho!!<<PAUSE [10]>>\n<<DEMONPC0 [00 00 17]>>Well now, <<PAUSE [03]>>that were some\nbumpy ride, wouldn't ye say?<<PAUSE [0A]>>\nAye, almost lost me vittles!\n<<BTN>>\n<<MSGCLEAR>><<DEMONPC0 [00 00 FF]>>Now ye can turn off<<PAUSE [06]>>\nyer <<COLORCHARS [19 8C DC 10]>>Game Boy Advance, <<PAUSE [03]>>\nif ye feel like doin' so.<<PAUSE [0A]>>\nMe, I don't give a squid.\n<<MSGEND>>",
-      "new": "<<DEMONPC0 [00 00 0E]>><<STR_FREE0>> Island, ho!!<<PAUSE [10]>>\n<<DEMONPC0 [00 00 17]>>Well now, <<PAUSE [03]>>that were some\nbumpy ride, wouldn't ye say?<<PAUSE [0A]>>\nAye, almost lost me vittles!\n<<BTN>>\n<<MSGCLEAR>><<DEMONPC0 [00 00 FF]>>Now ye can turn off<<PAUSE [06]>>\nyer <<COLORCHARS [19 8C DC 10]>>Game Boy Advance, <<PAUSE [03]>>\nif ye feel like doin' so.<<PAUSE [0A]>>\nMe, I don't give a squid.\n<<MSGEND>>",
+      "new": "<<DEMONPC0 [00 00 0E]>><<STR_FREE0>> Island, ho!!<<PAUSE [10]>>\n<<DEMONPC0 [00 00 17]>>Well now, <<PAUSE [03]>>that were some\nbumpy ride, wouldn't ye say?<<PAUSE [0A]>>\nAye, almost lost me vittles!\n<<BTN>>\n<<MSGCLEAR>><<DEMONPC0 [00 00 FF]>>Ye can head ashore now,<<PAUSE [06]>>\nif ye feel like doin' so.<<PAUSE [0A]>>\nMe, I don't give a squid.\n<<MSGEND>>",
       "flow": {
         "ends": true
       }
