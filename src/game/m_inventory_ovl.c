@@ -92,11 +92,16 @@ static u8 mIV_fish_collect_list[] = {
  * Register new fish here by replacing mIV_FISH_SLOT_EMPTY with the fish's
  * aGYO_TYPE_* value. See fish/ADDING_FISH.md for the full workflow. */
 static u8 mIV_fish_collect_list2[mIV_COLLECT_NUM] = {
-    aGYO_TYPE_NEON_TETRA, E, E, E, E, E, E, E,
-    E, E, E, E, E, E, E, E,
-    E, E, E, E, E, E, E, E,
-    E, E, E, E, E, E, E, E,
-    E, E, E, E, E, E, E, E,
+    aGYO_TYPE_NEON_TETRA, aGYO_TYPE_PIKE, aGYO_TYPE_YELLOW_PERCH, aGYO_TYPE_STURGEON,
+    aGYO_TYPE_GOLDEN_TROUT, aGYO_TYPE_TILAPIA, aGYO_TYPE_BETTA, aGYO_TYPE_RAINBOWFISH,
+    aGYO_TYPE_GAR, aGYO_TYPE_DORADO, aGYO_TYPE_SADDLED_BICHIR, aGYO_TYPE_NIBBLE_FISH,
+    aGYO_TYPE_TADPOLE, aGYO_TYPE_SNAPPING_TURTLE, aGYO_TYPE_SOFTSHELL_TURTLE, aGYO_TYPE_MITTEN_CRAB,
+    aGYO_TYPE_TUNA, aGYO_TYPE_BLUE_MARLIN, aGYO_TYPE_OCEAN_SUNFISH, aGYO_TYPE_RAY,
+    aGYO_TYPE_SAW_SHARK, aGYO_TYPE_HAMMERHEAD_SHARK, aGYO_TYPE_GREAT_WHITE_SHARK, aGYO_TYPE_WHALE_SHARK,
+    aGYO_TYPE_NAPOLEONFISH, aGYO_TYPE_BARRELEYE, aGYO_TYPE_MAHI_MAHI, aGYO_TYPE_RIBBON_EEL,
+    aGYO_TYPE_MORAY_EEL, aGYO_TYPE_SEAHORSE, aGYO_TYPE_CLOWNFISH, aGYO_TYPE_SURGEONFISH,
+    aGYO_TYPE_BUTTERFLY_FISH, aGYO_TYPE_ZEBRA_TURKEYFISH, aGYO_TYPE_PUFFER_FISH, aGYO_TYPE_HORSE_MACKEREL,
+    aGYO_TYPE_SQUID, aGYO_TYPE_ANCHOVY, aGYO_TYPE_FOOTBALL_FISH, aGYO_TYPE_OLIVE_FLOUNDER,
 };
 #undef E
 // clang-format on
@@ -2032,14 +2037,15 @@ static void mIV_inventory_ovl_init(Submenu* submenu, mSM_MenuInfo_c* menu_info, 
     int i;
     Mail_c* mail = Now_Private->mail;
 
-/* TEMP TEST CHEAT (remove for release): every time the inventory opens,
- * pocket slot 1 is overwritten with a neon tetra and the fish is unlocked
- * in the encyclopedia. Set to 0 to disable. */
+/* TEMP TEST CHEAT (remove for release): every time the inventory opens, all
+ * modded fish are unlocked in the encyclopedia. Set to 0 to disable. */
 #define mIV_MOD_FISH_TEST_CHEAT 1
 #if mIV_MOD_FISH_TEST_CHEAT
     if (menu_info->data0 == mSM_IV_OPEN_NORMAL) {
-        mPr_SetPossessionItem(Now_Private, 0, ITM_FISH40, mPr_ITEM_COND_NORMAL);
-        mSM_COLLECT_FISH_SET(FISH_NUM_VANILLA); /* unlock in encyclopedia page 2 */
+        for (i = FISH_NUM_VANILLA; i < FISH_NUM; i++) {
+            mSM_COLLECT_FISH_SET(i);
+        }
+        i = 0;
     }
 #endif
 

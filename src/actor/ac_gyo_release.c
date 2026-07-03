@@ -108,6 +108,45 @@ static int aGYR_anime_frame(GYO_RELEASE_ACTOR* gyo_release) {
         1, 2, 2, 2, 2, 1, 2, 2, 1, 2, 2, 2, 2, 1, 1, 2, 1, 1, 1, 2, 2, 2, 2,
         1, 1, 2, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0,
         1, /* aGYO_TYPE_NEON_TETRA (modded) */
+        2, /* aGYO_TYPE_PIKE (modded) */
+        1, /* aGYO_TYPE_YELLOW_PERCH (modded) */
+        2, /* aGYO_TYPE_STURGEON (modded) */
+        1, /* aGYO_TYPE_GOLDEN_TROUT (modded) */
+        1, /* aGYO_TYPE_TILAPIA (modded) */
+        1, /* aGYO_TYPE_BETTA (modded) */
+        1, /* aGYO_TYPE_RAINBOWFISH (modded) */
+        2, /* aGYO_TYPE_GAR (modded) */
+        1, /* aGYO_TYPE_DORADO (modded) */
+        2, /* aGYO_TYPE_SADDLED_BICHIR (modded) */
+        1, /* aGYO_TYPE_NIBBLE_FISH (modded) */
+        1, /* aGYO_TYPE_TADPOLE (modded) */
+        2, /* aGYO_TYPE_SNAPPING_TURTLE (modded) */
+        2, /* aGYO_TYPE_SOFTSHELL_TURTLE (modded) */
+        1, /* aGYO_TYPE_MITTEN_CRAB (modded) */
+        2, /* aGYO_TYPE_TUNA (modded) */
+        2, /* aGYO_TYPE_BLUE_MARLIN (modded) */
+        2, /* aGYO_TYPE_OCEAN_SUNFISH (modded) */
+        2, /* aGYO_TYPE_RAY (modded) */
+        2, /* aGYO_TYPE_SAW_SHARK (modded) */
+        2, /* aGYO_TYPE_HAMMERHEAD_SHARK (modded) */
+        2, /* aGYO_TYPE_GREAT_WHITE_SHARK (modded) */
+        2, /* aGYO_TYPE_WHALE_SHARK (modded) */
+        2, /* aGYO_TYPE_NAPOLEONFISH (modded) */
+        1, /* aGYO_TYPE_BARRELEYE (modded) */
+        1, /* aGYO_TYPE_MAHI_MAHI (modded) */
+        2, /* aGYO_TYPE_RIBBON_EEL (modded) */
+        2, /* aGYO_TYPE_MORAY_EEL (modded) */
+        1, /* aGYO_TYPE_SEAHORSE (modded) */
+        1, /* aGYO_TYPE_CLOWNFISH (modded) */
+        1, /* aGYO_TYPE_SURGEONFISH (modded) */
+        1, /* aGYO_TYPE_BUTTERFLY_FISH (modded) */
+        2, /* aGYO_TYPE_ZEBRA_TURKEYFISH (modded) */
+        1, /* aGYO_TYPE_PUFFER_FISH (modded) */
+        1, /* aGYO_TYPE_HORSE_MACKEREL (modded) */
+        2, /* aGYO_TYPE_SQUID (modded) */
+        1, /* aGYO_TYPE_ANCHOVY (modded) */
+        2, /* aGYO_TYPE_FOOTBALL_FISH (modded) */
+        2, /* aGYO_TYPE_OLIVE_FLOUNDER (modded) */
     };
 
     int cur_frame = gyo_release->anime_frame;

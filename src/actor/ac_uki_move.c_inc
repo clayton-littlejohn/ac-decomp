@@ -65,6 +65,45 @@ static mActor_name_t aUKI_get_fish_type(ACTOR* actorx) {
         ITM_DUST2_OLD_TIRE,
         ITM_FISH22,
         ITM_FISH40, /* aGYO_TYPE_NEON_TETRA (modded) */
+        (mActor_name_t)(ITM_FISH_START + 41), /* aGYO_TYPE_PIKE (modded) */
+        (mActor_name_t)(ITM_FISH_START + 42), /* aGYO_TYPE_YELLOW_PERCH (modded) */
+        (mActor_name_t)(ITM_FISH_START + 43), /* aGYO_TYPE_STURGEON (modded) */
+        (mActor_name_t)(ITM_FISH_START + 44), /* aGYO_TYPE_GOLDEN_TROUT (modded) */
+        (mActor_name_t)(ITM_FISH_START + 45), /* aGYO_TYPE_TILAPIA (modded) */
+        (mActor_name_t)(ITM_FISH_START + 46), /* aGYO_TYPE_BETTA (modded) */
+        (mActor_name_t)(ITM_FISH_START + 47), /* aGYO_TYPE_RAINBOWFISH (modded) */
+        (mActor_name_t)(ITM_FISH_START + 48), /* aGYO_TYPE_GAR (modded) */
+        (mActor_name_t)(ITM_FISH_START + 49), /* aGYO_TYPE_DORADO (modded) */
+        (mActor_name_t)(ITM_FISH_START + 50), /* aGYO_TYPE_SADDLED_BICHIR (modded) */
+        (mActor_name_t)(ITM_FISH_START + 51), /* aGYO_TYPE_NIBBLE_FISH (modded) */
+        (mActor_name_t)(ITM_FISH_START + 52), /* aGYO_TYPE_TADPOLE (modded) */
+        (mActor_name_t)(ITM_FISH_START + 53), /* aGYO_TYPE_SNAPPING_TURTLE (modded) */
+        (mActor_name_t)(ITM_FISH_START + 54), /* aGYO_TYPE_SOFTSHELL_TURTLE (modded) */
+        (mActor_name_t)(ITM_FISH_START + 55), /* aGYO_TYPE_MITTEN_CRAB (modded) */
+        (mActor_name_t)(ITM_FISH_START + 56), /* aGYO_TYPE_TUNA (modded) */
+        (mActor_name_t)(ITM_FISH_START + 57), /* aGYO_TYPE_BLUE_MARLIN (modded) */
+        (mActor_name_t)(ITM_FISH_START + 58), /* aGYO_TYPE_OCEAN_SUNFISH (modded) */
+        (mActor_name_t)(ITM_FISH_START + 59), /* aGYO_TYPE_RAY (modded) */
+        (mActor_name_t)(ITM_FISH_START + 60), /* aGYO_TYPE_SAW_SHARK (modded) */
+        (mActor_name_t)(ITM_FISH_START + 61), /* aGYO_TYPE_HAMMERHEAD_SHARK (modded) */
+        (mActor_name_t)(ITM_FISH_START + 62), /* aGYO_TYPE_GREAT_WHITE_SHARK (modded) */
+        (mActor_name_t)(ITM_FISH_START + 63), /* aGYO_TYPE_WHALE_SHARK (modded) */
+        (mActor_name_t)(ITM_FISH_START + 64), /* aGYO_TYPE_NAPOLEONFISH (modded) */
+        (mActor_name_t)(ITM_FISH_START + 65), /* aGYO_TYPE_BARRELEYE (modded) */
+        (mActor_name_t)(ITM_FISH_START + 66), /* aGYO_TYPE_MAHI_MAHI (modded) */
+        (mActor_name_t)(ITM_FISH_START + 67), /* aGYO_TYPE_RIBBON_EEL (modded) */
+        (mActor_name_t)(ITM_FISH_START + 68), /* aGYO_TYPE_MORAY_EEL (modded) */
+        (mActor_name_t)(ITM_FISH_START + 69), /* aGYO_TYPE_SEAHORSE (modded) */
+        (mActor_name_t)(ITM_FISH_START + 70), /* aGYO_TYPE_CLOWNFISH (modded) */
+        (mActor_name_t)(ITM_FISH_START + 71), /* aGYO_TYPE_SURGEONFISH (modded) */
+        (mActor_name_t)(ITM_FISH_START + 72), /* aGYO_TYPE_BUTTERFLY_FISH (modded) */
+        (mActor_name_t)(ITM_FISH_START + 73), /* aGYO_TYPE_ZEBRA_TURKEYFISH (modded) */
+        (mActor_name_t)(ITM_FISH_START + 74), /* aGYO_TYPE_PUFFER_FISH (modded) */
+        (mActor_name_t)(ITM_FISH_START + 75), /* aGYO_TYPE_HORSE_MACKEREL (modded) */
+        (mActor_name_t)(ITM_FISH_START + 76), /* aGYO_TYPE_SQUID (modded) */
+        (mActor_name_t)(ITM_FISH_START + 77), /* aGYO_TYPE_ANCHOVY (modded) */
+        (mActor_name_t)(ITM_FISH_START + 78), /* aGYO_TYPE_FOOTBALL_FISH (modded) */
+        (mActor_name_t)(ITM_FISH_START + 79), /* aGYO_TYPE_OLIVE_FLOUNDER (modded) */
     };
     // clang-format on
     mActor_name_t item = EMPTY_NO;

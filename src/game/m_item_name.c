@@ -86,6 +86,45 @@ static u8 itemArt_Fish[FISH_NUM] = {
     mIN_ARTICLE_AN, mIN_ARTICLE_A, mIN_ARTICLE_A, mIN_ARTICLE_A, mIN_ARTICLE_A,  mIN_ARTICLE_A,  mIN_ARTICLE_A,
     mIN_ARTICLE_A,  mIN_ARTICLE_A, mIN_ARTICLE_A, mIN_ARTICLE_A, mIN_ARTICLE_AN,
     mIN_ARTICLE_A, /* neon tetra (modded) */
+    mIN_ARTICLE_A, /* pike (modded) */
+    mIN_ARTICLE_A, /* yellow perch (modded) */
+    mIN_ARTICLE_A, /* sturgeon (modded) */
+    mIN_ARTICLE_A, /* golden trout (modded) */
+    mIN_ARTICLE_A, /* tilapia (modded) */
+    mIN_ARTICLE_A, /* betta (modded) */
+    mIN_ARTICLE_A, /* rainbowfish (modded) */
+    mIN_ARTICLE_A, /* gar (modded) */
+    mIN_ARTICLE_A, /* dorado (modded) */
+    mIN_ARTICLE_A, /* saddled bichir (modded) */
+    mIN_ARTICLE_A, /* nibble fish (modded) */
+    mIN_ARTICLE_A, /* tadpole (modded) */
+    mIN_ARTICLE_A, /* snapping turtle (modded) */
+    mIN_ARTICLE_A, /* softshell turtle (modded) */
+    mIN_ARTICLE_A, /* mitten crab (modded) */
+    mIN_ARTICLE_A, /* tuna (modded) */
+    mIN_ARTICLE_A, /* blue marlin (modded) */
+    mIN_ARTICLE_AN, /* ocean sunfish (modded) */
+    mIN_ARTICLE_A, /* ray (modded) */
+    mIN_ARTICLE_A, /* saw shark (modded) */
+    mIN_ARTICLE_A, /* hammerhead shark (modded) */
+    mIN_ARTICLE_A, /* gt. white shark (modded) */
+    mIN_ARTICLE_A, /* whale shark (modded) */
+    mIN_ARTICLE_A, /* napoleonfish (modded) */
+    mIN_ARTICLE_A, /* barreleye (modded) */
+    mIN_ARTICLE_A, /* mahi-mahi (modded) */
+    mIN_ARTICLE_A, /* ribbon eel (modded) */
+    mIN_ARTICLE_A, /* moray eel (modded) */
+    mIN_ARTICLE_A, /* seahorse (modded) */
+    mIN_ARTICLE_A, /* clownfish (modded) */
+    mIN_ARTICLE_A, /* surgeonfish (modded) */
+    mIN_ARTICLE_A, /* butterfly fish (modded) */
+    mIN_ARTICLE_A, /* zebra turkeyfish (modded) */
+    mIN_ARTICLE_A, /* puffer fish (modded) */
+    mIN_ARTICLE_A, /* horse mackerel (modded) */
+    mIN_ARTICLE_A, /* squid (modded) */
+    mIN_ARTICLE_AN, /* anchovy (modded) */
+    mIN_ARTICLE_A, /* football fish (modded) */
+    mIN_ARTICLE_AN, /* olive flounder (modded) */
 };
 
 static u8 itemArt_Cloth[CLOTH_NUM] = {

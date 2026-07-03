@@ -617,6 +617,45 @@ extern u8 inv_mwin_29angel_tex[];
 extern u16 inv_mwin_28gupi_pal[];
 extern u8 inv_mwin_28gupi_tex[];
 extern u16 inv_mwin_41tetra_pal[]; /* neon tetra (modded) */
+extern u16 inv_mwin_mf_pike_pal[]; /* pike (modded) */
+extern u16 inv_mwin_mf_yellow_perch_pal[]; /* yellow perch (modded) */
+extern u16 inv_mwin_mf_sturgeon_pal[]; /* sturgeon (modded) */
+extern u16 inv_mwin_mf_golden_trout_pal[]; /* golden trout (modded) */
+extern u16 inv_mwin_mf_tilapia_pal[]; /* tilapia (modded) */
+extern u16 inv_mwin_mf_betta_pal[]; /* betta (modded) */
+extern u16 inv_mwin_mf_rainbowfish_pal[]; /* rainbowfish (modded) */
+extern u16 inv_mwin_mf_gar_pal[]; /* gar (modded) */
+extern u16 inv_mwin_mf_dorado_pal[]; /* dorado (modded) */
+extern u16 inv_mwin_mf_saddled_bichir_pal[]; /* saddled bichir (modded) */
+extern u16 inv_mwin_mf_nibble_fish_pal[]; /* nibble fish (modded) */
+extern u16 inv_mwin_mf_tadpole_pal[]; /* tadpole (modded) */
+extern u16 inv_mwin_mf_snapping_turtle_pal[]; /* snapping turtle (modded) */
+extern u16 inv_mwin_mf_softshell_turtle_pal[]; /* softshell turtle (modded) */
+extern u16 inv_mwin_mf_mitten_crab_pal[]; /* mitten crab (modded) */
+extern u16 inv_mwin_mf_tuna_pal[]; /* tuna (modded) */
+extern u16 inv_mwin_mf_blue_marlin_pal[]; /* blue marlin (modded) */
+extern u16 inv_mwin_mf_ocean_sunfish_pal[]; /* ocean sunfish (modded) */
+extern u16 inv_mwin_mf_ray_pal[]; /* ray (modded) */
+extern u16 inv_mwin_mf_saw_shark_pal[]; /* saw shark (modded) */
+extern u16 inv_mwin_mf_hammerhead_shark_pal[]; /* hammerhead shark (modded) */
+extern u16 inv_mwin_mf_great_white_shark_pal[]; /* gt. white shark (modded) */
+extern u16 inv_mwin_mf_whale_shark_pal[]; /* whale shark (modded) */
+extern u16 inv_mwin_mf_napoleonfish_pal[]; /* napoleonfish (modded) */
+extern u16 inv_mwin_mf_barreleye_pal[]; /* barreleye (modded) */
+extern u16 inv_mwin_mf_mahi_mahi_pal[]; /* mahi-mahi (modded) */
+extern u16 inv_mwin_mf_ribbon_eel_pal[]; /* ribbon eel (modded) */
+extern u16 inv_mwin_mf_moray_eel_pal[]; /* moray eel (modded) */
+extern u16 inv_mwin_mf_seahorse_pal[]; /* seahorse (modded) */
+extern u16 inv_mwin_mf_clownfish_pal[]; /* clownfish (modded) */
+extern u16 inv_mwin_mf_surgeonfish_pal[]; /* surgeonfish (modded) */
+extern u16 inv_mwin_mf_butterfly_fish_pal[]; /* butterfly fish (modded) */
+extern u16 inv_mwin_mf_zebra_turkeyfish_pal[]; /* zebra turkeyfish (modded) */
+extern u16 inv_mwin_mf_puffer_fish_pal[]; /* puffer fish (modded) */
+extern u16 inv_mwin_mf_horse_mackerel_pal[]; /* horse mackerel (modded) */
+extern u16 inv_mwin_mf_squid_pal[]; /* squid (modded) */
+extern u16 inv_mwin_mf_anchovy_pal[]; /* anchovy (modded) */
+extern u16 inv_mwin_mf_football_fish_pal[]; /* football fish (modded) */
+extern u16 inv_mwin_mf_olive_flounder_pal[]; /* olive flounder (modded) */
 extern u16 inv_mwin_27demekin_pal[];
 extern u8 inv_mwin_27demekin_tex[];
 extern u16 inv_mwin_32kaseki_pal[];
@@ -1071,6 +1110,45 @@ static void mSM_draw_item(GRAPH* graph, f32 pos_x, f32 pos_y, f32 scale, mActor_
         { inv_mwin_39ishidai_pal, inv_mwin_39ishidai_tex },
         { inv_mwin_40piraruku_pal, inv_mwin_40piraruku_tex },
         { inv_mwin_41tetra_pal, inv_mwin_28gupi_tex }, /* neon tetra (modded) */
+        { inv_mwin_mf_pike_pal, inv_mwin_16raigyo_tex }, /* pike (modded) */
+        { inv_mwin_mf_yellow_perch_pal, inv_mwin_12gill_tex }, /* yellow perch (modded) */
+        { inv_mwin_mf_sturgeon_pal, inv_mwin_24itou_tex }, /* sturgeon (modded) */
+        { inv_mwin_mf_golden_trout_pal, inv_mwin_22niji_tex }, /* golden trout (modded) */
+        { inv_mwin_mf_tilapia_pal, inv_mwin_05nigoi_tex }, /* tilapia (modded) */
+        { inv_mwin_mf_betta_pal, inv_mwin_29angel_tex }, /* betta (modded) */
+        { inv_mwin_mf_rainbowfish_pal, inv_mwin_28gupi_tex }, /* rainbowfish (modded) */
+        { inv_mwin_mf_gar_pal, inv_mwin_25sake_tex }, /* gar (modded) */
+        { inv_mwin_mf_dorado_pal, inv_mwin_31aroana_tex }, /* dorado (modded) */
+        { inv_mwin_mf_saddled_bichir_pal, inv_mwin_07namazu_tex }, /* saddled bichir (modded) */
+        { inv_mwin_mf_nibble_fish_pal, inv_mwin_10tanago_tex }, /* nibble fish (modded) */
+        { inv_mwin_mf_tadpole_pal, inv_mwin_34kaeru_tex }, /* tadpole (modded) */
+        { inv_mwin_mf_snapping_turtle_pal, inv_mwin_32kaseki_tex }, /* snapping turtle (modded) */
+        { inv_mwin_mf_softshell_turtle_pal, inv_mwin_32kaseki_tex }, /* softshell turtle (modded) */
+        { inv_mwin_mf_mitten_crab_pal, inv_mwin_33zarigani_tex }, /* mitten crab (modded) */
+        { inv_mwin_mf_tuna_pal, inv_mwin_37suzuki_tex }, /* tuna (modded) */
+        { inv_mwin_mf_blue_marlin_pal, inv_mwin_37suzuki_tex }, /* blue marlin (modded) */
+        { inv_mwin_mf_ocean_sunfish_pal, inv_mwin_38tai_tex }, /* ocean sunfish (modded) */
+        { inv_mwin_mf_ray_pal, inv_mwin_39ishidai_tex }, /* ray (modded) */
+        { inv_mwin_mf_saw_shark_pal, inv_mwin_37suzuki_tex }, /* saw shark (modded) */
+        { inv_mwin_mf_hammerhead_shark_pal, inv_mwin_37suzuki_tex }, /* hammerhead shark (modded) */
+        { inv_mwin_mf_great_white_shark_pal, inv_mwin_40piraruku_tex }, /* gt. white shark (modded) */
+        { inv_mwin_mf_whale_shark_pal, inv_mwin_40piraruku_tex }, /* whale shark (modded) */
+        { inv_mwin_mf_napoleonfish_pal, inv_mwin_38tai_tex }, /* napoleonfish (modded) */
+        { inv_mwin_mf_barreleye_pal, inv_mwin_19wakasagi_tex }, /* barreleye (modded) */
+        { inv_mwin_mf_mahi_mahi_pal, inv_mwin_37suzuki_tex }, /* mahi-mahi (modded) */
+        { inv_mwin_mf_ribbon_eel_pal, inv_mwin_17unagi_tex }, /* ribbon eel (modded) */
+        { inv_mwin_mf_moray_eel_pal, inv_mwin_17unagi_tex }, /* moray eel (modded) */
+        { inv_mwin_mf_seahorse_pal, inv_mwin_10tanago_tex }, /* seahorse (modded) */
+        { inv_mwin_mf_clownfish_pal, inv_mwin_26kingyo_tex }, /* clownfish (modded) */
+        { inv_mwin_mf_surgeonfish_pal, inv_mwin_12gill_tex }, /* surgeonfish (modded) */
+        { inv_mwin_mf_butterfly_fish_pal, inv_mwin_27demekin_tex }, /* butterfly fish (modded) */
+        { inv_mwin_mf_zebra_turkeyfish_pal, inv_mwin_18donko_tex }, /* zebra turkeyfish (modded) */
+        { inv_mwin_mf_puffer_fish_pal, inv_mwin_27demekin_tex }, /* puffer fish (modded) */
+        { inv_mwin_mf_horse_mackerel_pal, inv_mwin_09oikawa_tex }, /* horse mackerel (modded) */
+        { inv_mwin_mf_squid_pal, inv_mwin_36kurage_tex }, /* squid (modded) */
+        { inv_mwin_mf_anchovy_pal, inv_mwin_19wakasagi_tex }, /* anchovy (modded) */
+        { inv_mwin_mf_football_fish_pal, inv_mwin_18donko_tex }, /* football fish (modded) */
+        { inv_mwin_mf_olive_flounder_pal, inv_mwin_18donko_tex }, /* olive flounder (modded) */
     };
     // clang-format on
 

@@ -49,6 +49,45 @@ DISPLAY_NAMES = {
     "BARRED_KNIFEJAW": "Barred knifejaw", "ARAPAIMA": "Arapaima",
     # modded fish
     "NEON_TETRA": "Neon tetra",
+    "PIKE": "Pike",
+    "YELLOW_PERCH": "Yellow perch",
+    "STURGEON": "Sturgeon",
+    "GOLDEN_TROUT": "Golden trout",
+    "TILAPIA": "Tilapia",
+    "BETTA": "Betta",
+    "RAINBOWFISH": "Rainbowfish",
+    "GAR": "Gar",
+    "DORADO": "Dorado",
+    "SADDLED_BICHIR": "Saddled bichir",
+    "NIBBLE_FISH": "Nibble fish",
+    "TADPOLE": "Tadpole",
+    "SNAPPING_TURTLE": "Snapping turtle",
+    "SOFTSHELL_TURTLE": "Softshell turtle",
+    "MITTEN_CRAB": "Mitten crab",
+    "TUNA": "Tuna",
+    "BLUE_MARLIN": "Blue marlin",
+    "OCEAN_SUNFISH": "Ocean sunfish",
+    "RAY": "Ray",
+    "SAW_SHARK": "Saw shark",
+    "HAMMERHEAD_SHARK": "Hammerhead shark",
+    "GREAT_WHITE_SHARK": "Great white shark",
+    "WHALE_SHARK": "Whale shark",
+    "NAPOLEONFISH": "Napoleonfish",
+    "BARRELEYE": "Barreleye",
+    "MAHI_MAHI": "Mahi-mahi",
+    "RIBBON_EEL": "Ribbon eel",
+    "MORAY_EEL": "Moray eel",
+    "SEAHORSE": "Seahorse",
+    "CLOWNFISH": "Clownfish",
+    "SURGEONFISH": "Surgeonfish",
+    "BUTTERFLY_FISH": "Butterfly fish",
+    "ZEBRA_TURKEYFISH": "Zebra turkeyfish",
+    "PUFFER_FISH": "Puffer fish",
+    "HORSE_MACKEREL": "Horse mackerel",
+    "SQUID": "Squid",
+    "ANCHOVY": "Anchovy",
+    "FOOTBALL_FISH": "Football fish",
+    "OLIVE_FLOUNDER": "Olive flounder",
 }
 
 SIZE_NAMES = {
@@ -111,7 +150,9 @@ def parse_prices() -> list[int]:
     body = re.search(r"fish_price_table\[\]\s*=\s*\{(.*?)\};", text, re.S)
     if not body:
         die(f"fish_price_table not found in {PRICE_C}")
-    vals = [int(v) for v in re.findall(r"(-?\d+)", body.group(1))]
+    src = re.sub(r"/\*.*?\*/", "", body.group(1), flags=re.S)  # strip comments
+    src = re.sub(r"//[^\n]*", "", src)
+    vals = [int(v) for v in re.findall(r"(-?\d+)", src)]
     if vals and vals[-1] == -1:
         vals = vals[:-1]  # end marker
     return vals

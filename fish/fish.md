@@ -60,42 +60,42 @@ Notes: `island` = also spawns at the island, `tourney` = boosted during the fish
 | # | Name | Sell price | Shadow size | Location | Time | Months | Notes |
 |---|------|-----------|-------------|----------|------|--------|-------|
 | 41 | Neon tetra | 2,000 Bells | Tiny (XXS) | River | 9 PM – 4 AM | –––––JJAS––– | modded |
-| 42 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 43 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 44 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 45 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 46 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 47 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 48 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 49 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 50 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 51 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 52 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 53 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 54 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 55 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 56 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 57 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 58 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 59 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 60 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 61 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 62 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 63 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 64 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 65 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 66 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 67 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 68 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 69 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 70 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 71 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 72 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 73 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 74 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 75 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 76 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 77 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 78 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 79 | *(empty slot)* | — | — | — | — | –––––––––––– | |
-| 80 | *(empty slot)* | — | — | — | — | –––––––––––– | |
+| 42 | Pike | 1,800 Bells | Large (L) | River | All day | ––––––––SOND | modded |
+| 43 | Yellow perch | 300 Bells | Medium (M) | River | All day | JFM––––––OND | modded |
+| 44 | Sturgeon | 10,000 Bells | Very Large (XL) | River (mouth) | All day | JFM–––––SOND | modded |
+| 45 | Golden trout | 15,000 Bells | Medium (M) | Waterfall | 4 AM – 9 AM; 4 PM – 9 PM | ––MAM–––SON– | modded |
+| 46 | Tilapia | 800 Bells | Medium (M) | River | All day | –––––JJAS––– | modded |
+| 47 | Betta | 2,500 Bells | Small (XS) | River | 4 AM – 9 PM | ––––MJJASO–– | modded |
+| 48 | Rainbowfish | 800 Bells | Tiny (XXS) | River | 4 AM – 9 PM | ––––MJJASO–– | modded |
+| 49 | Gar | 6,000 Bells | Very Large (XL) | Pond | All day | –––––JJAS––– | modded |
+| 50 | Dorado | 15,000 Bells | Large (L) | River | 4 AM – 9 PM | –––––JJAS––– | modded |
+| 51 | Saddled bichir | 4,000 Bells | Medium (M) | River | 4 PM – 9 AM | –––––JJAS––– | modded |
+| 52 | Nibble fish | 1,500 Bells | Tiny (XXS) | River | 4 AM – 9 PM | ––––MJJAS––– | modded |
+| 53 | Tadpole | 100 Bells | Tiny (XXS) | Pond | All day | –––AMJJ––––– | modded |
+| 54 | Snapping turtle | 5,000 Bells | Very Large (XL) | River | 9 PM – 4 AM | –––––––AS––– | modded |
+| 55 | Softshell turtle | 3,750 Bells | Large (L) | River | 4 AM – 9 AM; 4 PM – 9 PM | –––––––AS––– | modded |
+| 56 | Mitten crab | 2,000 Bells | Small (XS) | River | 4 PM – 9 AM | ––––––––SON– | modded |
+| 57 | Tuna | 7,000 Bells | Very Large (XL) | Sea | All day | JFMA––––––ND | modded |
+| 58 | Blue marlin | 10,000 Bells | Very Large (XL) | Sea | All day | JFMA––JAS–ND | modded |
+| 59 | Ocean sunfish | 4,000 Bells | Huge (XXL) | Sea | All day | ––––––JAS––– | modded |
+| 60 | Ray | 3,000 Bells | Very Large (XL) | Sea | All day | –––––––ASON– | modded |
+| 61 | Saw shark | 12,000 Bells | Very Large (XL) | Sea | All day | –––––JJAS––– | modded |
+| 62 | Hammerhead shark | 8,000 Bells | Very Large (XL) | Sea | All day | –––––JJAS––– | modded |
+| 63 | Great white shark | 15,000 Bells | Huge (XXL) | Sea | All day | –––––JJAS––– | modded |
+| 64 | Whale shark | 13,000 Bells | Huge (XXL) | Sea | All day | –––––JJAS––– | modded |
+| 65 | Napoleonfish | 10,000 Bells | Huge (XXL) | Sea | All day | ––––––JA–––– | modded |
+| 66 | Barreleye | 15,000 Bells | Small (XS) | Sea | All day | JFMAMJJASOND | modded |
+| 67 | Mahi-mahi | 6,000 Bells | Large (L) | Sea | All day | ––––MJJASO–– | modded |
+| 68 | Ribbon eel | 600 Bells | Small-Med (S) | Sea | All day | –––––JJASO–– | modded |
+| 69 | Moray eel | 2,000 Bells | Medium (M) | Sea | All day | –––––––ASO–– | modded |
+| 70 | Seahorse | 1,100 Bells | Tiny (XXS) | Sea | All day | –––AMJJASO–– | modded |
+| 71 | Clownfish | 650 Bells | Tiny (XXS) | Sea | All day | –––AMJJASO–– | modded |
+| 72 | Surgeonfish | 1,000 Bells | Small (XS) | Sea | All day | –––AMJJASO–– | modded |
+| 73 | Butterfly fish | 1,000 Bells | Small (XS) | Sea | All day | –––AMJJASO–– | modded |
+| 74 | Zebra turkeyfish | 500 Bells | Small-Med (S) | Sea | All day | –––AMJJASO–– | modded |
+| 75 | Puffer fish | 250 Bells | Small-Med (S) | Sea | All day | ––––––JAS––– | modded |
+| 76 | Horse mackerel | 150 Bells | Small (XS) | Sea | All day | JFMAMJJASOND | modded |
+| 77 | Squid | 500 Bells | Small-Med (S) | Sea | All day | JFMAMJJA–––D | modded |
+| 78 | Anchovy | 200 Bells | Tiny (XXS) | Sea | All day | JFMAMJJASOND | modded |
+| 79 | Football fish | 2,500 Bells | Large (L) | Sea | All day | JFM–––––––ND | modded |
+| 80 | Olive flounder | 800 Bells | Large (L) | Sea | All day | JFMAMJJASOND | modded |

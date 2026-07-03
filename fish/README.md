@@ -5,12 +5,28 @@ Tools and docs for extending the fish system in this Animal Crossing decomp.
 | File | Purpose |
 |---|---|
 | [fish.md](fish.md) | Auto-generated reference table of every fish (prices, shadow sizes, spawn locations/times/months) — always matches the game code |
+| [add_fish.py](add_fish.py) | **THE mass-add workflow**: declare fish in `FISH_SPECS` (name, price, size, spawn months/times/area, icon recolor, model reuse) and it patches all ~14 code touchpoints automatically, idempotently |
 | [gen_fish_table.py](gen_fish_table.py) | Regenerates `fish.md` by parsing the real data tables in `src/` and `include/` (`--write` to save) |
-| [gen_fish_model.py](gen_fish_model.py) | **Generates a complete 3D fish model** (swizzled CI4 texture + palette + 3-frame swim mesh) as a vanilla-style `act_f##` C file from a small color/shape spec |
+| [gen_fish_model.py](gen_fish_model.py) | Generates a complete 3D fish model (swizzled CI4 texture + palette + 3-frame swim mesh) as a vanilla-style `act_f##` C file from a small color/shape spec |
 | [make_iso.py](make_iso.py) | **One-shot pipeline**: `ninja` build → dialog/mail patches → inject rebuilt code → final bootable ISO |
-| [build_test_iso.py](build_test_iso.py) | Lower-level: inject an already-built `foresta.rel.szs` into an ISO (used when you don't want the full pipeline) |
-| [setup_dolphin_test_keys.py](setup_dolphin_test_keys.py) | One-shot Dolphin setup: binds the **P key** to the in-game test cheat (give a neon tetra while the inventory is open); `--remove` to uninstall |
-| [ADDING_FISH.md](ADDING_FISH.md) | Step-by-step checklist for adding a new, fully-functional fish (enum → item → price → model → spawns → encyclopedia → house tank) |
+| [build_test_iso.py](build_test_iso.py) | Lower-level: inject an already-built `foresta.rel.szs` into an ISO |
+| [setup_dolphin_test_keys.py](setup_dolphin_test_keys.py) | Optional Dolphin key binding for test cheats; `--remove` to uninstall |
+| [ADDING_FISH.md](ADDING_FISH.md) | The underlying per-file checklist (what add_fish.py automates) |
+
+## Adding fish (mass workflow)
+
+```bash
+# 1. add entries to FISH_SPECS in fish/add_fish.py, then:
+python fish/add_fish.py               # patches all code touchpoints (idempotent)
+python fish/gen_fish_table.py --write # refresh fish.md
+python fish/make_iso.py               # build + pack final ISO
+```
+
+Current state: **80 fish** (40 vanilla + tetra + 39 more) — encyclopedia page 2 is
+full; the next fish requires a third page (`mIV_FISH_PAGE_NUM` + `mIV_fish_collect_list3`,
+add_fish.py will refuse until then). Icons are recolored vanilla textures and 3D
+models reuse vanilla fish — both designed to be overwritten with real assets later
+(swap the `icon`/`model` spec fields or the generated palette arrays).
 
 ## Quick start
 

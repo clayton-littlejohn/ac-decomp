@@ -28,7 +28,7 @@ typedef struct term_list_s {
 
 #define FISH_SPAWN(fish, area, weight) { aGYO_TYPE_##fish, aSOG_SPAWN_AREA_##area, weight }
 
-static aSOG_term_info_c r_m1_t0[14] = {
+static aSOG_term_info_c r_m1_t0[16] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 5),
   FISH_SPAWN(BROOK_TROUT, POOL, 5),
   FISH_SPAWN(CARP, RIVER, 3),
@@ -43,14 +43,24 @@ static aSOG_term_info_c r_m1_t0[14] = {
   FISH_SPAWN(STRINGFISH, RIVER, 1),
   FISH_SPAWN(GOLDFISH, RIVER, 1),
   FISH_SPAWN(FRESHWATER_GOBY, RIVER, 3),
+  FISH_SPAWN(YELLOW_PERCH, RIVER, 8), /* modded */
+  FISH_SPAWN(STURGEON, RIVER_MOUTH, 2), /* modded */
 };
 
-static aSOG_term_info_c s_m1_t0[2] = {
+static aSOG_term_info_c s_m1_t0[10] = {
   FISH_SPAWN(SEA_BASS, SEA, 20),
   FISH_SPAWN(RED_SNAPPER, SEA, 3),
+  FISH_SPAWN(TUNA, SEA, 2), /* modded */
+  FISH_SPAWN(BLUE_MARLIN, SEA, 1), /* modded */
+  FISH_SPAWN(BARRELEYE, SEA, 1), /* modded */
+  FISH_SPAWN(HORSE_MACKEREL, SEA, 15), /* modded */
+  FISH_SPAWN(SQUID, SEA, 6), /* modded */
+  FISH_SPAWN(ANCHOVY, SEA, 12), /* modded */
+  FISH_SPAWN(FOOTBALL_FISH, SEA, 2), /* modded */
+  FISH_SPAWN(OLIVE_FLOUNDER, SEA, 6), /* modded */
 };
 
-static aSOG_term_info_c r_m1_t1[14] = {
+static aSOG_term_info_c r_m1_t1[16] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 7),
   FISH_SPAWN(BROOK_TROUT, POOL, 5),
   FISH_SPAWN(CARP, RIVER, 3),
@@ -65,9 +75,11 @@ static aSOG_term_info_c r_m1_t1[14] = {
   FISH_SPAWN(GOLDFISH, RIVER, 1),
   FISH_SPAWN(FRESHWATER_GOBY, RIVER, 3),
   FISH_SPAWN(POPEYED_GOLDFISH, RIVER, 1),
+  FISH_SPAWN(YELLOW_PERCH, RIVER, 8), /* modded */
+  FISH_SPAWN(STURGEON, RIVER_MOUTH, 2), /* modded */
 };
 
-static aSOG_term_info_c r_m1_t2[14] = {
+static aSOG_term_info_c r_m1_t2[16] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 5),
   FISH_SPAWN(BROOK_TROUT, POOL, 5),
   FISH_SPAWN(CARP, RIVER, 3),
@@ -82,23 +94,25 @@ static aSOG_term_info_c r_m1_t2[14] = {
   FISH_SPAWN(STRINGFISH, RIVER, 1),
   FISH_SPAWN(GOLDFISH, RIVER, 1),
   FISH_SPAWN(FRESHWATER_GOBY, RIVER, 3),
+  FISH_SPAWN(YELLOW_PERCH, RIVER, 8), /* modded */
+  FISH_SPAWN(STURGEON, RIVER_MOUTH, 2), /* modded */
 };
 
 static aSOG_term_list_c r_begining_january[aSOG_TIME_NUM] = {
-  { 14, r_m1_t2 },
-  { 14, r_m1_t0 },
-  { 14, r_m1_t1 },
-  { 14, r_m1_t0 }
+  { 16, r_m1_t2 },
+  { 16, r_m1_t0 },
+  { 16, r_m1_t1 },
+  { 16, r_m1_t0 }
 };
 
 static aSOG_term_list_c s_begining_january[aSOG_TIME_NUM] = {
-  { 2, s_m1_t0 },
-  { 2, s_m1_t0 },
-  { 2, s_m1_t0 },
-  { 2, s_m1_t0 }
+  { 10, s_m1_t0 },
+  { 10, s_m1_t0 },
+  { 10, s_m1_t0 },
+  { 10, s_m1_t0 }
 };
 
-static aSOG_term_info_c r_m2_t0[14] = {
+static aSOG_term_info_c r_m2_t0[16] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 5),
   FISH_SPAWN(BROOK_TROUT, POOL, 5),
   FISH_SPAWN(CARP, RIVER, 3),
@@ -113,14 +127,24 @@ static aSOG_term_info_c r_m2_t0[14] = {
   FISH_SPAWN(STRINGFISH, RIVER, 1),
   FISH_SPAWN(GOLDFISH, RIVER, 1),
   FISH_SPAWN(FRESHWATER_GOBY, RIVER, 3),
+  FISH_SPAWN(YELLOW_PERCH, RIVER, 8), /* modded */
+  FISH_SPAWN(STURGEON, RIVER_MOUTH, 2), /* modded */
 };
 
-static aSOG_term_info_c s_m2_t0[2] = {
+static aSOG_term_info_c s_m2_t0[10] = {
   FISH_SPAWN(SEA_BASS, SEA, 20),
   FISH_SPAWN(RED_SNAPPER, SEA, 3),
+  FISH_SPAWN(TUNA, SEA, 2), /* modded */
+  FISH_SPAWN(BLUE_MARLIN, SEA, 1), /* modded */
+  FISH_SPAWN(BARRELEYE, SEA, 1), /* modded */
+  FISH_SPAWN(HORSE_MACKEREL, SEA, 15), /* modded */
+  FISH_SPAWN(SQUID, SEA, 6), /* modded */
+  FISH_SPAWN(ANCHOVY, SEA, 12), /* modded */
+  FISH_SPAWN(FOOTBALL_FISH, SEA, 2), /* modded */
+  FISH_SPAWN(OLIVE_FLOUNDER, SEA, 6), /* modded */
 };
 
-static aSOG_term_info_c r_m2_t1[14] = {
+static aSOG_term_info_c r_m2_t1[16] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 7),
   FISH_SPAWN(BROOK_TROUT, POOL, 5),
   FISH_SPAWN(CARP, RIVER, 3),
@@ -135,9 +159,11 @@ static aSOG_term_info_c r_m2_t1[14] = {
   FISH_SPAWN(GOLDFISH, RIVER, 1),
   FISH_SPAWN(FRESHWATER_GOBY, RIVER, 3),
   FISH_SPAWN(POPEYED_GOLDFISH, RIVER, 1),
+  FISH_SPAWN(YELLOW_PERCH, RIVER, 8), /* modded */
+  FISH_SPAWN(STURGEON, RIVER_MOUTH, 2), /* modded */
 };
 
-static aSOG_term_info_c r_m2_t2[14] = {
+static aSOG_term_info_c r_m2_t2[16] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 5),
   FISH_SPAWN(BROOK_TROUT, POOL, 5),
   FISH_SPAWN(CARP, RIVER, 3),
@@ -152,23 +178,25 @@ static aSOG_term_info_c r_m2_t2[14] = {
   FISH_SPAWN(STRINGFISH, RIVER, 1),
   FISH_SPAWN(GOLDFISH, RIVER, 1),
   FISH_SPAWN(FRESHWATER_GOBY, RIVER, 3),
+  FISH_SPAWN(YELLOW_PERCH, RIVER, 8), /* modded */
+  FISH_SPAWN(STURGEON, RIVER_MOUTH, 2), /* modded */
 };
 
 static aSOG_term_list_c r_begining_february[aSOG_TIME_NUM] = {
-  { 14, r_m2_t2 },
-  { 14, r_m2_t0 },
-  { 14, r_m2_t1 },
-  { 14, r_m2_t0 }
+  { 16, r_m2_t2 },
+  { 16, r_m2_t0 },
+  { 16, r_m2_t1 },
+  { 16, r_m2_t0 }
 };
 
 static aSOG_term_list_c s_begining_february[aSOG_TIME_NUM] = {
-  { 2, s_m2_t0 },
-  { 2, s_m2_t0 },
-  { 2, s_m2_t0 },
-  { 2, s_m2_t0 }
+  { 10, s_m2_t0 },
+  { 10, s_m2_t0 },
+  { 10, s_m2_t0 },
+  { 10, s_m2_t0 }
 };
 
-static aSOG_term_info_c r_m3_t0[15] = {
+static aSOG_term_info_c r_m3_t0[18] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 11),
   FISH_SPAWN(BROOK_TROUT, POOL, 10),
   FISH_SPAWN(CARP, RIVER, 3),
@@ -184,15 +212,26 @@ static aSOG_term_info_c r_m3_t0[15] = {
   FISH_SPAWN(RAINBOW_TROUT, RIVER, 10),
   FISH_SPAWN(GOLDFISH, RIVER, 1),
   FISH_SPAWN(FRESHWATER_GOBY, RIVER, 3),
+  FISH_SPAWN(YELLOW_PERCH, RIVER, 8), /* modded */
+  FISH_SPAWN(STURGEON, RIVER_MOUTH, 2), /* modded */
+  FISH_SPAWN(GOLDEN_TROUT, WATERFALL, 1), /* modded */
 };
 
-static aSOG_term_info_c s_m3_t0[3] = {
+static aSOG_term_info_c s_m3_t0[11] = {
   FISH_SPAWN(SEA_BASS, SEA, 20),
   FISH_SPAWN(RED_SNAPPER, SEA, 10),
   FISH_SPAWN(BARRED_KNIFEJAW, SEA, 5),
+  FISH_SPAWN(TUNA, SEA, 2), /* modded */
+  FISH_SPAWN(BLUE_MARLIN, SEA, 1), /* modded */
+  FISH_SPAWN(BARRELEYE, SEA, 1), /* modded */
+  FISH_SPAWN(HORSE_MACKEREL, SEA, 15), /* modded */
+  FISH_SPAWN(SQUID, SEA, 6), /* modded */
+  FISH_SPAWN(ANCHOVY, SEA, 12), /* modded */
+  FISH_SPAWN(FOOTBALL_FISH, SEA, 2), /* modded */
+  FISH_SPAWN(OLIVE_FLOUNDER, SEA, 6), /* modded */
 };
 
-static aSOG_term_info_c r_m3_t1[13] = {
+static aSOG_term_info_c r_m3_t1[15] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 22),
   FISH_SPAWN(BROOK_TROUT, POOL, 15),
   FISH_SPAWN(CARP, RIVER, 3),
@@ -206,9 +245,11 @@ static aSOG_term_info_c r_m3_t1[13] = {
   FISH_SPAWN(GOLDFISH, RIVER, 1),
   FISH_SPAWN(FRESHWATER_GOBY, RIVER, 3),
   FISH_SPAWN(POPEYED_GOLDFISH, RIVER, 1),
+  FISH_SPAWN(YELLOW_PERCH, RIVER, 8), /* modded */
+  FISH_SPAWN(STURGEON, RIVER_MOUTH, 2), /* modded */
 };
 
-static aSOG_term_info_c r_m3_t2[12] = {
+static aSOG_term_info_c r_m3_t2[14] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 21),
   FISH_SPAWN(BROOK_TROUT, POOL, 10),
   FISH_SPAWN(CARP, RIVER, 3),
@@ -221,23 +262,25 @@ static aSOG_term_info_c r_m3_t2[12] = {
   FISH_SPAWN(LOACH, RIVER, 25),
   FISH_SPAWN(GOLDFISH, RIVER, 1),
   FISH_SPAWN(FRESHWATER_GOBY, RIVER, 3),
+  FISH_SPAWN(YELLOW_PERCH, RIVER, 8), /* modded */
+  FISH_SPAWN(STURGEON, RIVER_MOUTH, 2), /* modded */
 };
 
 static aSOG_term_list_c r_begining_march[aSOG_TIME_NUM] = {
-  { 12, r_m3_t2 },
-  { 15, r_m3_t0 },
-  { 13, r_m3_t1 },
-  { 15, r_m3_t0 }
+  { 14, r_m3_t2 },
+  { 18, r_m3_t0 },
+  { 15, r_m3_t1 },
+  { 18, r_m3_t0 }
 };
 
 static aSOG_term_list_c s_begining_march[aSOG_TIME_NUM] = {
-  { 3, s_m3_t0 },
-  { 3, s_m3_t0 },
-  { 3, s_m3_t0 },
-  { 3, s_m3_t0 }
+  { 11, s_m3_t0 },
+  { 11, s_m3_t0 },
+  { 11, s_m3_t0 },
+  { 11, s_m3_t0 }
 };
 
-static aSOG_term_info_c r_m4_t0[16] = {
+static aSOG_term_info_c r_m4_t0[17] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 10),
   FISH_SPAWN(BROOK_TROUT, POOL, 10),
   FISH_SPAWN(CARP, RIVER, 14),
@@ -254,17 +297,31 @@ static aSOG_term_info_c r_m4_t0[16] = {
   FISH_SPAWN(GOLDFISH, RIVER, 1),
   FISH_SPAWN(FRESHWATER_GOBY, RIVER, 3),
   FISH_SPAWN(KILLIFISH, RIVER, 1),
+  FISH_SPAWN(GOLDEN_TROUT, WATERFALL, 1), /* modded */
 };
 
-static aSOG_term_info_c s_m4_t0[3] = {
+static aSOG_term_info_c s_m4_t0[15] = {
   FISH_SPAWN(SEA_BASS, SEA, 20),
   FISH_SPAWN(RED_SNAPPER, SEA, 15),
   FISH_SPAWN(BARRED_KNIFEJAW, SEA, 7),
+  FISH_SPAWN(TUNA, SEA, 2), /* modded */
+  FISH_SPAWN(BLUE_MARLIN, SEA, 1), /* modded */
+  FISH_SPAWN(BARRELEYE, SEA, 1), /* modded */
+  FISH_SPAWN(SEAHORSE, SEA, 4), /* modded */
+  FISH_SPAWN(CLOWNFISH, SEA, 5), /* modded */
+  FISH_SPAWN(SURGEONFISH, SEA, 4), /* modded */
+  FISH_SPAWN(BUTTERFLY_FISH, SEA, 4), /* modded */
+  FISH_SPAWN(ZEBRA_TURKEYFISH, SEA, 3), /* modded */
+  FISH_SPAWN(HORSE_MACKEREL, SEA, 15), /* modded */
+  FISH_SPAWN(SQUID, SEA, 6), /* modded */
+  FISH_SPAWN(ANCHOVY, SEA, 12), /* modded */
+  FISH_SPAWN(OLIVE_FLOUNDER, SEA, 6), /* modded */
 };
 
-static aSOG_term_info_c p_m4_t0[2] = {
+static aSOG_term_info_c p_m4_t0[3] = {
   FISH_SPAWN(KILLIFISH, POND, 3),
   FISH_SPAWN(CRAWFISH, POND, 20),
+  FISH_SPAWN(TADPOLE, POND, 12), /* modded */
 };
 
 static aSOG_term_info_c r_m4_t1[15] = {
@@ -303,26 +360,26 @@ static aSOG_term_info_c r_m4_t2[13] = {
 
 static aSOG_term_list_c r_begining_april[aSOG_TIME_NUM] = {
   { 13, r_m4_t2 },
-  { 16, r_m4_t0 },
+  { 17, r_m4_t0 },
   { 15, r_m4_t1 },
-  { 16, r_m4_t0 }
+  { 17, r_m4_t0 }
 };
 
 static aSOG_term_list_c s_begining_april[aSOG_TIME_NUM] = {
-  { 3, s_m4_t0 },
-  { 3, s_m4_t0 },
-  { 3, s_m4_t0 },
-  { 3, s_m4_t0 }
+  { 15, s_m4_t0 },
+  { 15, s_m4_t0 },
+  { 15, s_m4_t0 },
+  { 15, s_m4_t0 }
 };
 
 static aSOG_term_list_c p_begining_april[aSOG_TIME_NUM] = {
-  { 2, p_m4_t0 },
-  { 2, p_m4_t0 },
-  { 2, p_m4_t0 },
-  { 2, p_m4_t0 }
+  { 3, p_m4_t0 },
+  { 3, p_m4_t0 },
+  { 3, p_m4_t0 },
+  { 3, p_m4_t0 }
 };
 
-static aSOG_term_info_c r_m5_t0[18] = {
+static aSOG_term_info_c r_m5_t0[22] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 11),
   FISH_SPAWN(BROOK_TROUT, POOL, 10),
   FISH_SPAWN(CARP, RIVER, 14),
@@ -341,21 +398,37 @@ static aSOG_term_info_c r_m5_t0[18] = {
   FISH_SPAWN(FRESHWATER_GOBY, RIVER, 3),
   FISH_SPAWN(ANGELFISH, RIVER, 1),
   FISH_SPAWN(KILLIFISH, RIVER, 1),
+  FISH_SPAWN(GOLDEN_TROUT, WATERFALL, 1), /* modded */
+  FISH_SPAWN(BETTA, RIVER, 2), /* modded */
+  FISH_SPAWN(RAINBOWFISH, RIVER, 4), /* modded */
+  FISH_SPAWN(NIBBLE_FISH, RIVER, 3), /* modded */
 };
 
-static aSOG_term_info_c s_m5_t0[3] = {
+static aSOG_term_info_c s_m5_t0[14] = {
   FISH_SPAWN(SEA_BASS, SEA, 20),
   FISH_SPAWN(RED_SNAPPER, SEA, 15),
   FISH_SPAWN(BARRED_KNIFEJAW, SEA, 7),
+  FISH_SPAWN(BARRELEYE, SEA, 1), /* modded */
+  FISH_SPAWN(MAHI_MAHI, SEA, 2), /* modded */
+  FISH_SPAWN(SEAHORSE, SEA, 4), /* modded */
+  FISH_SPAWN(CLOWNFISH, SEA, 5), /* modded */
+  FISH_SPAWN(SURGEONFISH, SEA, 4), /* modded */
+  FISH_SPAWN(BUTTERFLY_FISH, SEA, 4), /* modded */
+  FISH_SPAWN(ZEBRA_TURKEYFISH, SEA, 3), /* modded */
+  FISH_SPAWN(HORSE_MACKEREL, SEA, 15), /* modded */
+  FISH_SPAWN(SQUID, SEA, 6), /* modded */
+  FISH_SPAWN(ANCHOVY, SEA, 12), /* modded */
+  FISH_SPAWN(OLIVE_FLOUNDER, SEA, 6), /* modded */
 };
 
-static aSOG_term_info_c p_m5_t0[3] = {
+static aSOG_term_info_c p_m5_t0[4] = {
   FISH_SPAWN(KILLIFISH, POND, 3),
   FISH_SPAWN(CRAWFISH, POND, 20),
   FISH_SPAWN(FROG, POND, 15),
+  FISH_SPAWN(TADPOLE, POND, 12), /* modded */
 };
 
-static aSOG_term_info_c r_m5_t1[15] = {
+static aSOG_term_info_c r_m5_t1[18] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 18),
   FISH_SPAWN(BROOK_TROUT, POOL, 15),
   FISH_SPAWN(CARP, RIVER, 3),
@@ -371,6 +444,9 @@ static aSOG_term_info_c r_m5_t1[15] = {
   FISH_SPAWN(GUPPY, RIVER, 1),
   FISH_SPAWN(POPEYED_GOLDFISH, RIVER, 1),
   FISH_SPAWN(KILLIFISH, RIVER, 1),
+  FISH_SPAWN(BETTA, RIVER, 2), /* modded */
+  FISH_SPAWN(RAINBOWFISH, RIVER, 4), /* modded */
+  FISH_SPAWN(NIBBLE_FISH, RIVER, 3), /* modded */
 };
 
 static aSOG_term_info_c r_m5_t2[15] = {
@@ -393,26 +469,26 @@ static aSOG_term_info_c r_m5_t2[15] = {
 
 static aSOG_term_list_c r_begining_may[aSOG_TIME_NUM] = {
   { 15, r_m5_t2 },
-  { 18, r_m5_t0 },
-  { 15, r_m5_t1 },
-  { 18, r_m5_t0 }
+  { 22, r_m5_t0 },
+  { 18, r_m5_t1 },
+  { 22, r_m5_t0 }
 };
 
 static aSOG_term_list_c s_begining_may[aSOG_TIME_NUM] = {
-  { 3, s_m5_t0 },
-  { 3, s_m5_t0 },
-  { 3, s_m5_t0 },
-  { 3, s_m5_t0 }
+  { 14, s_m5_t0 },
+  { 14, s_m5_t0 },
+  { 14, s_m5_t0 },
+  { 14, s_m5_t0 }
 };
 
 static aSOG_term_list_c p_begining_may[aSOG_TIME_NUM] = {
-  { 3, p_m5_t0 },
-  { 3, p_m5_t0 },
-  { 3, p_m5_t0 },
-  { 3, p_m5_t0 }
+  { 4, p_m5_t0 },
+  { 4, p_m5_t0 },
+  { 4, p_m5_t0 },
+  { 4, p_m5_t0 }
 };
 
-static aSOG_term_info_c r_m6_t0[20] = {
+static aSOG_term_info_c r_m6_t0[26] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 7),
   FISH_SPAWN(BROOK_TROUT, POOL, 5),
   FISH_SPAWN(CARP, RIVER, 14),
@@ -433,21 +509,45 @@ static aSOG_term_info_c r_m6_t0[20] = {
   FISH_SPAWN(FRESHWATER_GOBY, RIVER, 3),
   FISH_SPAWN(ANGELFISH, RIVER, 1),
   FISH_SPAWN(KILLIFISH, RIVER, 1),
+  FISH_SPAWN(TILAPIA, RIVER, 6), /* modded */
+  FISH_SPAWN(BETTA, RIVER, 2), /* modded */
+  FISH_SPAWN(RAINBOWFISH, RIVER, 4), /* modded */
+  FISH_SPAWN(DORADO, RIVER, 1), /* modded */
+  FISH_SPAWN(SADDLED_BICHIR, RIVER, 2), /* modded */
+  FISH_SPAWN(NIBBLE_FISH, RIVER, 3), /* modded */
 };
 
-static aSOG_term_info_c s_m6_t0[] = {
+static aSOG_term_info_c s_m6_t0[19] = {
   FISH_SPAWN(SEA_BASS, SEA, 20),
   FISH_SPAWN(RED_SNAPPER, SEA, 15),
   FISH_SPAWN(BARRED_KNIFEJAW, SEA, 5),
+  FISH_SPAWN(SAW_SHARK, SEA, 2), /* modded */
+  FISH_SPAWN(HAMMERHEAD_SHARK, SEA, 2), /* modded */
+  FISH_SPAWN(GREAT_WHITE_SHARK, SEA, 1), /* modded */
+  FISH_SPAWN(WHALE_SHARK, SEA, 1), /* modded */
+  FISH_SPAWN(BARRELEYE, SEA, 1), /* modded */
+  FISH_SPAWN(MAHI_MAHI, SEA, 2), /* modded */
+  FISH_SPAWN(RIBBON_EEL, SEA, 4), /* modded */
+  FISH_SPAWN(SEAHORSE, SEA, 4), /* modded */
+  FISH_SPAWN(CLOWNFISH, SEA, 5), /* modded */
+  FISH_SPAWN(SURGEONFISH, SEA, 4), /* modded */
+  FISH_SPAWN(BUTTERFLY_FISH, SEA, 4), /* modded */
+  FISH_SPAWN(ZEBRA_TURKEYFISH, SEA, 3), /* modded */
+  FISH_SPAWN(HORSE_MACKEREL, SEA, 15), /* modded */
+  FISH_SPAWN(SQUID, SEA, 6), /* modded */
+  FISH_SPAWN(ANCHOVY, SEA, 12), /* modded */
+  FISH_SPAWN(OLIVE_FLOUNDER, SEA, 6), /* modded */
 };
 
-static aSOG_term_info_c p_m6_t0[] = {
+static aSOG_term_info_c p_m6_t0[5] = {
   FISH_SPAWN(KILLIFISH, POND, 3),
   FISH_SPAWN(CRAWFISH, POND, 20),
   FISH_SPAWN(FROG, POND, 15),
+  FISH_SPAWN(GAR, POND, 2), /* modded */
+  FISH_SPAWN(TADPOLE, POND, 12), /* modded */
 };
 
-static aSOG_term_info_c r_m6_t1[16] = {
+static aSOG_term_info_c r_m6_t1[21] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 17),
   FISH_SPAWN(BROOK_TROUT, POOL, 15),
   FISH_SPAWN(CARP, RIVER, 3),
@@ -464,9 +564,14 @@ static aSOG_term_info_c r_m6_t1[16] = {
   FISH_SPAWN(GUPPY, RIVER, 1),
   FISH_SPAWN(POPEYED_GOLDFISH, RIVER, 1),
   FISH_SPAWN(KILLIFISH, RIVER, 1),
+  FISH_SPAWN(TILAPIA, RIVER, 6), /* modded */
+  FISH_SPAWN(BETTA, RIVER, 2), /* modded */
+  FISH_SPAWN(RAINBOWFISH, RIVER, 4), /* modded */
+  FISH_SPAWN(DORADO, RIVER, 1), /* modded */
+  FISH_SPAWN(NIBBLE_FISH, RIVER, 3), /* modded */
 };
 
-static aSOG_term_info_c r_m6_t2[18] = {
+static aSOG_term_info_c r_m6_t2[20] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 5),
   FISH_SPAWN(BROOK_TROUT, POOL, 5),
   FISH_SPAWN(CARP, RIVER, 5),
@@ -485,30 +590,32 @@ static aSOG_term_info_c r_m6_t2[18] = {
   FISH_SPAWN(ANGELFISH, RIVER, 1),
   FISH_SPAWN(KILLIFISH, RIVER, 1),
   FISH_SPAWN(NEON_TETRA, RIVER, 4), /* modded */
+  FISH_SPAWN(TILAPIA, RIVER, 6), /* modded */
+  FISH_SPAWN(SADDLED_BICHIR, RIVER, 2), /* modded */
 };
 
 static aSOG_term_list_c r_begining_june[aSOG_TIME_NUM] = {
-  { 18, r_m6_t2 },
-  { 20, r_m6_t0 },
-  { 16, r_m6_t1 },
-  { 20, r_m6_t0 }
+  { 20, r_m6_t2 },
+  { 26, r_m6_t0 },
+  { 21, r_m6_t1 },
+  { 26, r_m6_t0 }
 };
 
 static aSOG_term_list_c s_begining_june[aSOG_TIME_NUM] = {
-  { 3, s_m6_t0 },
-  { 3, s_m6_t0 },
-  { 3, s_m6_t0 },
-  { 3, s_m6_t0 }
+  { 19, s_m6_t0 },
+  { 19, s_m6_t0 },
+  { 19, s_m6_t0 },
+  { 19, s_m6_t0 }
 };
 
 static aSOG_term_list_c p_begining_june[aSOG_TIME_NUM] = {
-  { 3, p_m6_t0 },
-  { 3, p_m6_t0 },
-  { 3, p_m6_t0 },
-  { 3, p_m6_t0 }
+  { 5, p_m6_t0 },
+  { 5, p_m6_t0 },
+  { 5, p_m6_t0 },
+  { 5, p_m6_t0 }
 };
 
-static aSOG_term_info_c r_m7_t0[19] = {
+static aSOG_term_info_c r_m7_t0[25] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 7),
   FISH_SPAWN(BROOK_TROUT, POOL, 5),
   FISH_SPAWN(CARP, RIVER, 5),
@@ -528,21 +635,49 @@ static aSOG_term_info_c r_m7_t0[19] = {
   FISH_SPAWN(ANGELFISH, RIVER, 1),
   FISH_SPAWN(KILLIFISH, RIVER, 1),
   FISH_SPAWN(ARAPAIMA, RIVER, 1),
+  FISH_SPAWN(TILAPIA, RIVER, 6), /* modded */
+  FISH_SPAWN(BETTA, RIVER, 2), /* modded */
+  FISH_SPAWN(RAINBOWFISH, RIVER, 4), /* modded */
+  FISH_SPAWN(DORADO, RIVER, 1), /* modded */
+  FISH_SPAWN(SADDLED_BICHIR, RIVER, 2), /* modded */
+  FISH_SPAWN(NIBBLE_FISH, RIVER, 3), /* modded */
 };
 
-static aSOG_term_info_c s_m7_t0[3] = {
+static aSOG_term_info_c s_m7_t0[23] = {
   FISH_SPAWN(SEA_BASS, SEA, 20),
   FISH_SPAWN(RED_SNAPPER, SEA, 10),
   FISH_SPAWN(BARRED_KNIFEJAW, SEA, 3),
+  FISH_SPAWN(BLUE_MARLIN, SEA, 1), /* modded */
+  FISH_SPAWN(OCEAN_SUNFISH, SEA, 2), /* modded */
+  FISH_SPAWN(SAW_SHARK, SEA, 2), /* modded */
+  FISH_SPAWN(HAMMERHEAD_SHARK, SEA, 2), /* modded */
+  FISH_SPAWN(GREAT_WHITE_SHARK, SEA, 1), /* modded */
+  FISH_SPAWN(WHALE_SHARK, SEA, 1), /* modded */
+  FISH_SPAWN(NAPOLEONFISH, SEA, 1), /* modded */
+  FISH_SPAWN(BARRELEYE, SEA, 1), /* modded */
+  FISH_SPAWN(MAHI_MAHI, SEA, 2), /* modded */
+  FISH_SPAWN(RIBBON_EEL, SEA, 4), /* modded */
+  FISH_SPAWN(SEAHORSE, SEA, 4), /* modded */
+  FISH_SPAWN(CLOWNFISH, SEA, 5), /* modded */
+  FISH_SPAWN(SURGEONFISH, SEA, 4), /* modded */
+  FISH_SPAWN(BUTTERFLY_FISH, SEA, 4), /* modded */
+  FISH_SPAWN(ZEBRA_TURKEYFISH, SEA, 3), /* modded */
+  FISH_SPAWN(PUFFER_FISH, SEA, 5), /* modded */
+  FISH_SPAWN(HORSE_MACKEREL, SEA, 15), /* modded */
+  FISH_SPAWN(SQUID, SEA, 6), /* modded */
+  FISH_SPAWN(ANCHOVY, SEA, 12), /* modded */
+  FISH_SPAWN(OLIVE_FLOUNDER, SEA, 6), /* modded */
 };
 
-static aSOG_term_info_c p_m7_t0[3] = {
+static aSOG_term_info_c p_m7_t0[5] = {
   FISH_SPAWN(KILLIFISH, POND, 3),
   FISH_SPAWN(CRAWFISH, POND, 20),
   FISH_SPAWN(FROG, POND, 15),
+  FISH_SPAWN(GAR, POND, 2), /* modded */
+  FISH_SPAWN(TADPOLE, POND, 12), /* modded */
 };
 
-static aSOG_term_info_c r_m7_t1[17] = {
+static aSOG_term_info_c r_m7_t1[22] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 8),
   FISH_SPAWN(BROOK_TROUT, POOL, 5),
   FISH_SPAWN(CARP, RIVER, 3),
@@ -560,9 +695,14 @@ static aSOG_term_info_c r_m7_t1[17] = {
   FISH_SPAWN(GUPPY, RIVER, 1),
   FISH_SPAWN(POPEYED_GOLDFISH, RIVER, 1),
   FISH_SPAWN(KILLIFISH, RIVER, 1),
+  FISH_SPAWN(TILAPIA, RIVER, 6), /* modded */
+  FISH_SPAWN(BETTA, RIVER, 2), /* modded */
+  FISH_SPAWN(RAINBOWFISH, RIVER, 4), /* modded */
+  FISH_SPAWN(DORADO, RIVER, 1), /* modded */
+  FISH_SPAWN(NIBBLE_FISH, RIVER, 3), /* modded */
 };
 
-static aSOG_term_info_c r_m7_t2[20] = {
+static aSOG_term_info_c r_m7_t2[22] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 7),
   FISH_SPAWN(BROOK_TROUT, POOL, 5),
   FISH_SPAWN(CARP, RIVER, 3),
@@ -583,30 +723,32 @@ static aSOG_term_info_c r_m7_t2[20] = {
   FISH_SPAWN(KILLIFISH, RIVER, 1),
   FISH_SPAWN(ARAPAIMA, RIVER, 1),
   FISH_SPAWN(NEON_TETRA, RIVER, 4), /* modded */
+  FISH_SPAWN(TILAPIA, RIVER, 6), /* modded */
+  FISH_SPAWN(SADDLED_BICHIR, RIVER, 2), /* modded */
 };
 
 static aSOG_term_list_c r_begining_july[aSOG_TIME_NUM] = {
-  { 20, r_m7_t2 },
-  { 19, r_m7_t0 },
-  { 17, r_m7_t1 },
-  { 19, r_m7_t0 }
+  { 22, r_m7_t2 },
+  { 25, r_m7_t0 },
+  { 22, r_m7_t1 },
+  { 25, r_m7_t0 }
 };
 
 static aSOG_term_list_c s_begining_july[aSOG_TIME_NUM] = {
-  { 3, s_m7_t0 },
-  { 3, s_m7_t0 },
-  { 3, s_m7_t0 },
-  { 3, s_m7_t0 }
+  { 23, s_m7_t0 },
+  { 23, s_m7_t0 },
+  { 23, s_m7_t0 },
+  { 23, s_m7_t0 }
 };
 
 static aSOG_term_list_c p_begining_july[aSOG_TIME_NUM] = {
-  { 3, p_m7_t0 },
-  { 3, p_m7_t0 },
-  { 3, p_m7_t0 },
-  { 3, p_m7_t0 }
+  { 5, p_m7_t0 },
+  { 5, p_m7_t0 },
+  { 5, p_m7_t0 },
+  { 5, p_m7_t0 }
 };
 
-static aSOG_term_info_c r_m8_t0[19] = {
+static aSOG_term_info_c r_m8_t0[26] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 7),
   FISH_SPAWN(BROOK_TROUT, POOL, 5),
   FISH_SPAWN(CARP, RIVER, 5),
@@ -626,27 +768,79 @@ static aSOG_term_info_c r_m8_t0[19] = {
   FISH_SPAWN(ANGELFISH, RIVER, 1),
   FISH_SPAWN(KILLIFISH, RIVER, 1),
   FISH_SPAWN(ARAPAIMA, RIVER, 1),
+  FISH_SPAWN(TILAPIA, RIVER, 6), /* modded */
+  FISH_SPAWN(BETTA, RIVER, 2), /* modded */
+  FISH_SPAWN(RAINBOWFISH, RIVER, 4), /* modded */
+  FISH_SPAWN(DORADO, RIVER, 1), /* modded */
+  FISH_SPAWN(SADDLED_BICHIR, RIVER, 2), /* modded */
+  FISH_SPAWN(NIBBLE_FISH, RIVER, 3), /* modded */
+  FISH_SPAWN(SOFTSHELL_TURTLE, RIVER, 3), /* modded */
 };
 
-static aSOG_term_info_c s_m8_t0[3] = {
+static aSOG_term_info_c s_m8_t0[25] = {
   FISH_SPAWN(SEA_BASS, SEA, 20),
   FISH_SPAWN(RED_SNAPPER, SEA, 10),
   FISH_SPAWN(BARRED_KNIFEJAW, SEA, 3),
+  FISH_SPAWN(BLUE_MARLIN, SEA, 1), /* modded */
+  FISH_SPAWN(OCEAN_SUNFISH, SEA, 2), /* modded */
+  FISH_SPAWN(RAY, SEA, 3), /* modded */
+  FISH_SPAWN(SAW_SHARK, SEA, 2), /* modded */
+  FISH_SPAWN(HAMMERHEAD_SHARK, SEA, 2), /* modded */
+  FISH_SPAWN(GREAT_WHITE_SHARK, SEA, 1), /* modded */
+  FISH_SPAWN(WHALE_SHARK, SEA, 1), /* modded */
+  FISH_SPAWN(NAPOLEONFISH, SEA, 1), /* modded */
+  FISH_SPAWN(BARRELEYE, SEA, 1), /* modded */
+  FISH_SPAWN(MAHI_MAHI, SEA, 2), /* modded */
+  FISH_SPAWN(RIBBON_EEL, SEA, 4), /* modded */
+  FISH_SPAWN(MORAY_EEL, SEA, 3), /* modded */
+  FISH_SPAWN(SEAHORSE, SEA, 4), /* modded */
+  FISH_SPAWN(CLOWNFISH, SEA, 5), /* modded */
+  FISH_SPAWN(SURGEONFISH, SEA, 4), /* modded */
+  FISH_SPAWN(BUTTERFLY_FISH, SEA, 4), /* modded */
+  FISH_SPAWN(ZEBRA_TURKEYFISH, SEA, 3), /* modded */
+  FISH_SPAWN(PUFFER_FISH, SEA, 5), /* modded */
+  FISH_SPAWN(HORSE_MACKEREL, SEA, 15), /* modded */
+  FISH_SPAWN(SQUID, SEA, 6), /* modded */
+  FISH_SPAWN(ANCHOVY, SEA, 12), /* modded */
+  FISH_SPAWN(OLIVE_FLOUNDER, SEA, 6), /* modded */
 };
 
-static aSOG_term_info_c s_m8_t0_2[3] = {
+static aSOG_term_info_c s_m8_t0_2[25] = {
   FISH_SPAWN(JELLYFISH, SEA, 77),
   FISH_SPAWN(RED_SNAPPER, SEA, 10),
   FISH_SPAWN(BARRED_KNIFEJAW, SEA, 3),
+  FISH_SPAWN(BLUE_MARLIN, SEA, 1), /* modded */
+  FISH_SPAWN(OCEAN_SUNFISH, SEA, 2), /* modded */
+  FISH_SPAWN(RAY, SEA, 3), /* modded */
+  FISH_SPAWN(SAW_SHARK, SEA, 2), /* modded */
+  FISH_SPAWN(HAMMERHEAD_SHARK, SEA, 2), /* modded */
+  FISH_SPAWN(GREAT_WHITE_SHARK, SEA, 1), /* modded */
+  FISH_SPAWN(WHALE_SHARK, SEA, 1), /* modded */
+  FISH_SPAWN(NAPOLEONFISH, SEA, 1), /* modded */
+  FISH_SPAWN(BARRELEYE, SEA, 1), /* modded */
+  FISH_SPAWN(MAHI_MAHI, SEA, 2), /* modded */
+  FISH_SPAWN(RIBBON_EEL, SEA, 4), /* modded */
+  FISH_SPAWN(MORAY_EEL, SEA, 3), /* modded */
+  FISH_SPAWN(SEAHORSE, SEA, 4), /* modded */
+  FISH_SPAWN(CLOWNFISH, SEA, 5), /* modded */
+  FISH_SPAWN(SURGEONFISH, SEA, 4), /* modded */
+  FISH_SPAWN(BUTTERFLY_FISH, SEA, 4), /* modded */
+  FISH_SPAWN(ZEBRA_TURKEYFISH, SEA, 3), /* modded */
+  FISH_SPAWN(PUFFER_FISH, SEA, 5), /* modded */
+  FISH_SPAWN(HORSE_MACKEREL, SEA, 15), /* modded */
+  FISH_SPAWN(SQUID, SEA, 6), /* modded */
+  FISH_SPAWN(ANCHOVY, SEA, 12), /* modded */
+  FISH_SPAWN(OLIVE_FLOUNDER, SEA, 6), /* modded */
 };
 
-static aSOG_term_info_c p_m8_t0[3] = {
+static aSOG_term_info_c p_m8_t0[4] = {
   FISH_SPAWN(KILLIFISH, POND, 3),
   FISH_SPAWN(CRAWFISH, POND, 20),
   FISH_SPAWN(FROG, POND, 15),
+  FISH_SPAWN(GAR, POND, 2), /* modded */
 };
 
-static aSOG_term_info_c r_m8_t1[17] = {
+static aSOG_term_info_c r_m8_t1[22] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 8),
   FISH_SPAWN(BROOK_TROUT, POOL, 5),
   FISH_SPAWN(CARP, RIVER, 3),
@@ -664,15 +858,38 @@ static aSOG_term_info_c r_m8_t1[17] = {
   FISH_SPAWN(GUPPY, RIVER, 1),
   FISH_SPAWN(POPEYED_GOLDFISH, RIVER, 1),
   FISH_SPAWN(KILLIFISH, RIVER, 1),
+  FISH_SPAWN(TILAPIA, RIVER, 6), /* modded */
+  FISH_SPAWN(BETTA, RIVER, 2), /* modded */
+  FISH_SPAWN(RAINBOWFISH, RIVER, 4), /* modded */
+  FISH_SPAWN(DORADO, RIVER, 1), /* modded */
+  FISH_SPAWN(NIBBLE_FISH, RIVER, 3), /* modded */
 };
 
-static aSOG_term_info_c s_m8_t1_2[3] = {
+static aSOG_term_info_c s_m8_t1_2[21] = {
   FISH_SPAWN(JELLYFISH, SEA, 87),
   FISH_SPAWN(RED_SNAPPER, SEA, 10),
   FISH_SPAWN(BARRED_KNIFEJAW, SEA, 3),
+  FISH_SPAWN(BLUE_MARLIN, SEA, 1), /* modded */
+  FISH_SPAWN(OCEAN_SUNFISH, SEA, 2), /* modded */
+  FISH_SPAWN(RAY, SEA, 3), /* modded */
+  FISH_SPAWN(WHALE_SHARK, SEA, 1), /* modded */
+  FISH_SPAWN(NAPOLEONFISH, SEA, 1), /* modded */
+  FISH_SPAWN(MAHI_MAHI, SEA, 2), /* modded */
+  FISH_SPAWN(RIBBON_EEL, SEA, 4), /* modded */
+  FISH_SPAWN(MORAY_EEL, SEA, 3), /* modded */
+  FISH_SPAWN(SEAHORSE, SEA, 4), /* modded */
+  FISH_SPAWN(CLOWNFISH, SEA, 5), /* modded */
+  FISH_SPAWN(SURGEONFISH, SEA, 4), /* modded */
+  FISH_SPAWN(BUTTERFLY_FISH, SEA, 4), /* modded */
+  FISH_SPAWN(ZEBRA_TURKEYFISH, SEA, 3), /* modded */
+  FISH_SPAWN(PUFFER_FISH, SEA, 5), /* modded */
+  FISH_SPAWN(HORSE_MACKEREL, SEA, 15), /* modded */
+  FISH_SPAWN(SQUID, SEA, 6), /* modded */
+  FISH_SPAWN(ANCHOVY, SEA, 12), /* modded */
+  FISH_SPAWN(OLIVE_FLOUNDER, SEA, 6), /* modded */
 };
 
-static aSOG_term_info_c r_m8_t2[20] = {
+static aSOG_term_info_c r_m8_t2[23] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 7),
   FISH_SPAWN(BROOK_TROUT, POOL, 5),
   FISH_SPAWN(CARP, RIVER, 3),
@@ -693,37 +910,40 @@ static aSOG_term_info_c r_m8_t2[20] = {
   FISH_SPAWN(KILLIFISH, RIVER, 1),
   FISH_SPAWN(ARAPAIMA, RIVER, 1),
   FISH_SPAWN(NEON_TETRA, RIVER, 4), /* modded */
+  FISH_SPAWN(TILAPIA, RIVER, 6), /* modded */
+  FISH_SPAWN(SADDLED_BICHIR, RIVER, 2), /* modded */
+  FISH_SPAWN(SNAPPING_TURTLE, RIVER, 2), /* modded */
 };
 
 static aSOG_term_list_c r_begining_august[aSOG_TIME_NUM] = {
-  { 20, r_m8_t2 },
-  { 19, r_m8_t0 },
-  { 17, r_m8_t1 },
-  { 19, r_m8_t0 }
+  { 23, r_m8_t2 },
+  { 26, r_m8_t0 },
+  { 22, r_m8_t1 },
+  { 26, r_m8_t0 }
 };
 
 static aSOG_term_list_c s_begining_august[aSOG_TIME_NUM] = {
-  { 3, s_m8_t0 },
-  { 3, s_m8_t0 },
-  { 3, s_m8_t0 },
-  { 3, s_m8_t0 }
+  { 25, s_m8_t0 },
+  { 25, s_m8_t0 },
+  { 25, s_m8_t0 },
+  { 25, s_m8_t0 }
 };
 
 static aSOG_term_list_c s_latter_august[aSOG_TIME_NUM] = {
-  { 3, s_m8_t0_2 },
-  { 3, s_m8_t0_2 },
-  { 3, s_m8_t1_2 },
-  { 3, s_m8_t0_2 }
+  { 25, s_m8_t0_2 },
+  { 25, s_m8_t0_2 },
+  { 21, s_m8_t1_2 },
+  { 25, s_m8_t0_2 }
 };
 
 static aSOG_term_list_c p_begining_august[aSOG_TIME_NUM] = {
-  { 3, p_m8_t0 },
-  { 3, p_m8_t0 },
-  { 3, p_m8_t0 },
-  { 3, p_m8_t0 }
+  { 4, p_m8_t0 },
+  { 4, p_m8_t0 },
+  { 4, p_m8_t0 },
+  { 4, p_m8_t0 }
 };
 
-static aSOG_term_info_c r_m9_t0[20] = {
+static aSOG_term_info_c r_m9_t0[31] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 8),
   FISH_SPAWN(BROOK_TROUT, POOL, 5),
   FISH_SPAWN(CARP, RIVER, 5),
@@ -744,9 +964,20 @@ static aSOG_term_info_c r_m9_t0[20] = {
   FISH_SPAWN(FRESHWATER_GOBY, RIVER, 3),
   FISH_SPAWN(ANGELFISH, RIVER, 1),
   FISH_SPAWN(ARAPAIMA, RIVER, 1),
+  FISH_SPAWN(PIKE, RIVER, 4), /* modded */
+  FISH_SPAWN(STURGEON, RIVER_MOUTH, 2), /* modded */
+  FISH_SPAWN(GOLDEN_TROUT, WATERFALL, 1), /* modded */
+  FISH_SPAWN(TILAPIA, RIVER, 6), /* modded */
+  FISH_SPAWN(BETTA, RIVER, 2), /* modded */
+  FISH_SPAWN(RAINBOWFISH, RIVER, 4), /* modded */
+  FISH_SPAWN(DORADO, RIVER, 1), /* modded */
+  FISH_SPAWN(SADDLED_BICHIR, RIVER, 2), /* modded */
+  FISH_SPAWN(NIBBLE_FISH, RIVER, 3), /* modded */
+  FISH_SPAWN(SOFTSHELL_TURTLE, RIVER, 3), /* modded */
+  FISH_SPAWN(MITTEN_CRAB, RIVER, 4), /* modded */
 };
 
-static aSOG_term_info_c r_m9_t0_2[18] = {
+static aSOG_term_info_c r_m9_t0_2[29] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 4),
   FISH_SPAWN(BROOK_TROUT, POOL, 5),
   FISH_SPAWN(CARP, RIVER, 3),
@@ -765,25 +996,77 @@ static aSOG_term_info_c r_m9_t0_2[18] = {
   FISH_SPAWN(FRESHWATER_GOBY, RIVER, 3),
   FISH_SPAWN(ANGELFISH, RIVER, 1),
   FISH_SPAWN(ARAPAIMA, RIVER, 1),
+  FISH_SPAWN(PIKE, RIVER, 4), /* modded */
+  FISH_SPAWN(STURGEON, RIVER_MOUTH, 2), /* modded */
+  FISH_SPAWN(GOLDEN_TROUT, WATERFALL, 1), /* modded */
+  FISH_SPAWN(TILAPIA, RIVER, 6), /* modded */
+  FISH_SPAWN(BETTA, RIVER, 2), /* modded */
+  FISH_SPAWN(RAINBOWFISH, RIVER, 4), /* modded */
+  FISH_SPAWN(DORADO, RIVER, 1), /* modded */
+  FISH_SPAWN(SADDLED_BICHIR, RIVER, 2), /* modded */
+  FISH_SPAWN(NIBBLE_FISH, RIVER, 3), /* modded */
+  FISH_SPAWN(SOFTSHELL_TURTLE, RIVER, 3), /* modded */
+  FISH_SPAWN(MITTEN_CRAB, RIVER, 4), /* modded */
 };
 
-static aSOG_term_info_c s_m9_t0[] = {
+static aSOG_term_info_c s_m9_t0[23] = {
   FISH_SPAWN(SALMON2, RIVER_MOUTH, 75), // river mouth salmon variant
   FISH_SPAWN(RED_SNAPPER, SEA, 10),
   FISH_SPAWN(BARRED_KNIFEJAW, SEA, 5),
+  FISH_SPAWN(BLUE_MARLIN, SEA, 1), /* modded */
+  FISH_SPAWN(OCEAN_SUNFISH, SEA, 2), /* modded */
+  FISH_SPAWN(RAY, SEA, 3), /* modded */
+  FISH_SPAWN(SAW_SHARK, SEA, 2), /* modded */
+  FISH_SPAWN(HAMMERHEAD_SHARK, SEA, 2), /* modded */
+  FISH_SPAWN(GREAT_WHITE_SHARK, SEA, 1), /* modded */
+  FISH_SPAWN(WHALE_SHARK, SEA, 1), /* modded */
+  FISH_SPAWN(BARRELEYE, SEA, 1), /* modded */
+  FISH_SPAWN(MAHI_MAHI, SEA, 2), /* modded */
+  FISH_SPAWN(RIBBON_EEL, SEA, 4), /* modded */
+  FISH_SPAWN(MORAY_EEL, SEA, 3), /* modded */
+  FISH_SPAWN(SEAHORSE, SEA, 4), /* modded */
+  FISH_SPAWN(CLOWNFISH, SEA, 5), /* modded */
+  FISH_SPAWN(SURGEONFISH, SEA, 4), /* modded */
+  FISH_SPAWN(BUTTERFLY_FISH, SEA, 4), /* modded */
+  FISH_SPAWN(ZEBRA_TURKEYFISH, SEA, 3), /* modded */
+  FISH_SPAWN(PUFFER_FISH, SEA, 5), /* modded */
+  FISH_SPAWN(HORSE_MACKEREL, SEA, 15), /* modded */
+  FISH_SPAWN(ANCHOVY, SEA, 12), /* modded */
+  FISH_SPAWN(OLIVE_FLOUNDER, SEA, 6), /* modded */
 };
 
-static aSOG_term_info_c s_m9_t0_2[] = {
+static aSOG_term_info_c s_m9_t0_2[23] = {
   FISH_SPAWN(SEA_BASS, SEA, 20),
   FISH_SPAWN(RED_SNAPPER, SEA, 10),
   FISH_SPAWN(BARRED_KNIFEJAW, SEA, 7),
+  FISH_SPAWN(BLUE_MARLIN, SEA, 1), /* modded */
+  FISH_SPAWN(OCEAN_SUNFISH, SEA, 2), /* modded */
+  FISH_SPAWN(RAY, SEA, 3), /* modded */
+  FISH_SPAWN(SAW_SHARK, SEA, 2), /* modded */
+  FISH_SPAWN(HAMMERHEAD_SHARK, SEA, 2), /* modded */
+  FISH_SPAWN(GREAT_WHITE_SHARK, SEA, 1), /* modded */
+  FISH_SPAWN(WHALE_SHARK, SEA, 1), /* modded */
+  FISH_SPAWN(BARRELEYE, SEA, 1), /* modded */
+  FISH_SPAWN(MAHI_MAHI, SEA, 2), /* modded */
+  FISH_SPAWN(RIBBON_EEL, SEA, 4), /* modded */
+  FISH_SPAWN(MORAY_EEL, SEA, 3), /* modded */
+  FISH_SPAWN(SEAHORSE, SEA, 4), /* modded */
+  FISH_SPAWN(CLOWNFISH, SEA, 5), /* modded */
+  FISH_SPAWN(SURGEONFISH, SEA, 4), /* modded */
+  FISH_SPAWN(BUTTERFLY_FISH, SEA, 4), /* modded */
+  FISH_SPAWN(ZEBRA_TURKEYFISH, SEA, 3), /* modded */
+  FISH_SPAWN(PUFFER_FISH, SEA, 5), /* modded */
+  FISH_SPAWN(HORSE_MACKEREL, SEA, 15), /* modded */
+  FISH_SPAWN(ANCHOVY, SEA, 12), /* modded */
+  FISH_SPAWN(OLIVE_FLOUNDER, SEA, 6), /* modded */
 };
 
-static aSOG_term_info_c p_m9_t0[] = {
+static aSOG_term_info_c p_m9_t0[2] = {
   FISH_SPAWN(CRAWFISH, POND, 20),
+  FISH_SPAWN(GAR, POND, 2), /* modded */
 };
 
-static aSOG_term_info_c r_m9_t1[15] = {
+static aSOG_term_info_c r_m9_t1[22] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 16),
   FISH_SPAWN(BROOK_TROUT, POOL, 15),
   FISH_SPAWN(CARP, RIVER, 3),
@@ -799,9 +1082,16 @@ static aSOG_term_info_c r_m9_t1[15] = {
   FISH_SPAWN(FRESHWATER_GOBY, RIVER, 3),
   FISH_SPAWN(GUPPY, RIVER, 1),
   FISH_SPAWN(POPEYED_GOLDFISH, RIVER, 2),
+  FISH_SPAWN(PIKE, RIVER, 4), /* modded */
+  FISH_SPAWN(STURGEON, RIVER_MOUTH, 2), /* modded */
+  FISH_SPAWN(TILAPIA, RIVER, 6), /* modded */
+  FISH_SPAWN(BETTA, RIVER, 2), /* modded */
+  FISH_SPAWN(RAINBOWFISH, RIVER, 4), /* modded */
+  FISH_SPAWN(DORADO, RIVER, 1), /* modded */
+  FISH_SPAWN(NIBBLE_FISH, RIVER, 3), /* modded */
 };
 
-static aSOG_term_info_c r_m9_t1_2[14] = {
+static aSOG_term_info_c r_m9_t1_2[21] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 6),
   FISH_SPAWN(BROOK_TROUT, POOL, 10),
   FISH_SPAWN(CARP, RIVER, 3),
@@ -816,15 +1106,38 @@ static aSOG_term_info_c r_m9_t1_2[14] = {
   FISH_SPAWN(FRESHWATER_GOBY, RIVER, 3),
   FISH_SPAWN(GUPPY, RIVER, 1),
   FISH_SPAWN(POPEYED_GOLDFISH, RIVER, 1),
+  FISH_SPAWN(PIKE, RIVER, 4), /* modded */
+  FISH_SPAWN(STURGEON, RIVER_MOUTH, 2), /* modded */
+  FISH_SPAWN(TILAPIA, RIVER, 6), /* modded */
+  FISH_SPAWN(BETTA, RIVER, 2), /* modded */
+  FISH_SPAWN(RAINBOWFISH, RIVER, 4), /* modded */
+  FISH_SPAWN(DORADO, RIVER, 1), /* modded */
+  FISH_SPAWN(NIBBLE_FISH, RIVER, 3), /* modded */
 };
 
-static aSOG_term_info_c s_m9_t1[3] = {
+static aSOG_term_info_c s_m9_t1[19] = {
   FISH_SPAWN(SALMON2, RIVER_MOUTH, 85), // river mouth salmon variant
   FISH_SPAWN(RED_SNAPPER, SEA, 10),
   FISH_SPAWN(BARRED_KNIFEJAW, SEA, 5),
+  FISH_SPAWN(BLUE_MARLIN, SEA, 1), /* modded */
+  FISH_SPAWN(OCEAN_SUNFISH, SEA, 2), /* modded */
+  FISH_SPAWN(RAY, SEA, 3), /* modded */
+  FISH_SPAWN(WHALE_SHARK, SEA, 1), /* modded */
+  FISH_SPAWN(MAHI_MAHI, SEA, 2), /* modded */
+  FISH_SPAWN(RIBBON_EEL, SEA, 4), /* modded */
+  FISH_SPAWN(MORAY_EEL, SEA, 3), /* modded */
+  FISH_SPAWN(SEAHORSE, SEA, 4), /* modded */
+  FISH_SPAWN(CLOWNFISH, SEA, 5), /* modded */
+  FISH_SPAWN(SURGEONFISH, SEA, 4), /* modded */
+  FISH_SPAWN(BUTTERFLY_FISH, SEA, 4), /* modded */
+  FISH_SPAWN(ZEBRA_TURKEYFISH, SEA, 3), /* modded */
+  FISH_SPAWN(PUFFER_FISH, SEA, 5), /* modded */
+  FISH_SPAWN(HORSE_MACKEREL, SEA, 15), /* modded */
+  FISH_SPAWN(ANCHOVY, SEA, 12), /* modded */
+  FISH_SPAWN(OLIVE_FLOUNDER, SEA, 6), /* modded */
 };
 
-static aSOG_term_info_c r_m9_t2[18] = {
+static aSOG_term_info_c r_m9_t2[24] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 16),
   FISH_SPAWN(BROOK_TROUT, POOL, 5),
   FISH_SPAWN(CARP, RIVER, 3),
@@ -843,9 +1156,15 @@ static aSOG_term_info_c r_m9_t2[18] = {
   FISH_SPAWN(ANGELFISH, RIVER, 1),
   FISH_SPAWN(ARAPAIMA, RIVER, 1),
   FISH_SPAWN(NEON_TETRA, RIVER, 4), /* modded */
+  FISH_SPAWN(PIKE, RIVER, 4), /* modded */
+  FISH_SPAWN(STURGEON, RIVER_MOUTH, 2), /* modded */
+  FISH_SPAWN(TILAPIA, RIVER, 6), /* modded */
+  FISH_SPAWN(SADDLED_BICHIR, RIVER, 2), /* modded */
+  FISH_SPAWN(SNAPPING_TURTLE, RIVER, 2), /* modded */
+  FISH_SPAWN(MITTEN_CRAB, RIVER, 4), /* modded */
 };
 
-static aSOG_term_info_c r_m9_t2_2[15] = {
+static aSOG_term_info_c r_m9_t2_2[21] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 5),
   FISH_SPAWN(BROOK_TROUT, POOL, 5),
   FISH_SPAWN(CARP, RIVER, 3),
@@ -861,44 +1180,50 @@ static aSOG_term_info_c r_m9_t2_2[15] = {
   FISH_SPAWN(FRESHWATER_GOBY, RIVER, 3),
   FISH_SPAWN(ANGELFISH, RIVER, 1),
   FISH_SPAWN(ARAPAIMA, RIVER, 1),
+  FISH_SPAWN(PIKE, RIVER, 4), /* modded */
+  FISH_SPAWN(STURGEON, RIVER_MOUTH, 2), /* modded */
+  FISH_SPAWN(TILAPIA, RIVER, 6), /* modded */
+  FISH_SPAWN(SADDLED_BICHIR, RIVER, 2), /* modded */
+  FISH_SPAWN(SNAPPING_TURTLE, RIVER, 2), /* modded */
+  FISH_SPAWN(MITTEN_CRAB, RIVER, 4), /* modded */
 };
 
 static aSOG_term_list_c r_begining_september[aSOG_TIME_NUM] = {
-  { 18, r_m9_t2 },
-  { 20, r_m9_t0 },
-  { 15, r_m9_t1 },
-  { 20, r_m9_t0 }
+  { 24, r_m9_t2 },
+  { 31, r_m9_t0 },
+  { 22, r_m9_t1 },
+  { 31, r_m9_t0 }
 };
 
 static aSOG_term_list_c r_latter_september[aSOG_TIME_NUM] = {
-  { 15, r_m9_t2_2 },
-  { 18, r_m9_t0_2 },
-  { 14, r_m9_t1_2 },
-  { 18, r_m9_t0_2 }
+  { 21, r_m9_t2_2 },
+  { 29, r_m9_t0_2 },
+  { 21, r_m9_t1_2 },
+  { 29, r_m9_t0_2 }
 };
 
 static aSOG_term_list_c s_begining_september[aSOG_TIME_NUM] = {
-  { 3, s_m9_t0 },
-  { 3, s_m9_t0 },
-  { 3, s_m9_t1 },
-  { 3, s_m9_t0 }
+  { 23, s_m9_t0 },
+  { 23, s_m9_t0 },
+  { 19, s_m9_t1 },
+  { 23, s_m9_t0 }
 };
 
 static aSOG_term_list_c s_latter_september[aSOG_TIME_NUM] = {
-  { 3, s_m9_t0_2 },
-  { 3, s_m9_t0_2 },
-  { 3, s_m9_t0_2 },
-  { 3, s_m9_t0_2 }
+  { 23, s_m9_t0_2 },
+  { 23, s_m9_t0_2 },
+  { 23, s_m9_t0_2 },
+  { 23, s_m9_t0_2 }
 };
 
 static aSOG_term_list_c p_begining_september[aSOG_TIME_NUM] = {
-  { 1, p_m9_t0 },
-  { 1, p_m9_t0 },
-  { 1, p_m9_t0 },
-  { 1, p_m9_t0 }
+  { 2, p_m9_t0 },
+  { 2, p_m9_t0 },
+  { 2, p_m9_t0 },
+  { 2, p_m9_t0 }
 };
 
-static aSOG_term_info_c r_m10_t0[16] = {
+static aSOG_term_info_c r_m10_t0[23] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 6),
   FISH_SPAWN(BROOK_TROUT, POOL, 10),
   FISH_SPAWN(CARP, RIVER, 15),
@@ -915,15 +1240,35 @@ static aSOG_term_info_c r_m10_t0[16] = {
   FISH_SPAWN(GOLDFISH, RIVER, 1),
   FISH_SPAWN(FRESHWATER_GOBY, RIVER, 3),
   FISH_SPAWN(ANGELFISH, RIVER, 1),
+  FISH_SPAWN(PIKE, RIVER, 4), /* modded */
+  FISH_SPAWN(YELLOW_PERCH, RIVER, 8), /* modded */
+  FISH_SPAWN(STURGEON, RIVER_MOUTH, 2), /* modded */
+  FISH_SPAWN(GOLDEN_TROUT, WATERFALL, 1), /* modded */
+  FISH_SPAWN(BETTA, RIVER, 2), /* modded */
+  FISH_SPAWN(RAINBOWFISH, RIVER, 4), /* modded */
+  FISH_SPAWN(MITTEN_CRAB, RIVER, 4), /* modded */
 };
 
-static aSOG_term_info_c s_m10_t0[3] = {
+static aSOG_term_info_c s_m10_t0[16] = {
   FISH_SPAWN(SEA_BASS, SEA, 20),
   FISH_SPAWN(RED_SNAPPER, SEA, 10),
   FISH_SPAWN(BARRED_KNIFEJAW, SEA, 7),
+  FISH_SPAWN(RAY, SEA, 3), /* modded */
+  FISH_SPAWN(BARRELEYE, SEA, 1), /* modded */
+  FISH_SPAWN(MAHI_MAHI, SEA, 2), /* modded */
+  FISH_SPAWN(RIBBON_EEL, SEA, 4), /* modded */
+  FISH_SPAWN(MORAY_EEL, SEA, 3), /* modded */
+  FISH_SPAWN(SEAHORSE, SEA, 4), /* modded */
+  FISH_SPAWN(CLOWNFISH, SEA, 5), /* modded */
+  FISH_SPAWN(SURGEONFISH, SEA, 4), /* modded */
+  FISH_SPAWN(BUTTERFLY_FISH, SEA, 4), /* modded */
+  FISH_SPAWN(ZEBRA_TURKEYFISH, SEA, 3), /* modded */
+  FISH_SPAWN(HORSE_MACKEREL, SEA, 15), /* modded */
+  FISH_SPAWN(ANCHOVY, SEA, 12), /* modded */
+  FISH_SPAWN(OLIVE_FLOUNDER, SEA, 6), /* modded */
 };
 
-static aSOG_term_info_c r_m10_t1[13] = {
+static aSOG_term_info_c r_m10_t1[18] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 24),
   FISH_SPAWN(BROOK_TROUT, POOL, 15),
   FISH_SPAWN(CARP, RIVER, 3),
@@ -937,9 +1282,14 @@ static aSOG_term_info_c r_m10_t1[13] = {
   FISH_SPAWN(FRESHWATER_GOBY, RIVER, 3),
   FISH_SPAWN(GUPPY, RIVER, 1),
   FISH_SPAWN(POPEYED_GOLDFISH, RIVER, 1),
+  FISH_SPAWN(PIKE, RIVER, 4), /* modded */
+  FISH_SPAWN(YELLOW_PERCH, RIVER, 8), /* modded */
+  FISH_SPAWN(STURGEON, RIVER_MOUTH, 2), /* modded */
+  FISH_SPAWN(BETTA, RIVER, 2), /* modded */
+  FISH_SPAWN(RAINBOWFISH, RIVER, 4), /* modded */
 };
 
-static aSOG_term_info_c r_m10_t2[13] = {
+static aSOG_term_info_c r_m10_t2[17] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 19),
   FISH_SPAWN(BROOK_TROUT, POOL, 10),
   FISH_SPAWN(CARP, RIVER, 15),
@@ -953,23 +1303,27 @@ static aSOG_term_info_c r_m10_t2[13] = {
   FISH_SPAWN(GOLDFISH, RIVER, 1),
   FISH_SPAWN(FRESHWATER_GOBY, RIVER, 3),
   FISH_SPAWN(ANGELFISH, RIVER, 1),
+  FISH_SPAWN(PIKE, RIVER, 4), /* modded */
+  FISH_SPAWN(YELLOW_PERCH, RIVER, 8), /* modded */
+  FISH_SPAWN(STURGEON, RIVER_MOUTH, 2), /* modded */
+  FISH_SPAWN(MITTEN_CRAB, RIVER, 4), /* modded */
 };
 
 static aSOG_term_list_c r_begining_october[aSOG_TIME_NUM] = {
-  { 13, r_m10_t2 },
-  { 16, r_m10_t0 },
-  { 13, r_m10_t1 },
-  { 16, r_m10_t0 }
+  { 17, r_m10_t2 },
+  { 23, r_m10_t0 },
+  { 18, r_m10_t1 },
+  { 23, r_m10_t0 }
 };
 
 static aSOG_term_list_c s_begining_october[aSOG_TIME_NUM] = {
-  { 3, s_m10_t0 },
-  { 3, s_m10_t0 },
-  { 3, s_m10_t0 },
-  { 3, s_m10_t0 }
+  { 16, s_m10_t0 },
+  { 16, s_m10_t0 },
+  { 16, s_m10_t0 },
+  { 16, s_m10_t0 }
 };
 
-static aSOG_term_info_c r_m11_t0[14] = {
+static aSOG_term_info_c r_m11_t0[19] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 15),
   FISH_SPAWN(BROOK_TROUT, POOL, 10),
   FISH_SPAWN(CARP, RIVER, 15),
@@ -984,15 +1338,28 @@ static aSOG_term_info_c r_m11_t0[14] = {
   FISH_SPAWN(RAINBOW_TROUT, RIVER, 5),
   FISH_SPAWN(GOLDFISH, RIVER, 1),
   FISH_SPAWN(FRESHWATER_GOBY, RIVER, 3),
+  FISH_SPAWN(PIKE, RIVER, 4), /* modded */
+  FISH_SPAWN(YELLOW_PERCH, RIVER, 8), /* modded */
+  FISH_SPAWN(STURGEON, RIVER_MOUTH, 2), /* modded */
+  FISH_SPAWN(GOLDEN_TROUT, WATERFALL, 1), /* modded */
+  FISH_SPAWN(MITTEN_CRAB, RIVER, 4), /* modded */
 };
 
-static aSOG_term_info_c s_m11_t0[3] = {
+static aSOG_term_info_c s_m11_t0[11] = {
   FISH_SPAWN(SEA_BASS, SEA, 20),
   FISH_SPAWN(RED_SNAPPER, SEA, 5),
   FISH_SPAWN(BARRED_KNIFEJAW, SEA, 5),
+  FISH_SPAWN(TUNA, SEA, 2), /* modded */
+  FISH_SPAWN(BLUE_MARLIN, SEA, 1), /* modded */
+  FISH_SPAWN(RAY, SEA, 3), /* modded */
+  FISH_SPAWN(BARRELEYE, SEA, 1), /* modded */
+  FISH_SPAWN(HORSE_MACKEREL, SEA, 15), /* modded */
+  FISH_SPAWN(ANCHOVY, SEA, 12), /* modded */
+  FISH_SPAWN(FOOTBALL_FISH, SEA, 2), /* modded */
+  FISH_SPAWN(OLIVE_FLOUNDER, SEA, 6), /* modded */
 };
 
-static aSOG_term_info_c r_m11_t1[13] = {
+static aSOG_term_info_c r_m11_t1[16] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 24),
   FISH_SPAWN(BROOK_TROUT, POOL, 15),
   FISH_SPAWN(CARP, RIVER, 3),
@@ -1006,9 +1373,12 @@ static aSOG_term_info_c r_m11_t1[13] = {
   FISH_SPAWN(FRESHWATER_GOBY, RIVER, 3),
   FISH_SPAWN(GUPPY, RIVER, 1),
   FISH_SPAWN(POPEYED_GOLDFISH, RIVER, 1),
+  FISH_SPAWN(PIKE, RIVER, 4), /* modded */
+  FISH_SPAWN(YELLOW_PERCH, RIVER, 8), /* modded */
+  FISH_SPAWN(STURGEON, RIVER_MOUTH, 2), /* modded */
 };
 
-static aSOG_term_info_c r_m11_t2[11] = {
+static aSOG_term_info_c r_m11_t2[15] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 15),
   FISH_SPAWN(BROOK_TROUT, POOL, 10),
   FISH_SPAWN(CARP, RIVER, 15),
@@ -1020,23 +1390,27 @@ static aSOG_term_info_c r_m11_t2[11] = {
   FISH_SPAWN(DACE, RIVER, 15),
   FISH_SPAWN(GOLDFISH, RIVER, 1),
   FISH_SPAWN(FRESHWATER_GOBY, RIVER, 3),
+  FISH_SPAWN(PIKE, RIVER, 4), /* modded */
+  FISH_SPAWN(YELLOW_PERCH, RIVER, 8), /* modded */
+  FISH_SPAWN(STURGEON, RIVER_MOUTH, 2), /* modded */
+  FISH_SPAWN(MITTEN_CRAB, RIVER, 4), /* modded */
 };
 
 static aSOG_term_list_c r_begining_november[aSOG_TIME_NUM] = {
-  { 11, r_m11_t2 },
-  { 14, r_m11_t0 },
-  { 13, r_m11_t1 },
-  { 14, r_m11_t0 }
+  { 15, r_m11_t2 },
+  { 19, r_m11_t0 },
+  { 16, r_m11_t1 },
+  { 19, r_m11_t0 }
 };
 
 static aSOG_term_list_c s_begining_november[aSOG_TIME_NUM] = {
-  { 3, s_m11_t0 },
-  { 3, s_m11_t0 },
-  { 3, s_m11_t0 },
-  { 3, s_m11_t0 }
+  { 11, s_m11_t0 },
+  { 11, s_m11_t0 },
+  { 11, s_m11_t0 },
+  { 11, s_m11_t0 }
 };
 
-static aSOG_term_info_c r_m12_t0[14] = {
+static aSOG_term_info_c r_m12_t0[17] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 5),
   FISH_SPAWN(BROOK_TROUT, POOL, 5),
   FISH_SPAWN(CARP, RIVER, 3),
@@ -1051,14 +1425,25 @@ static aSOG_term_info_c r_m12_t0[14] = {
   FISH_SPAWN(STRINGFISH, RIVER, 1),
   FISH_SPAWN(GOLDFISH, RIVER, 1),
   FISH_SPAWN(FRESHWATER_GOBY, RIVER, 3),
+  FISH_SPAWN(PIKE, RIVER, 4), /* modded */
+  FISH_SPAWN(YELLOW_PERCH, RIVER, 8), /* modded */
+  FISH_SPAWN(STURGEON, RIVER_MOUTH, 2), /* modded */
 };
 
-static aSOG_term_info_c s_m12_t0[2] = {
+static aSOG_term_info_c s_m12_t0[10] = {
   FISH_SPAWN(SEA_BASS, SEA, 20),
   FISH_SPAWN(RED_SNAPPER, SEA, 3),
+  FISH_SPAWN(TUNA, SEA, 2), /* modded */
+  FISH_SPAWN(BLUE_MARLIN, SEA, 1), /* modded */
+  FISH_SPAWN(BARRELEYE, SEA, 1), /* modded */
+  FISH_SPAWN(HORSE_MACKEREL, SEA, 15), /* modded */
+  FISH_SPAWN(SQUID, SEA, 6), /* modded */
+  FISH_SPAWN(ANCHOVY, SEA, 12), /* modded */
+  FISH_SPAWN(FOOTBALL_FISH, SEA, 2), /* modded */
+  FISH_SPAWN(OLIVE_FLOUNDER, SEA, 6), /* modded */
 };
 
-static aSOG_term_info_c r_m12_t1[14] = {
+static aSOG_term_info_c r_m12_t1[17] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 7),
   FISH_SPAWN(BROOK_TROUT, POOL, 5),
   FISH_SPAWN(CARP, RIVER, 3),
@@ -1073,9 +1458,12 @@ static aSOG_term_info_c r_m12_t1[14] = {
   FISH_SPAWN(GOLDFISH, RIVER, 1),
   FISH_SPAWN(FRESHWATER_GOBY, RIVER, 3),
   FISH_SPAWN(POPEYED_GOLDFISH, RIVER, 1),
+  FISH_SPAWN(PIKE, RIVER, 4), /* modded */
+  FISH_SPAWN(YELLOW_PERCH, RIVER, 8), /* modded */
+  FISH_SPAWN(STURGEON, RIVER_MOUTH, 2), /* modded */
 };
 
-static aSOG_term_info_c r_m12_t2[14] = {
+static aSOG_term_info_c r_m12_t2[17] = {
   FISH_SPAWN(CRUCIAN_CARP, RIVER, 5),
   FISH_SPAWN(BROOK_TROUT, POOL, 5),
   FISH_SPAWN(CARP, RIVER, 3),
@@ -1090,20 +1478,23 @@ static aSOG_term_info_c r_m12_t2[14] = {
   FISH_SPAWN(STRINGFISH, RIVER, 1),
   FISH_SPAWN(GOLDFISH, RIVER, 1),
   FISH_SPAWN(FRESHWATER_GOBY, RIVER, 3),
+  FISH_SPAWN(PIKE, RIVER, 4), /* modded */
+  FISH_SPAWN(YELLOW_PERCH, RIVER, 8), /* modded */
+  FISH_SPAWN(STURGEON, RIVER_MOUTH, 2), /* modded */
 };
 
 static aSOG_term_list_c r_begining_december[aSOG_TIME_NUM] = {
-  { 14, r_m12_t2 },
-  { 14, r_m12_t0 },
-  { 14, r_m12_t1 },
-  { 14, r_m12_t0 }
+  { 17, r_m12_t2 },
+  { 17, r_m12_t0 },
+  { 17, r_m12_t1 },
+  { 17, r_m12_t0 }
 };
 
 static aSOG_term_list_c s_begining_december[aSOG_TIME_NUM] = {
-  { 2, s_m12_t0 },
-  { 2, s_m12_t0 },
-  { 2, s_m12_t0 },
-  { 2, s_m12_t0 }
+  { 10, s_m12_t0 },
+  { 10, s_m12_t0 },
+  { 10, s_m12_t0 },
+  { 10, s_m12_t0 }
 };
 
 static aSOG_term_info_c f_bs_t0[3] = {
