@@ -13,6 +13,11 @@ Tools and docs for extending the fish system in this Animal Crossing decomp.
 | [setup_dolphin_test_keys.py](setup_dolphin_test_keys.py) | Optional Dolphin key binding for test cheats; `--remove` to uninstall |
 | [ADDING_FISH.md](ADDING_FISH.md) | The underlying per-file checklist (what add_fish.py automates) |
 
+For custom non-reskin fish art, use the asset workflow in
+[ADDING_FISH.md](ADDING_FISH.md#custom-fish-asset-workflow). It documents the
+Animal Crossing style rules, icon/model files to update, and a prompt template
+for asking Codex to generate the next fish with minimal back-and-forth.
+
 ## Adding fish (mass workflow)
 
 ```bash
@@ -24,9 +29,10 @@ python fish/make_iso.py               # build + pack final ISO
 
 Current state: **80 fish** (40 vanilla + tetra + 39 more) — encyclopedia page 2 is
 full; the next fish requires a third page (`mIV_FISH_PAGE_NUM` + `mIV_fish_collect_list3`,
-add_fish.py will refuse until then). Icons are recolored vanilla textures and 3D
-models reuse vanilla fish — both designed to be overwritten with real assets later
-(swap the `icon`/`model` spec fields or the generated palette arrays).
+add_fish.py will refuse until then). Neon tetra is the worked example for replacing
+both placeholder asset classes: it uses a generated custom catch/release model and
+a dedicated inventory/encyclopedia icon texture. The remaining modded fish still
+reuse vanilla model/icon shapes until they get their own generated assets.
 
 ## Quick start
 
@@ -52,9 +58,9 @@ ninja                                  # build only (sha1 CHECK failure = expect
   (azure-recolored window). The paging generalizes to N pages via
   `mIV_FISH_PAGE_NUM`.
 - **Fish #41 "Neon tetra"** (worked example): catchable in rivers on summer
-  nights, custom inventory icon, sellable (2,000 Bells), encyclopedia page 2,
-  releasable. Uses the vanilla guppy 3D model for now; a generated custom model
-  and a placeable house tank exist in the tree but are parked pending art
-  iteration (see ADDING_FISH.md). A temporary test cheat puts a tetra in pocket
-  slot 1 and unlocks its encyclopedia entry every time the inventory opens
-  (`mIV_MOD_FISH_TEST_CHEAT` in src/game/m_inventory_ovl.c).
+  nights, custom inventory/encyclopedia icon texture, sellable (2,000 Bells),
+  encyclopedia page 2, releasable, and wired to a generated custom low-poly
+  catch/release model. A placeable house tank exists in the tree but remains
+  separate from the catch/release work (see ADDING_FISH.md). A temporary test
+  cheat puts a tetra in pocket slot 1 and unlocks its encyclopedia entry every
+  time the inventory opens (`mIV_MOD_FISH_TEST_CHEAT` in src/game/m_inventory_ovl.c).

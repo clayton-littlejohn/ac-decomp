@@ -258,13 +258,13 @@ def main():
     t = read(p)
     todo = missing_from(t)
     if todo:
-        anchor = re.search(r"  &aGYO_gupi_dl[^\n]*NEON_TETRA[^\n]*\n", t)
+        anchor = re.search(r"  &aGYO_tetra_dl[^\n]*NEON_TETRA[^\n]*\n", t)
         if not anchor:
             die("tetra displayList anchor missing")
         line = anchor.group(0)
         fixed = line.rstrip("\n")
         if not fixed.rstrip().endswith(","):
-            fixed = re.sub(r"(\&aGYO_gupi_dl)", r"\1,", fixed, count=1)
+            fixed = re.sub(r"(\&aGYO_tetra_dl)", r"\1,", fixed, count=1)
         add = "".join(f"  &{model_dl(s['model'])}, /* aGYO_TYPE_{s['enum']} (modded) */\n" for s in todo)
         t = t.replace(line, fixed + "\n" + add, 1)
         write(p, t)
@@ -389,7 +389,7 @@ def main():
     if added_ext:
         sub = insert_after(sub, "extern u16 inv_mwin_41tetra_pal[]; /* neon tetra (modded) */\n",
                            "".join(added_ext), sub_p)
-        sub = insert_after(sub, "        { inv_mwin_41tetra_pal, inv_mwin_28gupi_tex }, /* neon tetra (modded) */\n",
+        sub = insert_after(sub, "        { inv_mwin_41tetra_pal, inv_mwin_41tetra_tex }, /* neon tetra (modded) */\n",
                            "".join(added_rows), sub_p)
         write(sub_p, sub)
 

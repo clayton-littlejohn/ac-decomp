@@ -53,15 +53,15 @@ SPECS = {
         "height": 200,
         "tail_x": 0.43,      # fraction of half-length where the tail fin starts
         "colors": {
-            "outline": rgb(3, 5, 10),
-            "back": rgb(9, 13, 18),
-            "belly": rgb(27, 28, 30),
-            "stripe": rgb(6, 27, 31),
-            "stripe2": rgb(3, 19, 28),
-            "rear": rgb(28, 5, 5),
-            "rear2": rgb(20, 3, 4),
+            "outline": rgb(4, 8, 10),
+            "back": rgb(5, 11, 20),
+            "belly": rgb(28, 29, 30),
+            "stripe": rgb(8, 29, 31),
+            "stripe2": rgb(5, 22, 29),
+            "rear": rgb(29, 6, 5),
+            "rear2": rgb(22, 4, 5),
             "eye": rgb(1, 1, 2),
-            "fin": rgb(24, 22, 24),
+            "fin": rgb(22, 25, 28),
         },
     },
 }

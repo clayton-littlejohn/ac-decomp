@@ -37,7 +37,7 @@ appended **after** the whale/trash block so vanilla indices never move.
 | 11 | `src/data/item/fish_price.c` | append catalog price before `-1` (sell = /4) |
 | 12 | `src/data/item/item_name.c` | append 16-byte space-padded ASCII name after the `.inc` include |
 | 13 | `src/game/m_item_name.c` | append `mIN_ARTICLE_A`/`AN` to `itemArt_Fish[]` |
-| 14 | `src/data/model/inv_mwin3.c` | icon palette (reuse a similar fish's CI4 texture with a recolored 32-entry palette) |
+| 14 | `src/data/model/inv_mwin3.c` | icon palette and texture (prefer a custom CI4 texture; palette-only recolors are placeholders) |
 | 15 | `src/game/m_submenu_ovl.c` | extern + append `{ pal, tex }` to `fish_tex_table[]` |
 | 16 | `src/actor/ac_set_ovl_gyoei.c` | `FISH_SPAWN(NAME, AREA, weight)` in each month/time array **and bump the array size + `aSOG_term_list_c` count** |
 | 17 | `src/game/m_inventory_ovl.c` | put `aGYO_TYPE_<NAME>` into a `mIV_fish_collect_list2[]` slot |
@@ -91,16 +91,108 @@ with UVs derived from the same outline function, and emits three vertex frames
 vanilla `act_f##` models. It prints the registration snippet for
 `ac_gyoei_model.c_inc` and the `#include` line for `src/f_furniture.c`.
 
-**Status:** the generated tetra model is currently *not wired in* (needs art
-iteration); the tetra uses the vanilla guppy model. To swap the generated one
-back in: `#include "../src/data/model/act_f41_tetra.c"` in src/f_furniture.c
-and point the tetra's `aGYO_displayList` entry at an `aGYO_tetra_dl` built
-from the `act_f41_tetra_*T_model` display lists.
+**Status:** neon tetra is wired in as the first custom generated example:
+`src/f_furniture.c` includes `src/data/model/act_f41_tetra.c`,
+`src/actor/ac_gyoei_model.c_inc` defines `aGYO_tetra_dl`, and the
+`aGYO_TYPE_NEON_TETRA` display-list entry points at it. Future generated fish
+should follow that same three-step pattern.
 
 **Icon palette rule:** entries 1 and 17 of the `inv_mwin_*` icon palettes are
 the shared dark-blue background disc behind every item icon - never recolor
 them (keep `0xB19F` / `0xA66D`), or the item's background won't match the rest
 of the inventory.
+
+## Custom fish asset workflow
+
+Use this when replacing a placeholder/reskin with a real custom fish. Neon
+tetra is the worked example. The goal is to produce two matching asset classes:
+
+- **Inventory/encyclopedia icon:** a unique 32x32 CI4 icon, not a recolored
+  vanilla fish texture.
+- **Catch/held/release model:** a generated `act_f##_<name>.c` model from
+  `fish/gen_fish_model.py`.
+
+Do not worry about the placed house/tank asset in this workflow unless the
+request explicitly says to work on placement.
+
+### Codex prompt template
+
+Paste this shape of prompt for the next fish:
+
+```text
+Create custom Animal Crossing GameCube-style assets for <fish name>.
+Use <reference traits or attached image>. Do not make it a reskin.
+
+For the icon: make a unique 32x32 CI4 inventory/encyclopedia texture matching
+the vanilla fish icon style: chunky readable silhouette, soft blended pixel
+clusters, no hard black outline, vanilla-size eye, and the shared blue disc
+background preserved.
+
+For catch/release: add or update the <spec name> entry in fish/gen_fish_model.py
+and regenerate src/data/model/act_f##_<name>.c. Keep the low-poly side-profile
+model consistent with the icon. Do not work on placed tank assets.
+
+After editing, verify the icon has exactly 512 bytes, run py -m ninja, and run
+py fish/make_iso.py so I can test in Dolphin.
+```
+
+### Icon style rules
+
+- Keep palette entries 1 and 17 as the shared icon disc colors
+  (`0xB19F` / `0xA66D`).
+- Keep the disc round. Do not let the background become a rectangular block
+  around fins or the tail.
+- Use the vanilla fish language: small eye, softened edges, 1-3 pixel color
+  ramps, and compact highlights. Avoid photo-real gradients, hard black
+  outlines, and overly crisp color separations.
+- Match the fish's real anatomy, but simplify it for 32x32 readability. The
+  silhouette matters more than tiny details.
+- Decode/check the icon visually as a 32x32 grid before building; the stored
+  bytes are CI4 swizzled in 8x8 blocks, so linear edits will look scrambled.
+- Verify the include file contains exactly 512 byte literals.
+
+### Catch/release model rules
+
+- Add/update a `SPECS` entry in `fish/gen_fish_model.py` for the fish.
+- Tune `length`, `height`, and `tail_x` to the real fish silhouette before
+  touching colors.
+- Use role colors (`outline`, `back`, `belly`, `stripe`, `rear`, `rear2`,
+  `eye`, `fin`) rather than hand-editing generated model C.
+- Regenerate with:
+
+```bash
+python fish/gen_fish_model.py <spec-name>
+```
+
+- Wire the generated model exactly like neon tetra:
+  `src/f_furniture.c` includes the generated C file,
+  `src/actor/ac_gyoei_model.c_inc` declares the three model frames and creates
+  `aGYO_<name>_dl`, and the new fish's display-list table entry points to it.
+
+### Validation checklist
+
+1. Decode the icon and confirm it is not scrambled, has a round blue disc, and
+   looks consistent beside vanilla fish.
+2. Count icon bytes: exactly 512 `0xNN` literals.
+3. Run `py -m ninja`; the retail sha1 failure for `foresta.rel` is expected
+   for modded builds, but compile/link should complete first.
+4. Run `py fish/make_iso.py`.
+5. Test `build/GAFE01_00/Animal Crossing (USA) (final).iso` in Dolphin and
+   compare inventory, encyclopedia, catch/hold, and release views.
+
+## Custom inventory/encyclopedia icons
+
+Inventory and encyclopedia entries both use `fish_tex_table[]` in
+`src/game/m_submenu_ovl.c`. The table stores `{ palette, texture }` pairs, so
+a real custom fish icon needs two symbols:
+
+1. A 32-entry `u16` palette in `src/data/model/inv_mwin3.c`.
+2. A 32x32 CI4 `u8` texture in the same file, swizzled in 8x8 blocks.
+3. Matching externs plus a `{ pal, tex }` entry in `fish_tex_table[]`.
+
+Neon tetra is the worked example: `inv_mwin_41tetra_pal` plus
+`inv_mwin_41tetra_tex`. Palette-only entries that point at an existing
+`inv_mwin_##*_tex` are acceptable temporary placeholders, but they are reskins.
 
 ## Known limitations (v1)
 
@@ -175,14 +267,15 @@ Binary assets — all indexed by fish/item index:
 | Asset | Location | Notes |
 |---|---|---|
 | Item name | `assets/itemName_fish.inc` (built into `itemName_fish[]`, `src/data/item/item_name.c`) | fixed-width name records; append one record per fish |
-| Menu icon | inventory icon sheet (`inv_mwin_*_tex` assets) | 16×16 icon per fish, referenced by item draw code |
-| Held/menu model | `act_f##_*` model + texture assets | copy an existing fish model as a starting point |
+| Menu/encyclopedia icon | `src/data/model/inv_mwin3.c` + `fish_tex_table[]` in `src/game/m_submenu_ovl.c` | 32x32 CI4 icon per fish; use a custom texture symbol for real assets, not only a recolored vanilla texture |
+| Held/catch/release model | `src/data/model/act_f##_*` + `aGYO_displayList[]` in `src/actor/ac_gyoei_model.c_inc` | generated by `fish/gen_fish_model.py`; used when held overhead and when released back into water |
 | Catch message | message table in `src/actor/ac_turi_clip.c_inc` (`0x10F6 + idx`) | "I caught a …!" text lives in the message data files |
 | Museum donation | N/A | modded fish are refused by Blathers |
 
 These are the most labor-intensive steps because they are binary/asset edits,
-not C tables. Use the existing extraction/build pipeline (`configure.py`,
-`assets/`) and crib from a similar-sized vanilla fish.
+not C tables. For new custom fish, prefer a generated `act_f##` model plus a
+native CI4 icon texture. Reusing a similar vanilla fish is useful for temporary
+blocking only.
 
 ## Step 5 — Spawn tables (`src/actor/ac_set_ovl_gyoei.c`)
 

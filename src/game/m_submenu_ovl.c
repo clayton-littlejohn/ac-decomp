@@ -617,6 +617,7 @@ extern u8 inv_mwin_29angel_tex[];
 extern u16 inv_mwin_28gupi_pal[];
 extern u8 inv_mwin_28gupi_tex[];
 extern u16 inv_mwin_41tetra_pal[]; /* neon tetra (modded) */
+extern u8 inv_mwin_41tetra_tex[]; /* neon tetra (modded) */
 extern u16 inv_mwin_mf_pike_pal[]; /* pike (modded) */
 extern u16 inv_mwin_mf_yellow_perch_pal[]; /* yellow perch (modded) */
 extern u16 inv_mwin_mf_sturgeon_pal[]; /* sturgeon (modded) */
@@ -1109,7 +1110,7 @@ static void mSM_draw_item(GRAPH* graph, f32 pos_x, f32 pos_y, f32 scale, mActor_
         { inv_mwin_38tai_pal, inv_mwin_38tai_tex },
         { inv_mwin_39ishidai_pal, inv_mwin_39ishidai_tex },
         { inv_mwin_40piraruku_pal, inv_mwin_40piraruku_tex },
-        { inv_mwin_41tetra_pal, inv_mwin_28gupi_tex }, /* neon tetra (modded) */
+        { inv_mwin_41tetra_pal, inv_mwin_41tetra_tex }, /* neon tetra (modded) */
         { inv_mwin_mf_pike_pal, inv_mwin_16raigyo_tex }, /* pike (modded) */
         { inv_mwin_mf_yellow_perch_pal, inv_mwin_12gill_tex }, /* yellow perch (modded) */
         { inv_mwin_mf_sturgeon_pal, inv_mwin_24itou_tex }, /* sturgeon (modded) */
