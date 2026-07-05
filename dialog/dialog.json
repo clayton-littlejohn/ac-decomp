@@ -144440,27 +144440,32 @@
       "index": 14981,
       "label": "",
       "original": "<<MSGCONTINUE>>",
-      "new": "<<MSGCONTINUE>>",
+      "new": "<<DEMONPC0 [00 00 04]>>Eek? <<PAUSE [08]>><<STR_PLAYERNAME>>!<<PAUSE [08]>>\nWord reached the station\nthat you've acquired a\ncreature from far lands!<<BTN>>\n<<MSGCLEAR>><<DEMONPC0 [00 00 17]>>A foreign fish...<<PAUSE [08]>> from\nbeyond our usual routes!<<PAUSE [08]>>\nHow exciting!<<PAUSE [08]>> Or, well...\na bit worrying! Eek!<<BTN>>\n<<MSGCLEAR>><<DEMONPC0 [00 00 FF]>>If you want to ask about\nunusual destinations, come\nsee me anytime.<<PAUSE [08]>> I'll check\nthe timetables!<<MSGEND>>",
       "flow": {
-        "continues": true
+        "ends": true
       }
     },
     {
       "index": 14982,
       "label": "",
       "original": "<<MSGCONTINUE>>",
-      "new": "<<MSGCONTINUE>>",
+      "new": "<<DEMONPC0 [00 00 17]>>The Wild West line?<<PAUSE [08]>>\nEek... I'd love to send\nyou, but I can't right now.<<BTN>>\n<<MSGCLEAR>><<DEMONPC0 [00 00 FF]>>There's construction on the\ntracks, so trains can't\ntravel there yet.<<PAUSE [08]>> Please\ncheck back later!<<MSGEND>>",
       "flow": {
-        "continues": true
+        "ends": true
       }
     },
     {
       "index": 14983,
       "label": "",
       "original": "<<MSGCONTINUE>>",
-      "new": "<<MSGCONTINUE>>",
+      "new": "Are you planning on going\non a trip,<<PAUSE [04]>>\n<<STR_PLAYERNAME>>?<<SETSELSTR3 [00 63 00 62 00 63]>><<SELNOB>><<BTN>><<OPENCHOICE>><<SETNEXTMSG0 [3A 86]>><<SETNEXTMSG1 [09 4A]>><<SETNEXTMSG2 [09 44]>><<FORCENEXT>>\n<<MSGCONTINUE>>",
       "flow": {
-        "continues": true
+        "continues": true,
+        "next": [
+          14982,
+          2378,
+          2372
+        ]
       }
     },
     {

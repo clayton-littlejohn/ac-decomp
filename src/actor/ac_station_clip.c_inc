@@ -1,5 +1,11 @@
 static aSTC_clip_c aSTC_clip;
 
+enum {
+    aSTC_FOREIGN_FISH_PORTER_NONE,
+    aSTC_FOREIGN_FISH_PORTER_PENDING,
+    aSTC_FOREIGN_FISH_PORTER_UNLOCKED,
+};
+
 static int aSTC_clip_change_talk_proc(ACTOR* actorx, int talk_idx);
 
 static void aSTC_clip_ct(void) {
@@ -186,16 +192,50 @@ static void aSTM_cardproc(NPC_STATION_MASTER_ACTOR* master, GAME_PLAY* play) {
     }
 }
 
+static void aSTM_set_wild_west_choice_label(void) {
+    static u8 wild_west_label[mChoice_CHOICE_STRING_LEN] = {
+        'V', 'i', 's', 'i', 't', ' ', 'w', 'i', 'l', 'd', ' ', 'w', 'e', 's', 't', '!'
+    };
+
+    mChoice_c* choice = mChoice_Get_base_window_p();
+
+    if (choice->data.choice_num == 3) {
+        mem_copy(choice->data.strings[0], wild_west_label, mChoice_CHOICE_STRING_LEN);
+        choice->data.string_lens[0] = mChoice_CHOICE_STRING_LEN;
+    }
+}
+
 static void aSTM_chk_leave_talk(NPC_STATION_MASTER_ACTOR* master, GAME_PLAY* play) {
+    if (Save_Get(mod_fish_donation[0]) >= aSTC_FOREIGN_FISH_PORTER_UNLOCKED) {
+        aSTM_set_wild_west_choice_label();
+    }
+
     if (mMsg_CHECK_MAINNORMALCONTINUE() == TRUE) {
         switch (mChoice_GET_CHOSENUM()) {
             case mChoice_CHOICE0:
-                aSTC_clip_change_talk_proc((ACTOR*)master, aSTM_TALK_CHK_LEAVE_TALK2);
+                if (Save_Get(mod_fish_donation[0]) >= aSTC_FOREIGN_FISH_PORTER_UNLOCKED) {
+                    aSTC_clip_change_talk_proc((ACTOR*)master, aSTM_TALK_WILD_WEST_CONSTRUCTION);
+                } else {
+                    aSTC_clip_change_talk_proc((ACTOR*)master, aSTM_TALK_CHK_LEAVE_TALK2);
+                }
                 break;
             case mChoice_CHOICE1:
+                if (Save_Get(mod_fish_donation[0]) >= aSTC_FOREIGN_FISH_PORTER_UNLOCKED) {
+                    aSTC_clip_change_talk_proc((ACTOR*)master, aSTM_TALK_CHK_LEAVE_TALK2);
+                } else {
+                    aSTC_clip_change_talk_proc((ACTOR*)master, aSTM_TALK_END_WAIT);
+                }
+                break;
+            case mChoice_CHOICE2:
                 aSTC_clip_change_talk_proc((ACTOR*)master, aSTM_TALK_END_WAIT);
                 break;
         }
+    }
+}
+
+static void aSTM_wild_west_construction(NPC_STATION_MASTER_ACTOR* master, GAME_PLAY* play) {
+    if (mMsg_CHECK_MAINNORMALCONTINUE() == TRUE) {
+        aSTC_clip_change_talk_proc((ACTOR*)master, aSTM_TALK_END_WAIT);
     }
 }
 
@@ -500,6 +540,7 @@ static int aSTC_clip_change_talk_proc(ACTOR* actorx, int talk_act) {
         &aSTM_repairid,
         &aSTM_repairid_after,
         &aSTM_cardproc,
+        &aSTM_wild_west_construction,
         (aSTM_TALK_PROC)&none_proc1,
     };
     // clang-format on

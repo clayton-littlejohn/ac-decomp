@@ -614,6 +614,12 @@ static void aCR_get_demo_end_wait(NPC_CURATOR_ACTOR* curator, GAME_PLAY* play) {
 
 #define aCR_IS_FISH(item) ((item) >= ITM_FISH_START && (item) <= ITM_FISH_END)
 
+enum {
+    aCR_FOREIGN_FISH_PORTER_NONE,
+    aCR_FOREIGN_FISH_PORTER_PENDING,
+    aCR_FOREIGN_FISH_PORTER_UNLOCKED,
+};
+
 typedef struct {
     int msg_no;
     int talk_act;
@@ -670,6 +676,10 @@ static void aCR_msg_win_open_wait(NPC_CURATOR_ACTOR* curator, GAME_PLAY* play) {
                 act_idx = aCR_get_idx_to_donate_insect(item);
             } else if (aCR_IS_FISH(item) == TRUE) {
                 act_idx = aCR_get_idx_to_donate_fish(item);
+                if (item >= (ITM_FISH_START + FISH_NUM_VANILLA) &&
+                    Save_Get(mod_fish_donation[0]) == aCR_FOREIGN_FISH_PORTER_NONE) {
+                    Save_Get(mod_fish_donation[0]) = aCR_FOREIGN_FISH_PORTER_PENDING;
+                }
             } else if (item == ITM_FOSSIL) {
                 act_idx = 3;
             } else {
