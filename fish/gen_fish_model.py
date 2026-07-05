@@ -52,6 +52,7 @@ SPECS = {
         "length": 560,
         "height": 200,
         "tail_x": 0.43,      # fraction of half-length where the tail fin starts
+        "belly_scale": 0.72,
         "colors": {
             "outline": rgb(4, 8, 10),
             "back": rgb(5, 11, 20),
@@ -61,6 +62,7 @@ SPECS = {
             "rear": rgb(29, 6, 5),
             "rear2": rgb(22, 4, 5),
             "eye": rgb(1, 1, 2),
+            "eye_white": rgb(31, 31, 29),
             "fin": rgb(22, 25, 28),
         },
     },
@@ -82,6 +84,8 @@ def outline_test(fx, fy, spec):
         half = max(half, 0.08)
         peduncle = 0.35 + 0.65 * (1.0 - max(0.0, (t - 0.75) / 0.25))
         half *= min(1.0, peduncle)
+        if fy < 0:
+            half *= spec.get("belly_scale", 1.0)
         return "body" if abs(fy) <= half else ""
     else:
         # tail fin: widening triangle from the peduncle
@@ -95,8 +99,8 @@ def paint_texture(spec):
     c = spec["colors"]
     palette = [0x0000, c["outline"], c["back"], c["belly"], c["stripe"],
                c["stripe2"], c["rear"], c["rear2"], c["eye"], c["fin"],
-               0, 0, 0, 0, 0, 0]
-    OUTLINE, BACK, BELLY, STRIPE, STRIPE2, REAR, REAR2, EYE, FIN = range(1, 10)
+               c["eye_white"], 0, 0, 0, 0, 0]
+    OUTLINE, BACK, BELLY, STRIPE, STRIPE2, REAR, REAR2, EYE, FIN, EYE_WHITE = range(1, 11)
 
     px = [0] * (TEX_W * TEX_H)
 
@@ -139,11 +143,28 @@ def paint_texture(spec):
     px = out
 
     # eye near the nose, on the stripe line
-    ex, ey = 4, TEX_H // 2 - 2
-    for yy in range(ey, ey + 2):
-        for xx in range(ex, ex + 2):
-            if px[yy * TEX_W + xx] != 0:
-                px[yy * TEX_W + xx] = EYE
+    eye_white = {
+        (4, 13), (5, 13), (6, 13), (7, 13),
+        (4, 14), (7, 14),
+        (4, 15), (7, 15),
+        (4, 16), (5, 16), (6, 16), (7, 16),
+    }
+    eye_pupil = {(5, 14), (6, 14), (5, 15), (6, 15)}
+    for xx, yy in eye_white:
+        if px[yy * TEX_W + xx] != 0:
+            px[yy * TEX_W + xx] = EYE_WHITE
+    for xx, yy in eye_pupil:
+        if px[yy * TEX_W + xx] != 0:
+            px[yy * TEX_W + xx] = EYE
+
+    # Two small pale fins tucked under the rear belly.
+    bottom_fins = {
+        (14, 21), (15, 22),
+        (18, 21), (19, 22),
+    }
+    for xx, yy in bottom_fins:
+        if px[yy * TEX_W + xx] != 0:
+            px[yy * TEX_W + xx] = EYE_WHITE
 
     return px, palette
 
@@ -171,6 +192,7 @@ def build_mesh(spec):
     L2 = spec["length"] / 2.0
     H2 = spec["height"] / 2.0
     tx = spec["tail_x"] * L2                      # peduncle x
+    belly_scale = spec.get("belly_scale", 1.0)
     verts = [
         (-L2, 0),                                 # 0 nose
         (-L2 * 0.42, H2 * 0.9),                   # 1 top front
@@ -178,9 +200,9 @@ def build_mesh(spec):
         (tx, H2 * 0.30),                          # 3 peduncle top
         (L2, H2 * 0.95),                          # 4 tail tip top
         (L2, -H2 * 0.95),                         # 5 tail tip bottom
-        (tx, -H2 * 0.30),                         # 6 peduncle bottom
-        (L2 * 0.28, -H2 * 0.7),                   # 7 bottom rear
-        (-L2 * 0.42, -H2 * 0.9),                  # 8 bottom front
+        (tx, -H2 * 0.30 * belly_scale),           # 6 peduncle bottom
+        (L2 * 0.28, -H2 * 0.7 * belly_scale),     # 7 bottom rear
+        (-L2 * 0.42, -H2 * 0.9 * belly_scale),    # 8 bottom front
     ]
     tris = [
         (0, 1, 8), (1, 2, 8), (2, 7, 8), (2, 3, 7), (3, 6, 7),
