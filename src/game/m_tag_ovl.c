@@ -75,6 +75,7 @@ static s16 mTG_mbox_col_pos[] = { -36, -12 };
 static s16 mTG_haniwa_col_pos[] = { -35, -11, 13, 37 };
 static s16 mTG_collect_col_pos[] = { -89, -65, -41, -17, 8, 32, 57, 81 };
 static s16 mTG_wchange_col_pos[] = { 105 };
+static s16 mTG_fish_page_arrow_col_pos[] = { -28, 28 };
 static s16 mTG_cpmail_col_pos[] = { -16, 8, 32, 56 };
 static s16 mTG_cpmail_wc_col_pos[] = { 98 };
 static s16 mTG_cpmail_ti_col_pos[] = { 24 };
@@ -103,6 +104,7 @@ static s16 mTG_mbox_line_pos[] = { 39, 15, -9, -33, -57 };
 static s16 mTG_haniwa_line_pos[] = { 46 };
 static s16 mTG_collect_line_pos[] = { 42, 18, -6, -30, -54 };
 static s16 mTG_wchange_line_pos[] = { 37, 0, -37 };
+static s16 mTG_fish_page_arrow_line_pos[] = { -68 };
 static s16 mTG_cpmail_wc_line_pos[] = { 50, 35, 20, 5, -10, -25, -40, -55 };
 static s16 mTG_cpmail_ti_line_pos[] = { 71 };
 static s16 mTG_cpedit_line_pos[] = { 50, 18, -14 };
@@ -149,6 +151,7 @@ static mTG_tag_data_table_c mTG_table_data[] = {
     { 2, 4, mTG_gba_nw_col_pos, mTG_gba_nw_line_pos },                     /* mTG_TABLE_GBA_NW */
     { 1, 1, mTG_card_col_pos, mTG_card_line_pos },                         /* mTG_TABLE_CARD */
     { 2, 4, mTG_gba_nw_col_pos, mTG_gba_nw_line_pos },                     /* mTG_TABLE_CARD_NW */
+    { 2, 1, mTG_fish_page_arrow_col_pos, mTG_fish_page_arrow_line_pos },    /* mTG_TABLE_FISH_PAGE_ARROW */
 };
 
 static u8 str_omikuji[7] = "fortune";
@@ -6182,6 +6185,11 @@ static int mTG_move_cursol_between_table_inventory_upper(Submenu* submenu, mTG_t
             tag->table = mTG_TABLE_PLAYER;
             return TRUE;
         }
+    } else if (tag->table == mTG_TABLE_FISH_PAGE_ARROW) {
+        tag->table = mTG_TABLE_COLLECT;
+        tag->tag_col = tag->tag_col == 0 ? 3 : 4;
+        tag->tag_row = 4;
+        return TRUE;
     }
 
     return FALSE;
@@ -6204,6 +6212,14 @@ static int mTG_move_cursol_between_table_inventory_lower(Submenu* submenu, mTG_t
     } else if (tag->table == mTG_TABLE_PLAYER) {
         tag->table = mTG_TABLE_ITEM;
         return TRUE;
+    } else if (tag->table == mTG_TABLE_COLLECT) {
+        if (submenu->overlay->inventory_ovl->page_order[0] == mIV_PAGE_FISH_COLLECTION &&
+            mIV_has_registered_mod_fish() && tag->tag_row == 4) {
+            tag->table = mTG_TABLE_FISH_PAGE_ARROW;
+            tag->tag_col = tag->tag_col < 4 ? 0 : 1;
+            tag->tag_row = 0;
+            return TRUE;
+        }
     }
 
     return FALSE;
@@ -6987,17 +7003,13 @@ static int mTG_select_tag_decide_wchange(Submenu* submenu, mSM_MenuInfo_c* menu_
         inv_ovl->page_move_timer = 40;
         submenu->overlay->hand_ovl->nop_hand_func(submenu);
         sAdo_SysTrgStart(NA_SE_41C);
-    } else if (tag->tag_row == mIV_PAGE_FISH_COLLECTION && mIV_FISH_PAGE_NUM > 1) {
-        /* fish tab clicked while the fish page is already open:
-         * play the normal page-change transition and flip to the next fish sub-page
-         * (applied at the transition midpoint, see mIV_move_Play) */
-        mTG_mark_main_CLR(submenu, menu_info);
-        inv_ovl->next_page_id = tag->tag_row;
-        inv_ovl->page_move_timer = 40;
-        submenu->overlay->hand_ovl->nop_hand_func(submenu);
-        sAdo_SysTrgStart(NA_SE_41C);
     }
 
+    return mTG_TYPE_NONE;
+}
+
+static int mTG_select_tag_decide_fish_page_arrow(Submenu* submenu, mSM_MenuInfo_c* menu_info, mTG_tag_c* tag) {
+    mIV_change_fish_page(submenu, tag->tag_col == 0 ? -1 : 1);
     return mTG_TYPE_NONE;
 }
 
@@ -7422,6 +7434,11 @@ static int mTG_check_move_proc(Submenu* submenu, mTG_tag_c* tag) {
                     res = FALSE;
                 }
                 break;
+            case mTG_TABLE_FISH_PAGE_ARROW:
+                if (!mIV_can_change_fish_page(tag->tag_col == 0 ? -1 : 1)) {
+                    res = FALSE;
+                }
+                break;
         }
     }
 
@@ -7546,6 +7563,7 @@ static void mTG_move_decide(Submenu* submenu, mSM_MenuInfo_c* menu_info, mTG_tag
         &mTG_select_tag_decide_gba_nw,
         &mTG_select_tag_decide_cporiginal_nw,
         &mTG_select_tag_decide_gba_nw,
+        &mTG_select_tag_decide_fish_page_arrow,
     };
 
     if (!mTG_check_move_proc(submenu, tag)) {

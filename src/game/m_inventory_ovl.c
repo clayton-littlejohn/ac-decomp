@@ -106,6 +106,46 @@ static u8 mIV_fish_collect_list2[mIV_COLLECT_NUM] = {
 #undef E
 // clang-format on
 
+extern int mIV_has_registered_mod_fish(void) {
+    int i;
+
+    for (i = 0; i < mIV_COLLECT_NUM; i++) {
+        int fish_no = mIV_fish_collect_list2[i];
+
+        if (fish_no != mIV_FISH_SLOT_EMPTY && fish_no < aGYO_TYPE_MODDED_NUM &&
+            (fish_no < aGYO_TYPE_NUM || fish_no >= aGYO_TYPE_EXTENDED_NUM) &&
+            mSM_COLLECT_FISH_GET(aGYO_TYPE_2_FISH_IDX(fish_no))) {
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+extern int mIV_can_change_fish_page(int direction) {
+    if (!mIV_has_registered_mod_fish()) {
+        return FALSE;
+    }
+
+    if (direction < 0) {
+        return inv_ovl_data.fish_page_no > 0;
+    } else if (direction > 0) {
+        return inv_ovl_data.fish_page_no < mIV_FISH_PAGE_NUM - 1;
+    }
+
+    return FALSE;
+}
+
+extern void mIV_change_fish_page(Submenu* submenu, int direction) {
+    if (mIV_can_change_fish_page(direction)) {
+        inv_ovl_data.fish_page_no += direction;
+        submenu->overlay->hand_ovl->set_hand_func(submenu);
+        sAdo_SysTrgStart(NA_SE_41C);
+    } else {
+        sAdo_SysTrgStart(MONO(NA_SE_A));
+    }
+}
+
 // clang-format off
 #define I(n) aINS_INSECT_TYPE_##n
 
@@ -1327,17 +1367,12 @@ static void mIV_move_Play(Submenu* submenu, mSM_MenuInfo_c* menu_info) {
         menu_info->position[1] = (f32)y;
 
         if (inv_ovl->page_move_timer == 20) {
-            if (inv_ovl->next_page_id == inv_ovl->page_order[0]) {
-                /* same-tab transition: advance to the next fish sub-page instead of reordering */
-                inv_ovl->fish_page_no = (inv_ovl->fish_page_no + 1) % mIV_FISH_PAGE_NUM;
-            } else {
-                if (inv_ovl->page_order[2] == inv_ovl->next_page_id) {
-                    inv_ovl->page_order[2] = inv_ovl->page_order[1];
-                }
-
-                inv_ovl->page_order[1] = inv_ovl->page_order[0];
-                inv_ovl->page_order[0] = inv_ovl->next_page_id;
+            if (inv_ovl->page_order[2] == inv_ovl->next_page_id) {
+                inv_ovl->page_order[2] = inv_ovl->page_order[1];
             }
+
+            inv_ovl->page_order[1] = inv_ovl->page_order[0];
+            inv_ovl->page_order[0] = inv_ovl->next_page_id;
         } else if (inv_ovl->page_move_timer == 0) {
             menu_info->position[1] = 0.0f;
             submenu->overlay->hand_ovl->set_hand_func(submenu);
@@ -1832,6 +1867,44 @@ static void mIV_set_money(Submenu* submenu, GAME* game, f32 pos_x, f32 pos_y) {
     // clang-format on
 }
 
+static void mIV_set_fish_page_arrows(GAME* game, f32 pos_x, f32 pos_y) {
+    static u8 left_arrow[] = { CHAR_LESS_THAN };
+    static u8 right_arrow[] = { CHAR_GREATER_THAN };
+    u8 page_str[] = { CHAR_ONE, CHAR_FORWARD_SLASH, CHAR_ZERO + mIV_FISH_PAGE_NUM };
+    int left_enabled = mIV_can_change_fish_page(-1);
+    int right_enabled = mIV_can_change_fish_page(1);
+    f32 arrow_scale = 0.9375f;
+    f32 page_scale = 0.75f;
+    f32 y = 120.0f - (pos_y - 68.0f);
+    f32 left_x;
+    f32 page_x;
+    f32 right_x;
+
+    if (!mIV_has_registered_mod_fish()) {
+        return;
+    }
+
+    page_str[0] = CHAR_ONE + inv_ovl_data.fish_page_no;
+    left_x = 160.0f + pos_x - 28.0f - (f32)mFont_GetStringWidth(left_arrow, sizeof(left_arrow), TRUE) * arrow_scale * 0.5f;
+    page_x = 160.0f + pos_x - (f32)mFont_GetStringWidth(page_str, sizeof(page_str), TRUE) * page_scale * 0.5f;
+    right_x = 160.0f + pos_x + 28.0f - (f32)mFont_GetStringWidth(right_arrow, sizeof(right_arrow), TRUE) * arrow_scale * 0.5f;
+
+    mFont_SetLineStrings(game, left_arrow, sizeof(left_arrow), left_x + 1.0f, y + 1.0f, 45, 60, 110, 210, FALSE,
+                         TRUE, arrow_scale, arrow_scale, mFont_MODE_POLY);
+    mFont_SetLineStrings(game, right_arrow, sizeof(right_arrow), right_x + 1.0f, y + 1.0f, 45, 60, 110, 210, FALSE,
+                         TRUE, arrow_scale, arrow_scale, mFont_MODE_POLY);
+    mFont_SetLineStrings(game, page_str, sizeof(page_str), page_x + 1.0f, y + 1.0f, 45, 60, 110, 210, FALSE, TRUE,
+                         page_scale, page_scale, mFont_MODE_POLY);
+    mFont_SetLineStrings(game, left_arrow, sizeof(left_arrow), left_x, y, left_enabled ? 255 : 150,
+                         left_enabled ? 255 : 165, left_enabled ? 255 : 190, 255, FALSE, TRUE, arrow_scale, arrow_scale,
+                         mFont_MODE_POLY);
+    mFont_SetLineStrings(game, page_str, sizeof(page_str), page_x, y, 255, 250, 190, 255, FALSE, TRUE, page_scale, page_scale,
+                         mFont_MODE_POLY);
+    mFont_SetLineStrings(game, right_arrow, sizeof(right_arrow), right_x, y, right_enabled ? 255 : 150,
+                         right_enabled ? 255 : 165, right_enabled ? 255 : 190, 255, FALSE, TRUE, arrow_scale, arrow_scale,
+                         mFont_MODE_POLY);
+}
+
 typedef struct inventory_line_data_s {
     int max_str_len;
     f32 pos_x;
@@ -1899,15 +1972,6 @@ static f32 mIV_get_win_posY(Submenu* submenu, mSM_MenuInfo_c* menu_info, int pag
 static int mIV_up_page_draw_check(Submenu* submenu, int page) {
     mIV_Ovl_c* inv_ovl = submenu->overlay->inventory_ovl;
 
-    if (inv_ovl->page_move_timer != 0 && inv_ovl->next_page_id == inv_ovl->page_order[0]) {
-        /* same-tab (fish sub-page) transition: only the front page moves */
-        if (inv_ovl->page_order[0] == page) {
-            return TRUE;
-        }
-
-        return FALSE;
-    }
-
     if (inv_ovl->page_move_timer > 20) {
         if (inv_ovl->next_page_id == page || inv_ovl->page_order[0] == page) {
             return TRUE;
@@ -1962,6 +2026,11 @@ static void mIV_set_collect_dl(Submenu* submenu, mSM_MenuInfo_c* menu_info, GAME
                 submenu->overlay->draw_item_proc(graph, pos_x + pos[0], pos_y + pos[1], 1.0f, item, FALSE, TRUE, 1,
                                                  FALSE, FALSE);
             }
+        }
+
+        if (page == mIV_PAGE_FISH_COLLECTION) {
+            submenu->overlay->set_char_matrix_proc(graph);
+            mIV_set_fish_page_arrows(game, pos_x, pos_y);
         }
     }
 }

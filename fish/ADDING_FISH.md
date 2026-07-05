@@ -230,26 +230,27 @@ ninja                                    # build (sha1 CHECK failure is expected
 
 Smoke test in Dolphin:
 
-1. Open the menu → click the fish tab → page 1 shows as usual.
-2. Click the fish tab again → window plays the tab transition and shows page 2.
+1. Open the menu -> click the fish tab -> page 1 shows as usual.
+2. After at least one page-2 fish is registered, use the bottom-center right
+   arrow to open page 2, then the left arrow to return to page 1. The disabled
+   arrow should stay visible but should not change pages.
 3. Catch the new fish at the right place/time; confirm the catch message,
    pocket icon, sell price at Nook's, and that its encyclopedia circle fills in.
 
 ---
 
-## Encyclopedia paging — how it works (implemented)
+## Encyclopedia paging - how it works (implemented)
 
 - `mIV_Ovl_c.fish_page_no` (new field, `include/m_inventory_ovl.h`) selects the
   active fish sub-page; `mIV_FISH_PAGE_NUM` is the page count (currently 2).
-- Clicking the fish tab while the fish page is already in front
-  (`mTG_select_tag_decide_wchange`, `src/game/m_tag_ovl.c`) starts the standard
-  40-frame page transition targeting the fish page itself.
-- `mIV_move_Play` (`src/game/m_inventory_ovl.c`) detects this "same-tab"
-  transition at the midpoint (timer == 20) and advances
-  `fish_page_no = (fish_page_no + 1) % mIV_FISH_PAGE_NUM` instead of reordering
-  `page_order[]`; `mIV_up_page_draw_check` keeps only the fish window animating.
+- The fish tab only changes to the fish encyclopedia. Page changes happen
+  through `mTG_TABLE_FISH_PAGE_ARROW` at the bottom center of the fish page.
+- The arrows are drawn only when `mIV_has_registered_mod_fish()` finds a
+  collected page-2 fish. Both arrows stay visible then, but
+  `mIV_can_change_fish_page()` controls which one is clickable for the current
+  page.
 - `mIV_set_collect_itemNo` reads `mIV_fish_collect_list2[]` when
   `fish_page_no != 0`.
 - To add a third page: bump `mIV_FISH_PAGE_NUM`, add `mIV_fish_collect_list3[]`,
-  and extend the list selection in `mIV_set_collect_itemNo` — the transition
-  logic already cycles through any number of pages.
+  extend the list selection in `mIV_set_collect_itemNo`, and teach
+  `mIV_can_change_fish_page()` about the new upper bound.

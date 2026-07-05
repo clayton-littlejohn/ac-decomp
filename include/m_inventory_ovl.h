@@ -113,6 +113,9 @@ struct inventory_ovl_s {
 extern void mIV_inventory_ovl_construct(Submenu* submenu);
 extern void mIV_inventory_ovl_destruct(Submenu* submenu);
 extern void mIV_inventory_ovl_set_proc(Submenu* submenu);
+extern int mIV_has_registered_mod_fish(void);
+extern int mIV_can_change_fish_page(int direction);
+extern void mIV_change_fish_page(Submenu* submenu, int direction);
 
 #ifdef __cplusplus
 }

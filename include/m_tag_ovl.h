@@ -173,6 +173,7 @@ enum {
     mTG_TABLE_GBA_NW,
     mTG_TABLE_CARD,
     mTG_TABLE_CARD_NW,
+    mTG_TABLE_FISH_PAGE_ARROW,
 
     mTG_TABLE_NUM
 };
