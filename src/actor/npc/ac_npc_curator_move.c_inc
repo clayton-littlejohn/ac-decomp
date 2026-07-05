@@ -470,6 +470,10 @@ static int aCR_get_idx_to_donate_insect(mActor_name_t item) {
 static int aCR_get_idx_to_donate_fish(mActor_name_t item) {
     int donator = aCR_GetFishDonator(item);
 
+    if (item >= (ITM_FISH_START + FISH_NUM_VANILLA)) {
+        return 28;
+    }
+
     if (donator == (Common_Get(player_no) + 1)) {
         return 6;
     }
@@ -645,6 +649,7 @@ static void aCR_msg_win_open_wait(NPC_CURATOR_ACTOR* curator, GAME_PLAY* play) {
         { 0x2F86, aCR_TALK_PUTAWAY_DEMO_START_WAIT5 },
         { 0x2F87, aCR_TALK_PUTAWAY_DEMO_START_WAIT4 },
         { 0x2F89, aCR_TALK_PUTAWAY_DEMO_START_WAIT5_2 },
+        { 0x3A84, aCR_TALK_RETURN_DEMO_START_WAIT },
     };
 
     mMsg_Window_c* msg_p = mMsg_Get_base_window_p();

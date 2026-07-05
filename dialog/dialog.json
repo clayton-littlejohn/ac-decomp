@@ -144431,7 +144431,7 @@
       "index": 14980,
       "label": "",
       "original": "<<MSGCONTINUE>>",
-      "new": "<<MSGCONTINUE>>",
+      "new": "<<SETCURSORJUST>><<DEMONPC0 [00 00 04]>>Hoo now?<<PAUSE [08]>> Ah...<<PAUSE [08]>> This\n<<CUTARTICLE>><<STR_ITEM0>> is most\nunusual indeed.<<BTN>>\n<<MSGCLEAR>><<DEMONPC0 [00 00 FF]>>I am sorry, but we don't\naccept these here.<<PAUSE [08]>> No, no.<<BTN>>\n<<MSGCLEAR>>This fish appears to have\ncome from foreign lands.<<PAUSE [08]>>\nPerhaps Porter would know\nmore about it.<<BTN>>\n<<MSGCLEAR>>You might ask him at the\ntrain station, wot wot!<<DEMONPC0 [01 00 0A]>>\n<<SETFORCEMSG [2F 66]>><<CLRCUSRORJUST>>\n<<MSGCONTINUE>>",
       "flow": {
         "continues": true
       }

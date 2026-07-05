@@ -113,17 +113,9 @@ of the inventory.
 * **Golden rod**: awarded via `mSM_CHECK_ALL_FISH_GET()` which compares against
   `FISH_NUM` using `mSM_COLLECT_FISH_GET` — modded fish are REQUIRED and the
   requirement scales automatically as `FISH_NUM` grows.
-* **Museum**: modded fish are **donatable and required for the fish wing to
-  count as complete, but are intentionally NOT displayed in the tanks**. The
-  exhibit room code is 100% vanilla (no per-fish museum work, scales to any
-  fish count). Donor records for modded fish live in a dedicated save ledger
-  `Save_t.mod_fish_donation[128]` (4-bit donor nibbles, capacity **256 modded
-  fish**, carved from unused save padding so vanilla saves stay compatible).
-  `mMmd_FishInfo/SetFish/CountDisplayedFish/DeletePresentedByPlayer` route
-  fish idx >= `mMmd_FISH_DISPLAY_NUM` (40) to the ledger; completion checks
-  compare against `mMmd_FISH_NUM` which is defined as `FISH_NUM` and scales
-  automatically. Per new fish, the ONLY museum-related step is the curator
-  `msg_no[]` entry (#18).
+* **Museum**: modded fish are **not donatable and are not required** for museum
+  fish-wing completion. If the player tries to donate one, Blathers returns it
+  with a custom message pointing them to Porter at the train station.
 
 ## Step 1 — Fish type enum (`include/ac_gyoei.h`)
 
@@ -186,7 +178,7 @@ Binary assets — all indexed by fish/item index:
 | Menu icon | inventory icon sheet (`inv_mwin_*_tex` assets) | 16×16 icon per fish, referenced by item draw code |
 | Held/menu model | `act_f##_*` model + texture assets | copy an existing fish model as a starting point |
 | Catch message | message table in `src/actor/ac_turi_clip.c_inc` (`0x10F6 + idx`) | "I caught a …!" text lives in the message data files |
-| Museum donation | `src/data/scene/museum_fish.c` + curator dialog | optional but needed for donations |
+| Museum donation | N/A | modded fish are refused by Blathers |
 
 These are the most labor-intensive steps because they are binary/asset edits,
 not C tables. Use the existing extraction/build pipeline (`configure.py`,
