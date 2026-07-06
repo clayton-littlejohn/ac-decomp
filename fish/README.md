@@ -12,11 +12,12 @@ Tools and docs for extending the fish system in this Animal Crossing decomp.
 | [build_test_iso.py](build_test_iso.py) | Lower-level: inject an already-built `foresta.rel.szs` into an ISO |
 | [setup_dolphin_test_keys.py](setup_dolphin_test_keys.py) | Optional Dolphin key binding for test cheats; `--remove` to uninstall |
 | [ADDING_FISH.md](ADDING_FISH.md) | The underlying per-file checklist (what add_fish.py automates) |
+| [CUSTOM_FISH_ASSET_WORKFLOW.md](CUSTOM_FISH_ASSET_WORKFLOW.md) | Preview-first workflow for vanilla-consistent custom fish icons and catch/held/release models |
 
-For custom non-reskin fish art, use the asset workflow in
-[ADDING_FISH.md](ADDING_FISH.md#custom-fish-asset-workflow). It documents the
-Animal Crossing style rules, icon/model files to update, and a prompt template
-for asking Codex to generate the next fish with minimal back-and-forth.
+For custom non-reskin fish art, use the preview-first workflow in
+[CUSTOM_FISH_ASSET_WORKFLOW.md](CUSTOM_FISH_ASSET_WORKFLOW.md). It documents
+how to generate vanilla-base icon candidates, choose one beside the fish grid,
+then install the approved icon and matching catch/held/release model.
 
 ## Adding fish (mass workflow)
 

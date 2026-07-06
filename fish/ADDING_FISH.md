@@ -104,81 +104,16 @@ of the inventory.
 
 ## Custom fish asset workflow
 
-Use this when replacing a placeholder/reskin with a real custom fish. Neon
-tetra is the worked example. The goal is to produce two matching asset classes:
+For any fish that needs a custom inventory/encyclopedia icon or custom
+catch/held/release model, use
+[`CUSTOM_FISH_ASSET_WORKFLOW.md`](CUSTOM_FISH_ASSET_WORKFLOW.md).
 
-- **Inventory/encyclopedia icon:** a unique 32x32 CI4 icon, not a recolored
-  vanilla fish texture.
-- **Catch/held/release model:** a generated `act_f##_<name>.c` model from
-  `fish/gen_fish_model.py`.
-
-Do not worry about the placed house/tank asset in this workflow unless the
-request explicitly says to work on placement.
-
-### Codex prompt template
-
-Paste this shape of prompt for the next fish:
-
-```text
-Create custom Animal Crossing GameCube-style assets for <fish name>.
-Use <reference traits or attached image>. Do not make it a reskin.
-
-For the icon: make a unique 32x32 CI4 inventory/encyclopedia texture matching
-the vanilla fish icon style: chunky readable silhouette, soft blended pixel
-clusters, no hard black outline, vanilla-size eye, and the shared blue disc
-background preserved.
-
-For catch/release: add or update the <spec name> entry in fish/gen_fish_model.py
-and regenerate src/data/model/act_f##_<name>.c. Keep the low-poly side-profile
-model consistent with the icon. Do not work on placed tank assets.
-
-After editing, verify the icon has exactly 512 bytes, run py -m ninja, and run
-py fish/make_iso.py so I can test in Dolphin.
-```
-
-### Icon style rules
-
-- Keep palette entries 1 and 17 as the shared icon disc colors
-  (`0xB19F` / `0xA66D`).
-- Keep the disc round. Do not let the background become a rectangular block
-  around fins or the tail.
-- Use the vanilla fish language: small eye, softened edges, 1-3 pixel color
-  ramps, and compact highlights. Avoid photo-real gradients, hard black
-  outlines, and overly crisp color separations.
-- Match the fish's real anatomy, but simplify it for 32x32 readability. The
-  silhouette matters more than tiny details.
-- Decode/check the icon visually as a 32x32 grid before building; the stored
-  bytes are CI4 swizzled in 8x8 blocks, so linear edits will look scrambled.
-- Verify the include file contains exactly 512 byte literals.
-
-### Catch/release model rules
-
-- Add/update a `SPECS` entry in `fish/gen_fish_model.py` for the fish.
-- Tune `length`, `height`, and `tail_x` to the real fish silhouette before
-  touching colors.
-- Use role colors (`outline`, `back`, `belly`, `stripe`, `rear`, `rear2`,
-  `eye`, `fin`) rather than hand-editing generated model C.
-- Regenerate with:
-
-```bash
-python fish/gen_fish_model.py <spec-name>
-```
-
-- Wire the generated model exactly like neon tetra:
-  `src/f_furniture.c` includes the generated C file,
-  `src/actor/ac_gyoei_model.c_inc` declares the three model frames and creates
-  `aGYO_<name>_dl`, and the new fish's display-list table entry points to it.
-
-### Validation checklist
-
-1. Decode the icon and confirm it is not scrambled, has a round blue disc, and
-   looks consistent beside vanilla fish.
-2. Count icon bytes: exactly 512 `0xNN` literals.
-3. Run `py -m ninja`; the retail sha1 failure for `foresta.rel` is expected
-   for modded builds, but compile/link should complete first.
-4. Run `py fish/make_iso.py`.
-5. Test `build/GAFE01_00/Animal Crossing (USA) (final).iso` in Dolphin and
-   compare inventory, encyclopedia, catch/hold, and release views.
+That file is the required/default workflow for fish art in this repo. It
+documents the preview-first process used for neon tetra: generate vanilla-base
+icon candidates beside the fish grid, get one approved, then install the exact
+approved icon and create the matching generated model. Do not skip straight to
+implementation for custom fish assets unless the user explicitly asks to bypass
+the preview phase.
 
 ## Custom inventory/encyclopedia icons
 
