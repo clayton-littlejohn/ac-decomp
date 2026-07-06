@@ -91,6 +91,28 @@ SPECS = {
             "fin": rgb(13, 8, 3),
         },
     },
+    "perch": {
+        "num": 43,
+        "display_name": "yellow perch",
+        "length": 565,
+        "height": 175,
+        "tail_x": 0.58,
+        "belly_scale": 0.74,
+        "perch_bars": True,
+        "colors": {
+            "outline": rgb(6, 5, 3),
+            "back": rgb(10, 9, 4),
+            "belly": rgb(29, 25, 13),
+            "stripe": rgb(16, 13, 5),
+            "stripe2": rgb(22, 18, 8),
+            "rear": rgb(18, 8, 3),
+            "rear2": rgb(24, 15, 5),
+            "eye": rgb(2, 2, 1),
+            "eye_white": rgb(30, 27, 18),
+            "fin": rgb(19, 9, 4),
+            "fin2": rgb(12, 9, 3),
+        },
+    },
 }
 
 
@@ -163,6 +185,18 @@ def paint_texture(spec):
                     body_t = (fx + 1.0) / (spec["tail_x"] + 1.0)
                     if 0.12 < body_t < 0.90 and -0.42 < fy < 0.34 and ((x * 3 + y * 5) % 11 in (0, 1)):
                         col = EYE_WHITE if fy < 0.18 else STRIPE2
+                elif spec.get("perch_bars"):
+                    if fy > 0.30:
+                        col = BACK
+                    elif fy > -0.18:
+                        col = STRIPE2 if fx < 0.18 else STRIPE
+                    else:
+                        col = BELLY
+
+                    body_t = (fx + 1.0) / (spec["tail_x"] + 1.0)
+                    for n, bpos in enumerate((0.30, 0.44, 0.58, 0.72)):
+                        if abs(body_t - bpos) < 0.025 and -0.42 < fy < 0.42 and ((x + y + n) % 4 != 0):
+                            col = FIN2 if fy > -0.02 else STRIPE
                 else:
                     band_top = 0.30 - 0.06 * math.sin((fx + 0.2) * math.pi)
                     band_bottom = 0.00 + 0.05 * math.sin((fx + 0.8) * math.pi * 0.7)
@@ -201,15 +235,25 @@ def paint_texture(spec):
         if px[yy * TEX_W + xx] != 0:
             px[yy * TEX_W + xx] = EYE
 
-    # Small approved-style fins: blue-gray above, light gray below.
-    top_fins = {
-        (18, 11), (19, 11), (20, 11),
-        (18, 12), (19, 12),
-    }
-    bottom_fins = {
-        (20, 20), (21, 20), (22, 20),
-        (21, 21), (22, 21),
-    }
+    if spec.get("perch_bars"):
+        top_fins = {
+            (16, 10), (17, 10), (18, 10), (19, 11), (20, 11),
+            (17, 11), (18, 12), (20, 12),
+        }
+        bottom_fins = {
+            (11, 20), (12, 20), (12, 21),
+            (18, 20), (19, 20), (19, 21),
+        }
+    else:
+        # Small approved-style fins: blue-gray above, light gray below.
+        top_fins = {
+            (18, 11), (19, 11), (20, 11),
+            (18, 12), (19, 12),
+        }
+        bottom_fins = {
+            (20, 20), (21, 20), (22, 20),
+            (21, 21), (22, 21),
+        }
     for xx, yy in top_fins:
         if px[yy * TEX_W + xx] != 0:
             px[yy * TEX_W + xx] = FIN2

@@ -141,6 +141,9 @@ extern Gfx act_f41_tetra_cT_model[];
 extern Gfx act_f42_pike_aT_model[];
 extern Gfx act_f42_pike_bT_model[];
 extern Gfx act_f42_pike_cT_model[];
+extern Gfx act_f43_perch_aT_model[];
+extern Gfx act_f43_perch_bT_model[];
+extern Gfx act_f43_perch_cT_model[];
 
 static aGYO_DL_c aGYO_funa_dl = {
   act_f01_funa_aT_model,
@@ -367,6 +370,11 @@ static aGYO_DL_c aGYO_pike_dl = {
   act_f42_pike_bT_model,
   act_f42_pike_cT_model,
 };
+static aGYO_DL_c aGYO_perch_dl = {
+  act_f43_perch_aT_model,
+  act_f43_perch_bT_model,
+  act_f43_perch_cT_model,
+};
 
 
 static aGYO_DL_c* aGYO_displayList[aGYO_TYPE_MODDED_NUM] = {
@@ -417,7 +425,7 @@ static aGYO_DL_c* aGYO_displayList[aGYO_TYPE_MODDED_NUM] = {
   NULL,
   &aGYO_tetra_dl, /* aGYO_TYPE_NEON_TETRA (modded): generated custom model */
   &aGYO_pike_dl, /* aGYO_TYPE_PIKE (modded): generated custom model */
-  &aGYO_ugui_dl, /* aGYO_TYPE_YELLOW_PERCH (modded) */
+  &aGYO_perch_dl, /* aGYO_TYPE_YELLOW_PERCH (modded): generated custom model */
   &aGYO_ito_dl, /* aGYO_TYPE_STURGEON (modded) */
   &aGYO_niji_dl, /* aGYO_TYPE_GOLDEN_TROUT (modded) */
   &aGYO_nigoi_dl, /* aGYO_TYPE_TILAPIA (modded) */
