@@ -113,6 +113,28 @@ SPECS = {
             "fin2": rgb(12, 9, 3),
         },
     },
+    "sturgeon": {
+        "num": 44,
+        "display_name": "sturgeon",
+        "length": 760,
+        "height": 230,
+        "tail_x": 0.64,
+        "belly_scale": 0.80,
+        "sturgeon": True,
+        "colors": {
+            "outline": rgb(5, 4, 3),
+            "back": rgb(9, 6, 4),
+            "belly": rgb(22, 21, 19),
+            "stripe": rgb(14, 11, 8),
+            "stripe2": rgb(18, 15, 11),
+            "rear": rgb(13, 8, 5),
+            "rear2": rgb(18, 14, 10),
+            "eye": rgb(2, 2, 1),
+            "eye_white": rgb(28, 26, 22),
+            "fin": rgb(13, 9, 6),
+            "fin2": rgb(18, 12, 7),
+        },
+    },
 }
 
 
@@ -125,6 +147,15 @@ def outline_test(fx, fy, spec):
     fy in [-1,1] bottom->top. Region: '' outside, 'body', 'tail'."""
     tail_x = spec["tail_x"]
     if fx < tail_x:
+        if spec.get("sturgeon"):
+            t = (fx + 1.0) / (tail_x + 1.0)
+            half = math.sin(min(t * 1.10, 1.0) * math.pi * 0.5) ** 0.45
+            half = max(half, 0.18)               # blunt shovel snout
+            peduncle = 0.36 + 0.64 * (1.0 - max(0.0, (t - 0.68) / 0.32))
+            half *= min(1.0, peduncle)
+            if fy < 0:
+                half *= spec.get("belly_scale", 1.0)
+            return "body" if abs(fy) <= half else ""
         # body: tapered ellipse. Tiny ornamental fish can ask for a blunter,
         # toy-like head to match the vanilla gupi/kingyo icon language.
         t = (fx + 1.0) / (tail_x + 1.0)          # 0 at nose, 1 at peduncle
@@ -175,7 +206,22 @@ def paint_texture(spec):
                 else:
                     col = FIN if (int(x + y) % 3 == 0 and t > 0.25) else (STRIPE2 if fy > -0.15 else FIN)
             else:
-                if spec.get("pike_spots"):
+                if spec.get("sturgeon"):
+                    if fy > 0.36:
+                        col = BACK
+                    elif fy > -0.14:
+                        col = STRIPE2 if fx < 0.14 else STRIPE
+                    else:
+                        col = BELLY
+
+                    body_t = (fx + 1.0) / (spec["tail_x"] + 1.0)
+                    if 0.20 < body_t < 0.82 and 0.18 < fy < 0.52 and ((x * 5 + y * 3) % 12 in (0, 1)):
+                        col = REAR2 if fy > 0.34 else STRIPE2
+                    if -0.95 < fx < -0.72 and -0.28 < fy < -0.05 and ((x + y) % 3 == 0):
+                        col = FIN
+                    if -0.70 < fx < -0.54 and -0.45 < fy < 0.34 and ((x + y) % 4 != 0):
+                        col = STRIPE
+                elif spec.get("pike_spots"):
                     if fy > 0.32:
                         col = BACK
                     elif fy > -0.14:
@@ -235,7 +281,17 @@ def paint_texture(spec):
         if px[yy * TEX_W + xx] != 0:
             px[yy * TEX_W + xx] = EYE
 
-    if spec.get("perch_bars"):
+    if spec.get("sturgeon"):
+        top_fins = {
+            (21, 8), (22, 8),
+            (20, 9), (21, 9), (22, 9), (23, 9),
+            (20, 10), (21, 10), (22, 10), (23, 10),
+        }
+        bottom_fins = {
+            (10, 21), (11, 21), (11, 22),
+            (20, 20), (21, 20), (22, 21),
+        }
+    elif spec.get("perch_bars"):
         top_fins = {
             (16, 10), (17, 10), (18, 10), (19, 11), (20, 11),
             (17, 11), (18, 12), (20, 12),
@@ -288,6 +344,28 @@ def build_mesh(spec):
     H2 = spec["height"] / 2.0
     tx = spec["tail_x"] * L2                      # peduncle x
     belly_scale = spec.get("belly_scale", 1.0)
+    if spec.get("sturgeon"):
+        verts = [
+            (-L2, H2 * 0.10),                      # 0 blunt shovel snout top
+            (-L2 * 0.70, H2 * 0.50),               # 1 head top
+            (-L2 * 0.20, H2 * 0.78),               # 2 high armored back
+            (L2 * 0.42, H2 * 0.58),                # 3 rear back
+            (tx, H2 * 0.24),                       # 4 peduncle top
+            (L2, H2 * 0.60),                       # 5 tail tip top
+            (L2, -H2 * 0.58),                      # 6 tail tip bottom
+            (tx, -H2 * 0.24 * belly_scale),        # 7 peduncle bottom
+            (L2 * 0.30, -H2 * 0.62 * belly_scale), # 8 lower rear
+            (-L2 * 0.18, -H2 * 0.76 * belly_scale),# 9 lower mid
+            (-L2 * 0.72, -H2 * 0.42 * belly_scale),# 10 lower head
+            (-L2, -H2 * 0.08),                     # 11 snout bottom
+        ]
+        tris = [
+            (0, 1, 11), (1, 10, 11), (1, 2, 10), (2, 9, 10), (2, 3, 9),
+            (3, 8, 9), (3, 4, 8), (4, 7, 8), (4, 5, 6), (4, 6, 7),
+        ]
+        tris += [(a, c, b) for (a, b, c) in tris]
+        tail = [False, False, False, False, True, True, True, True, False, False, False, False]
+        return verts, tris, tail
     if spec.get("blunt_head"):
         verts = [
             (-L2, H2 * 0.20),                      # 0 blunt snout top
