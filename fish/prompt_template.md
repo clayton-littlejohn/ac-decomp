@@ -3,8 +3,8 @@ I want you to create a new vanilla-consistent Animal Crossing GameCube custom fi
 Follow that workflow exactly.
 
 Fish:
-- Name: sturgeon 
-- Fish number: 44
+- Name: Golden trout 
+- Fish number: 45
  
 Goal:
 Create only:
@@ -25,10 +25,10 @@ First:
 
 The candidates should use existing vanilla fish icons as structural bases. Preserve the base icon’s silhouette, eye size, tail size, fin placement, pixel density, shading style, and round blue item-disc background. Only adapt colors and markings enough to suggest the new fish.
 
-After I approve one candidate, implement that exact approved icon and create the matching catch/held/release model-preview asset. Keep all changes scoped strictly to fish #44’s icon and generated model.
+After I approve one candidate, implement that exact approved icon and create the matching catch/held/release model-preview asset. Keep all changes scoped strictly to fish #45’s icon and generated model.
 
 Attatched is a real life reference image of this fish.
 
 __________________________________
 
-Approved. I like candidate_A Now implement this exact final icon and create the matching catch/held/release model-preview asset for fish #44.
+Approved. I like candidate_A Now implement this exact final icon and create the matching catch/held/release model-preview asset for fish #45.

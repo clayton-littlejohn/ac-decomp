@@ -624,6 +624,8 @@ extern u16 inv_mwin_43perch_pal[]; /* yellow perch (modded) */
 extern u8 inv_mwin_43perch_tex[]; /* yellow perch (modded) */
 extern u16 inv_mwin_44sturgeon_pal[]; /* sturgeon (modded) */
 extern u8 inv_mwin_44sturgeon_tex[]; /* sturgeon (modded) */
+extern u16 inv_mwin_45golden_trout_pal[]; /* golden trout (modded) */
+extern u8 inv_mwin_45golden_trout_tex[]; /* golden trout (modded) */
 extern u16 inv_mwin_mf_yellow_perch_pal[]; /* yellow perch (modded) */
 extern u16 inv_mwin_mf_sturgeon_pal[]; /* sturgeon (modded) */
 extern u16 inv_mwin_mf_golden_trout_pal[]; /* golden trout (modded) */
@@ -1119,7 +1121,7 @@ static void mSM_draw_item(GRAPH* graph, f32 pos_x, f32 pos_y, f32 scale, mActor_
         { inv_mwin_42pike_pal, inv_mwin_42pike_tex }, /* pike (modded) */
         { inv_mwin_43perch_pal, inv_mwin_43perch_tex }, /* yellow perch (modded) */
         { inv_mwin_44sturgeon_pal, inv_mwin_44sturgeon_tex }, /* sturgeon (modded) */
-        { inv_mwin_mf_golden_trout_pal, inv_mwin_22niji_tex }, /* golden trout (modded) */
+        { inv_mwin_45golden_trout_pal, inv_mwin_45golden_trout_tex }, /* golden trout (modded) */
         { inv_mwin_mf_tilapia_pal, inv_mwin_05nigoi_tex }, /* tilapia (modded) */
         { inv_mwin_mf_betta_pal, inv_mwin_29angel_tex }, /* betta (modded) */
         { inv_mwin_mf_rainbowfish_pal, inv_mwin_28gupi_tex }, /* rainbowfish (modded) */

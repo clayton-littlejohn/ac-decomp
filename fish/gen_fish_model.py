@@ -135,6 +135,28 @@ SPECS = {
             "fin2": rgb(18, 12, 7),
         },
     },
+    "golden_trout": {
+        "num": 45,
+        "display_name": "golden trout",
+        "length": 560,
+        "height": 185,
+        "tail_x": 0.56,
+        "belly_scale": 0.78,
+        "golden_trout": True,
+        "colors": {
+            "outline": rgb(5, 4, 2),
+            "back": rgb(10, 12, 5),
+            "belly": rgb(29, 25, 13),
+            "stripe": rgb(22, 7, 4),
+            "stripe2": rgb(25, 12, 5),
+            "rear": rgb(20, 9, 3),
+            "rear2": rgb(27, 16, 6),
+            "eye": rgb(2, 2, 1),
+            "eye_white": rgb(30, 27, 16),
+            "fin": rgb(24, 13, 4),
+            "fin2": rgb(18, 15, 8),
+        },
+    },
 }
 
 
@@ -243,6 +265,19 @@ def paint_texture(spec):
                     for n, bpos in enumerate((0.30, 0.44, 0.58, 0.72)):
                         if abs(body_t - bpos) < 0.025 and -0.42 < fy < 0.42 and ((x + y + n) % 4 != 0):
                             col = FIN2 if fy > -0.02 else STRIPE
+                elif spec.get("golden_trout"):
+                    if fy > 0.36:
+                        col = BACK
+                    elif fy > -0.20:
+                        col = STRIPE2 if fx < 0.12 else STRIPE
+                    else:
+                        col = BELLY
+
+                    body_t = (fx + 1.0) / (spec["tail_x"] + 1.0)
+                    if 0.18 < body_t < 0.86 and 0.00 < fy < 0.46 and ((x * 7 + y * 5) % 17 == 0):
+                        col = FIN2
+                    if 0.30 < body_t < 0.74 and -0.10 < fy < 0.16 and ((x + y) % 5 != 1):
+                        col = STRIPE2 if fx < 0.10 else STRIPE
                 else:
                     band_top = 0.30 - 0.06 * math.sin((fx + 0.2) * math.pi)
                     band_bottom = 0.00 + 0.05 * math.sin((fx + 0.8) * math.pi * 0.7)
@@ -299,6 +334,17 @@ def paint_texture(spec):
         bottom_fins = {
             (11, 20), (12, 20), (12, 21),
             (18, 20), (19, 20), (19, 21),
+        }
+    elif spec.get("golden_trout"):
+        top_fins = {
+            (18, 10), (19, 10), (20, 10),
+            (17, 11), (18, 11), (19, 11), (20, 11),
+            (18, 12), (19, 12),
+        }
+        bottom_fins = {
+            (9, 20), (10, 20), (11, 20), (10, 21), (11, 21),
+            (16, 20), (17, 20), (18, 20), (17, 21), (18, 21),
+            (21, 19), (22, 19), (23, 19), (22, 20), (23, 20),
         }
     else:
         # Small approved-style fins: blue-gray above, light gray below.
