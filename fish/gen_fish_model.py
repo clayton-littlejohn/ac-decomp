@@ -157,6 +157,29 @@ SPECS = {
             "fin2": rgb(18, 15, 8),
         },
     },
+    "tilapia": {
+        "num": 46,
+        "display_name": "tilapia",
+        "length": 560,
+        "height": 220,
+        "tail_x": 0.55,
+        "belly_scale": 0.86,
+        "blunt_head": True,
+        "tilapia": True,
+        "colors": {
+            "outline": rgb(4, 4, 3),
+            "back": rgb(9, 8, 7),
+            "belly": rgb(22, 15, 13),
+            "stripe": rgb(14, 14, 12),
+            "stripe2": rgb(18, 18, 16),
+            "rear": rgb(16, 12, 10),
+            "rear2": rgb(22, 18, 15),
+            "eye": rgb(2, 2, 1),
+            "eye_white": rgb(30, 29, 26),
+            "fin": rgb(13, 9, 8),
+            "fin2": rgb(17, 16, 14),
+        },
+    },
 }
 
 
@@ -278,6 +301,19 @@ def paint_texture(spec):
                         col = FIN2
                     if 0.30 < body_t < 0.74 and -0.10 < fy < 0.16 and ((x + y) % 5 != 1):
                         col = STRIPE2 if fx < 0.10 else STRIPE
+                elif spec.get("tilapia"):
+                    if fy > 0.18:
+                        col = BACK if fy > 0.44 else STRIPE
+                    elif fy > -0.34:
+                        col = STRIPE2 if fx < 0.12 else STRIPE
+                    else:
+                        col = BELLY
+
+                    body_t = (fx + 1.0) / (spec["tail_x"] + 1.0)
+                    if 0.18 < body_t < 0.84 and -0.18 < fy < 0.42 and ((x * 3 + y * 5) % 13 == 0):
+                        col = EYE_WHITE if fy > -0.02 else STRIPE2
+                    if 0.18 < body_t < 0.62 and -0.56 < fy < -0.30 and ((x + y) % 4 != 1):
+                        col = REAR2 if fy > -0.44 else BELLY
                 else:
                     band_top = 0.30 - 0.06 * math.sin((fx + 0.2) * math.pi)
                     band_bottom = 0.00 + 0.05 * math.sin((fx + 0.8) * math.pi * 0.7)
@@ -345,6 +381,18 @@ def paint_texture(spec):
             (9, 20), (10, 20), (11, 20), (10, 21), (11, 21),
             (16, 20), (17, 20), (18, 20), (17, 21), (18, 21),
             (21, 19), (22, 19), (23, 19), (22, 20), (23, 20),
+        }
+    elif spec.get("tilapia"):
+        top_fins = {
+            (17, 8), (18, 8), (19, 8), (20, 8), (21, 8),
+            (18, 9), (19, 9), (20, 9), (21, 9), (22, 9),
+            (19, 10), (20, 10), (21, 10), (22, 10),
+            (18, 11), (19, 11), (20, 11),
+        }
+        bottom_fins = {
+            (9, 21), (10, 21), (11, 21), (10, 22),
+            (17, 20), (18, 20), (19, 20), (18, 21),
+            (21, 19), (22, 19), (23, 19), (22, 20),
         }
     else:
         # Small approved-style fins: blue-gray above, light gray below.

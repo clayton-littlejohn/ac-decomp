@@ -715,6 +715,7 @@ static Gfx* fFTR_GetTwoTileGfx(int width0, int height0, int scroll_x0, int scrol
 #include "../src/data/model/act_f43_perch.c"
 #include "../src/data/model/act_f44_sturgeon.c"
 #include "../src/data/model/act_f45_golden_trout.c"
+#include "../src/data/model/act_f46_tilapia.c"
 #include "../src/furniture/ac_tak_toudai.c"
 #include "../src/furniture/ac_tak_ufo.c"
 #include "../src/furniture/ac_tak_yaji.c"

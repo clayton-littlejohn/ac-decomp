@@ -150,6 +150,9 @@ extern Gfx act_f44_sturgeon_cT_model[];
 extern Gfx act_f45_golden_trout_aT_model[];
 extern Gfx act_f45_golden_trout_bT_model[];
 extern Gfx act_f45_golden_trout_cT_model[];
+extern Gfx act_f46_tilapia_aT_model[];
+extern Gfx act_f46_tilapia_bT_model[];
+extern Gfx act_f46_tilapia_cT_model[];
 
 static aGYO_DL_c aGYO_funa_dl = {
   act_f01_funa_aT_model,
@@ -391,6 +394,11 @@ static aGYO_DL_c aGYO_golden_trout_dl = {
   act_f45_golden_trout_bT_model,
   act_f45_golden_trout_cT_model,
 };
+static aGYO_DL_c aGYO_tilapia_dl = {
+  act_f46_tilapia_aT_model,
+  act_f46_tilapia_bT_model,
+  act_f46_tilapia_cT_model,
+};
 
 
 static aGYO_DL_c* aGYO_displayList[aGYO_TYPE_MODDED_NUM] = {
@@ -444,7 +452,7 @@ static aGYO_DL_c* aGYO_displayList[aGYO_TYPE_MODDED_NUM] = {
   &aGYO_perch_dl, /* aGYO_TYPE_YELLOW_PERCH (modded): generated custom model */
   &aGYO_sturgeon_dl, /* aGYO_TYPE_STURGEON (modded): generated custom model */
   &aGYO_golden_trout_dl, /* aGYO_TYPE_GOLDEN_TROUT (modded): generated custom model */
-  &aGYO_nigoi_dl, /* aGYO_TYPE_TILAPIA (modded) */
+  &aGYO_tilapia_dl, /* aGYO_TYPE_TILAPIA (modded): generated custom model */
   &aGYO_angel_dl, /* aGYO_TYPE_BETTA (modded) */
   &aGYO_gupi_dl, /* aGYO_TYPE_RAINBOWFISH (modded) */
   &aGYO_sake_dl, /* aGYO_TYPE_GAR (modded) */

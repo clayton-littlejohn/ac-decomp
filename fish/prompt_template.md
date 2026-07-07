@@ -3,8 +3,8 @@ I want you to create a new vanilla-consistent Animal Crossing GameCube custom fi
 Follow that workflow exactly.
 
 Fish:
-- Name: Golden trout 
-- Fish number: 45
+- Name: Tilapia
+- Fish number: 46
  
 Goal:
 Create only:
@@ -31,4 +31,4 @@ Attatched is a real life reference image of this fish.
 
 __________________________________
 
-Approved. I like candidate_A Now implement this exact final icon and create the matching catch/held/release model-preview asset for fish #45.
+Approved. I like candidate_A Now implement this exact final icon and create the matching catch/held/release model-preview asset for fish #46.
